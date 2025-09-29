@@ -1,0 +1,37 @@
+{% extends 'core/base.html' %}
+
+{%block title %} Welcome {% endblock %}
+
+{% block content %}
+
+<div class="container mx-auto">
+    <!-- welcome to bazzar -->
+    <div class="text-center mb-8">
+        <h1 class="text-4xl font-bold text-gray-800">Welcome to Bazzar</h1>
+        <p class="text-gray-600 mt-2">Discover amazing products and deals!</p>
+    </div>
+
+    <!-- product grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        {% for item in items %}
+        <div class="flex flex-col rounded-lg shadow-md overflow-hidden">
+            <img class="w-full object-cover" src="{{ item.image.url }}" alt="{{ item.name|truncatewords:3 }}">
+            <div class="p-4 overflow-hidden">
+                <h2 class="text-lg font-bold text-gray-800">{{ item.name|truncatewords:10 }}</h2>
+                <p class="text-gray-600 mt-2">{{ item.description|truncatewords:20 }}</p>
+            </div>        
+            <div class="px-4 pb-4 mt-auto">
+                    <div class="mt-4 flex items-center justify-between">
+                        <span class="text-lg font-bold text-teal-600">{{ item.price }}Tk.</span>
+                        <a href="#" class="bg-teal-500 hover:bg-teal-600 text-white px-3 py-2 rounded-lg text-sm font-medium">View Details</a>
+                    </div>
+            </div>
+        </div>
+
+        {% empty %}
+        <p class="text-gray-600">No items available at the moment. Please check back later.</p>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
