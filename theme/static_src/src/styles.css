@@ -10,4 +10,13 @@
   .footerlist{
     @apply hover:underline text-white;
   }
+
+
+  .signuplabel{
+    @apply text-gray-800 text-lg font-bold;
+  }
+
+  .signupbox{
+    @apply bg-[#fff] p-2  rounded-xl shadow-sm border-1 border-gray-300 focus:border-teal-400 focus:ring-1 focus:ring-teal-400;
+  }
 }

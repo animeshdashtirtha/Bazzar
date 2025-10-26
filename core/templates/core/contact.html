@@ -1,12 +1,100 @@
 {% extends 'core/base.html' %}
 
-{%block title %}Contact{% endblock %}
+{% block title %}Contact Us{% endblock %}
 
 {% block content %}
 
-    <div>
-       Contact
-        
+<div class="container mx-auto px-4 py-16 max-w-5xl">
+    <!-- Header -->
+    <div class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-extrabold text-gray-800 mb-3">Get in Touch</h1>
+        <p class="text-gray-500 text-lg max-w-2xl mx-auto">
+            We'd love to hear from you! Whether you have a question about our products, need support, or just want to share feedback — our team is ready to help.
+        </p>
     </div>
-      
+
+    <!-- Contact Section -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+        
+        <!-- Contact Info -->
+        <div class="bg-white shadow-md rounded-2xl p-8 flex flex-col justify-center border border-gray-100">
+            <h2 class="text-2xl font-semibold text-teal-600 mb-6">Contact Information</h2>
+            <p class="text-gray-600 mb-8">
+                Feel free to reach out to us using the form, or contact us directly through any of the details below.
+            </p>
+
+            <div class="space-y-6 text-gray-700">
+                <div class="flex items-center space-x-4">
+                    <i class="fa-solid fa-envelope text-teal-600 text-xl"></i>
+                    <div>
+                        <h3 class="font-medium">Email</h3>
+                        <p class="text-gray-500">bazzarsupport@gmail.com</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <i class="fa-solid fa-phone text-teal-600 text-xl"></i>
+                    <div>
+                        <h3 class="font-medium">Phone</h3>
+                        <p class="text-gray-500">+880 1700 123 456</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <i class="fa-solid fa-location-dot text-teal-600 text-xl"></i>
+                    <div>
+                        <h3 class="font-medium">Address</h3>
+                        <p class="text-gray-500">Bazzar HQ, Uttara Sector 7, Dhaka, Bangladesh</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-10">
+                <h3 class="text-gray-600 font-semibold mb-3">Follow Us</h3>
+                <a href="" class="text-teal-500 font-semibold mb-3">https://www.facebook.com/Bazzar/</a>
+                <div class="flex space-x-4 text-teal-600">
+                    <a href="#" class="hover:text-teal-700"><i class="fa-brands fa-facebook text-2xl"></i></a>
+                    <a href="#" class="hover:text-teal-700"><i class="fa-brands fa-instagram text-2xl"></i></a>
+                    <a href="#" class="hover:text-teal-700"><i class="fa-brands fa-x-twitter text-2xl"></i></a>
+                    <a href="#" class="hover:text-teal-700"><i class="fa-brands fa-linkedin text-2xl"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="bg-white shadow-md rounded-2xl p-8 border border-gray-100">
+            <h2 class="text-2xl font-semibold text-teal-600 mb-6">Send Us a Message</h2>
+            <form method="POST" class="space-y-5">
+                {% csrf_token %}
+                
+                <div>
+                    <label class="block text-gray-700 font-medium mb-2">Your Name</label>
+                    <input type="text" name="name" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="John Doe" required>
+                </div>
+
+                <div>
+                    <label class="block text-gray-700 font-medium mb-2">Email Address</label>
+                    <input type="email" name="email" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="you@example.com" required>
+                </div>
+
+                <div>
+                    <label class="block text-gray-700 font-medium mb-2">Subject</label>
+                    <input type="text" name="subject" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="What’s this about?" required>
+                </div>
+
+                <div>
+                    <label class="block text-gray-700 font-medium mb-2">Message</label>
+                    <textarea name="message" rows="5" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="Write your message here..." required></textarea>
+                </div>
+
+                <div class="pt-2">
+                    <button type="submit" class="bg-teal-500 hover:bg-teal-600 text-white px-6 py-3 rounded-lg font-semibold w-full transition-all shadow-md hover:shadow-lg">
+                        Send Message
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 {% endblock %}

@@ -16,14 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from core.views import index, contact
 from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index, name='index'),
-    path('contact/', contact, name='contact'), 
+    path('', include('core.urls', namespace='core')),
+    path('item/', include('item.urls', namespace='item')),
+    path('cart/', include('cart.urls')),
+    path('orders/', include('orders.urls')),
 ]
 
 if settings.DEBUG:

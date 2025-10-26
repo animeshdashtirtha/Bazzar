@@ -1,0 +1,107 @@
+{% extends 'core/base.html' %}
+{% block title %}My Cart{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-10 max-w-5xl">
+    <h1 class="text-3xl font-bold text-gray-800 mb-8 text-center">🛒 My Cart</h1>
+
+    {% if cart_items %}
+    <div class="overflow-x-auto bg-white rounded-2xl shadow-md">
+        <table class="w-full text-left border-collapse">
+            <thead>
+                <tr class="bg-gray-100 text-gray-700 text-sm uppercase">
+                    <th class="py-3 px-4">Product</th>
+                    <th class="py-3 px-4 text-center">Quantity</th>
+                    <th class="py-3 px-4 text-center">Price</th>
+                    <th class="py-3 px-4 text-center">Total</th>
+                    <th class="py-3 px-4 text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cart_item in cart_items %}
+                <tr class="border-b hover:bg-gray-50 transition">
+                    <!-- Product Name -->
+                    <td class="py-4 px-4 flex items-center gap-3">
+                        <img src="{{ cart_item.item.image.url }}" alt="{{ cart_item.item.name }}" 
+                             class="w-16 h-16 object-cover rounded-md border">
+                        <span class="font-semibold text-gray-800">{{ cart_item.item.name|truncatewords:15 }}</span>
+                    </td>
+
+                    <!-- Quantity -->
+                    <td class="py-4 px-4 text-center">
+                        <div class="flex items-center justify-center gap-2">
+                            <form method="POST" action="{% url 'cart:update_quantity' cart_item.item.id %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="action" value="decrease">
+                                <button type="submit" 
+                                        class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-2 py-1 rounded-md font-bold text-lg">
+                                    −
+                                </button>
+                            </form>
+
+                            <span class="px-3 font-medium text-gray-800">{{ cart_item.quantity }}</span>
+
+                            <form method="POST" action="{% url 'cart:update_quantity' cart_item.item.id %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="action" value="increase">
+                                <button type="submit" 
+                                        class="bg-teal-500 hover:bg-teal-600 text-white px-2 py-1 rounded-md font-bold text-lg">
+                                    +
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+
+                    <!-- Price -->
+                    <td class="py-4 px-4 text-center text-gray-700 font-medium">
+                        {{ cart_item.item.price }} Tk
+                    </td>
+
+                    <!-- Total -->
+                    <td class="py-4 px-4 text-center font-semibold text-gray-800">
+                        {{ cart_item.total }} Tk
+                    </td>
+
+                    <!-- Remove -->
+                    <td class="py-4 px-4 text-center">
+                        <a href="{% url 'cart:remove_from_cart' cart_item.item.id %}" 
+                           class="text-red-500 font-medium hover:text-red-600 transition">
+                            Remove
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Total Section -->
+    <div class="mt-8 flex flex-col sm:flex-row justify-between items-center bg-gray-50 p-6 rounded-2xl shadow-sm">
+        <p class="text-2xl font-semibold text-gray-800">
+            Total: <span class="text-teal-600">{{ total_price }} Tk</span>
+        </p>
+        <div class="mt-4 sm:mt-0 flex gap-3">
+            <a href="{% url 'core:index' %}" 
+               class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-5 py-3 rounded-lg font-medium transition">
+               ← Continue Shopping
+            </a>
+            <a href="{% url 'cart:checkout' %}" 
+               class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold shadow-md transition">
+               Proceed to Checkout
+            </a>
+        </div>
+    </div>
+
+    {% else %}
+    <!-- Empty Cart -->
+    <div class="text-center bg-white py-16 rounded-2xl shadow-md">
+        <h2 class="text-2xl font-semibold text-gray-700 mb-4">Your cart is empty 😔</h2>
+        <p class="text-gray-500 mb-6">Browse our latest products and add something you love!</p>
+        <a href="{% url 'core:index' %}" 
+           class="bg-teal-500 hover:bg-teal-600 text-white px-6 py-3 rounded-lg font-semibold transition">
+           Start Shopping
+        </a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

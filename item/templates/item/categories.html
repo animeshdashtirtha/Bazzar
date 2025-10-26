@@ -1,0 +1,72 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %} {{ category.name }} | Bazzar {% endblock %}
+
+{% block content %}
+
+<div class="container mx-auto px-6 pb-10 pt-4">
+
+    <!-- Breadcrumb -->
+    <nav class="text-sm mb-6 text-gray-600">
+        <a href="{% url 'core:index' %}" class="hover:text-teal-600 font-semibold">Home</a>
+        <span class="mx-2">›</span>
+        <span class="text-gray-800 font-semibold">{{ category.name }}</span>
+    </nav>
+
+    <!-- Category Header -->
+    <div class="text-center mb-10">
+        <h1 class="text-4xl font-extrabold text-gray-800 tracking-tight">
+            {{ category.name }}
+        </h1>
+        <p class="text-gray-500 mt-2 text-lg">
+            Explore the latest products in the <span class="text-teal-600 font-semibold">{{ category.name }}</span> category.
+        </p>
+    </div>
+
+    <!-- Product Grid -->
+    {% if Categoryitems %}
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        {% for item in Categoryitems %}
+        <a href="{% url 'item:detail' item.id %}" class="group">
+            <div class="flex flex-col h-full bg-white rounded-2xl shadow-md overflow-hidden transition-transform transform hover:scale-105 hover:shadow-lg">
+                
+                <div class="aspect-[3/4] overflow-hidden">
+                    <img src="{{ item.image.url }}" alt="{{ item.name|truncatewords:3 }}"
+                        class="w-full h-full object-contain transition-transform duration-300 group-hover:scale-110">
+                </div>
+
+                <div class="flex flex-col flex-grow p-4">
+                    <h2 class="text-lg font-bold text-gray-800 group-hover:text-teal-600 truncate">
+                        {{ item.name }}
+                    </h2>
+                    <p class="text-gray-600 mt-2 text-sm flex-grow line-clamp-2">
+                        {{ item.description|truncatewords:15 }}
+                    </p>
+
+                    <div class="mt-4 flex items-center justify-between">
+                        <span class="text-lg font-bold text-teal-600">{{ item.price }} Tk</span>
+                        <span class="bg-teal-500 text-white px-3 py-2 rounded-lg text-sm font-medium">
+                            View Details
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+
+    {% else %}
+    <!-- Empty Category State -->
+    <div class="text-center mt-20">
+        <img src="{% static 'images/empty.png' %}" alt="No items" class="mx-auto w-80 opacity-80 mb-4">
+        <h3 class="text-xl font-semibold text-gray-700">No items found in this category</h3>
+        <p class="text-gray-500 mt-2">Please check back later or browse other categories.</p>
+        <a href="{% url 'core:index' %}" class="inline-block mt-6 bg-teal-500 hover:bg-teal-600 text-white px-6 py-2 rounded-lg shadow-md transition">
+            Back to Home
+        </a>
+    </div>
+    {% endif %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+<!-- Login Segment -->
+<form action="" method="POST" class="flex flex-col mb-12 bg-white shadow-md sm:p-12 p-8 gap-6 rounded-xl text-shadow-lg sm:mx-auto sm:max-w-2xl sm:w-[60%] mx-4">
+    {% csrf_token %}
+
+    <div class="text-center">
+        <h2 class="text-gray-600 text-2xl font-extrabold underline">Sign In</h2>
+        <h3 class="text-gray-400 text-lg">Welcome back! Please login to continue</h3>
+    </div>
+
+    <hr class="my-0 w-full border-[1px] border-gray-200">
+
+    {% if error_login %}
+    <div class="mx-auto text-teal-900 text-shadow-2xs">
+        <p class="text-xl font-semibold">{{ error_login }}</p>
+    </div>
+    {% endif %}
+
+    <div class="flex flex-col gap-2">
+        <label for="username" class="signuplabel">
+            Username
+        </label>
+        <input type="text" id="username" name="username" placeholder="Enter Username..." class="signupbox">
+
+        <label for="password" class="signuplabel">
+            Password
+        </label>
+        <input type="password" id="password" name="password" placeholder="Enter Password..." class="signupbox">
+    </div>
+
+    <button type="submit" class="p-2 font-bold rounded mt-4 mx-auto w-64 hover:scale-110 bg-teal-400 hover:bg-teal-500 text-gray-100 shadow-lg transition duration-200">
+        Log In
+    </button>
+
+    <a href="{% url 'core:signup' %}" class="mx-auto">
+        <button type="button" class="p-2 font-bold rounded mt-1 hover:scale-110 bg-[#707070] hover:bg-[#919191] text-gray-200 text-sm shadow-lg w-64 transition duration-200">
+            Create a new account
+        </button>
+    </a>
+</form>
+
+{% endblock %}

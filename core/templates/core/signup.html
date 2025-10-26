@@ -1,0 +1,53 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+
+<!-- Sign Up Segment -->
+<form action="" method="POST" class="flex flex-col mb-12 bg-white shadow-md sm:p-12 p-8 gap-6 rounded-xl text-shadow-lg sm:mx-auto sm:max-w-2xl sm:w-[60%] mx-4">
+    {% csrf_token %}    
+    <div class="text-center">
+        <h2 class="text-gray-600 text-2xl font-extrabold underline">Create new account</h2>
+        <h3 class="text-gray-400 text-lg">It's quick and easy</h3>
+    </div>
+
+    <hr class="my-0 w-full border-[1px] border-gray-200">
+
+    {% if error_signup %}
+    <div class="mx-auto text-teal-900 text-shadow-2xs">
+        <p class="text-2xl">{{ error_signup }}</p>
+    </div>
+    {% endif %}
+
+    <div class="flex flex-col gap-2">
+        <label for="username" class="signuplabel">Username</label>
+        <input type="text" id="username" name="username" placeholder="Enter Username..." class="signupbox" required>
+
+        <label for="email" class="signuplabel">Email</label>
+        <input type="email" id="email" name="email" placeholder="Enter Email..." class="signupbox" required>
+
+        <label for="password" class="signuplabel">Password</label>
+        <input type="password" id="password" name="password" placeholder="Password..." class="signupbox" required>
+
+        <label for="repeatpassword" class="signuplabel">Re-enter Password</label>
+        <input type="password" id="repeatpassword" name="repeatpassword" placeholder="Password..." class="signupbox" required>
+
+        <!-- 👇 New section for user type -->
+        <label for="user_type" class="signuplabel">Register as</label>
+        <select id="user_type" name="user_type" class="signupbox cursor-pointer">
+            <option value="buyer" selected>Buyer</option>
+            <option value="seller">Seller</option>
+        </select>
+    </div>
+
+    <button class="p-2 font-bold rounded mt-4 mx-auto w-64 hover:scale-110 bg-teal-400 hover:bg-teal-400 text-gray-100 shadow-lg">
+        Create account
+    </button>
+    
+    <button type="button" onclick="window.location.href='/login/'" class="p-2 font-bold rounded mt-1 mx-auto w hover:scale-110 bg-[#707070] hover:bg-[#919191] text-gray-200 text-sm shadow-lg">
+        Already have an account??
+    </button>
+</form>
+
+{% endblock %}

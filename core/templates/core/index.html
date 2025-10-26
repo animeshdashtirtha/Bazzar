@@ -1,37 +1,47 @@
 {% extends 'core/base.html' %}
 
-{%block title %} Welcome {% endblock %}
+{% block title %} Welcome {% endblock %}
 
 {% block content %}
-
+<br>
+<br>
 <div class="container mx-auto">
     <!-- welcome to bazzar -->
-    <div class="text-center mb-8">
-        <h1 class="text-4xl font-bold text-gray-800">Welcome to Bazzar</h1>
-        <p class="text-gray-600 mt-2">Discover amazing products and deals!</p>
+    <div class="text-center mb-12">
+        <h1 class="text-4xl font-extrabold text-gray-800 tracking-tight">Welcome to <span class="text-teal-600">Bazzar</span></h1>
+        <p class="text-gray-500 mt-2 text-lg">Discover amazing products and deals!</p>
     </div>
 
     <!-- product grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-        {% for item in items %}
-        <div class="flex flex-col rounded-lg shadow-md overflow-hidden">
-            <img class="w-full object-cover" src="{{ item.image.url }}" alt="{{ item.name|truncatewords:3 }}">
-            <div class="p-4 overflow-hidden">
-                <h2 class="text-lg font-bold text-gray-800">{{ item.name|truncatewords:10 }}</h2>
-                <p class="text-gray-600 mt-2">{{ item.description|truncatewords:20 }}</p>
-            </div>        
-            <div class="px-4 pb-4 mt-auto">
-                    <div class="mt-4 flex items-center justify-between">
-                        <span class="text-lg font-bold text-teal-600">{{ item.price }}Tk.</span>
-                        <a href="#" class="bg-teal-500 hover:bg-teal-600 text-white px-3 py-2 rounded-lg text-sm font-medium">View Details</a>
-                    </div>
-            </div>
-        </div>
-
-        {% empty %}
-        <p class="text-gray-600">No items available at the moment. Please check back later.</p>
-        {% endfor %}
+    <div id="item-grid" class="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
+        {% include 'core/item_card.html'%}
     </div>
+
+    <!-- Load More Button -->
+    <div class="flex justify-center mt-10">
+        <button id="load-more" 
+            class="bg-gray-700 hover:bg-gray-800 text-white px-6 py-3 rounded-lg font-semibold transition-all shadow-md">
+            See More
+        </button>
+    </div>
+
 </div>
+
+
+<script>
+    let offset = 6;
+
+    document.getElementById('load-more').addEventListener('click', function() {
+        fetch(`/load-more-items/?offset=${offset}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('item-grid').insertAdjacentHTML('beforeend', data.html);
+                offset += 6;
+                if (!data.has_more) {
+                    document.getElementById('load-more').style.display = 'none';
+                }
+            });
+    });
+</script>
 
 {% endblock %}
