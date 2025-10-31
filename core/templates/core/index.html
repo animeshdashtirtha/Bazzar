@@ -3,33 +3,32 @@
 {% block title %} Welcome {% endblock %}
 
 {% block content %}
-<br>
-<br>
+<br><br>
 <div class="container mx-auto">
     <!-- welcome to bazzar -->
     <div class="text-center mb-12">
-        <h1 class="text-4xl font-extrabold text-gray-800 tracking-tight">Welcome to <span class="text-teal-600">Bazzar</span></h1>
+        <h1 class="text-4xl font-extrabold text-gray-800 tracking-tight">
+            Welcome to <span class="text-teal-600">Bazzar</span>
+        </h1>
         <p class="text-gray-500 mt-2 text-lg">Discover amazing products and deals!</p>
     </div>
 
     <!-- product grid -->
     <div id="item-grid" class="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
-        {% include 'core/item_card.html'%}
+        {% include 'core/item_card.html' %}
     </div>
 
     <!-- Load More Button -->
     <div class="flex justify-center mt-10">
-        <button id="load-more" 
+        <button id="load-more"
             class="bg-gray-700 hover:bg-gray-800 text-white px-6 py-3 rounded-lg font-semibold transition-all shadow-md">
             See More
         </button>
     </div>
-
 </div>
 
-
 <script>
-    let offset = 6;
+    let offset = 9; // You initially load 8 items in views.py
 
     document.getElementById('load-more').addEventListener('click', function() {
         fetch(`/load-more-items/?offset=${offset}`)
@@ -40,8 +39,8 @@
                 if (!data.has_more) {
                     document.getElementById('load-more').style.display = 'none';
                 }
-            });
+            })
+            .catch(error => console.error('Error loading more items:', error));
     });
 </script>
-
 {% endblock %}

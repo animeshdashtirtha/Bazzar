@@ -24,7 +24,6 @@ def categories(request, pk):
     return render(request, 'item/categories.html', context)
 
 
-# Edit Item
 @login_required
 def edit_item(request, pk):
     item_obj = get_object_or_404(item, pk=pk, created_by=request.user)
@@ -49,7 +48,6 @@ def edit_item(request, pk):
     })
 
 
-# Delete Item
 @login_required
 def delete_item(request, pk):
     item_obj = get_object_or_404(item, pk=pk, created_by=request.user)
@@ -63,7 +61,6 @@ def delete_item(request, pk):
 
 
 
-# seller_items_page
 def seller_items(request, seller_id):
     seller = get_object_or_404(User, id=seller_id)
     items = item.objects.filter(created_by=seller, is_sold=False).order_by('-created_at')

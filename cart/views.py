@@ -36,7 +36,7 @@ def remove_from_cart(request, item_id):
 def update_quantity(request, item_id):
     action = request.POST.get('action')
 
-    # ✅ FIX — filter by cart__user, not user
+    #  FIX — filter by cart__user, not user
     cart_item = get_object_or_404(CartItem, item_id=item_id, cart__user=request.user)
 
     if action == 'increase':
@@ -50,32 +50,40 @@ def update_quantity(request, item_id):
 
 @login_required
 def checkout(request):
-    cart_items = CartItem.objects.filter(cart__user=request.user)
-    cart = Cart.objects.get(user=request.user)
-    total_price = sum(item.total() for item in cart_items)
+    try:
+        cart = Cart.objects.get(user=request.user)
+    except Cart.DoesNotExist:
+        messages.warning(request, "Your cart is empty or missing.")
+        return redirect('cart:view_cart')
 
-    if not cart_items:
+    cart_items = CartItem.objects.filter(cart=cart)
+    if not cart_items.exists():
         messages.warning(request, "Your cart is empty. Please add items before checkout.")
         return redirect('cart:view_cart')
 
+    total_price = sum(item.total() for item in cart_items)
+
     if request.method == "POST":
-        # ✅ Create Order
+        # ✅ Create the order
         order = Order.objects.create(
             user=request.user,
             total_price=total_price,
         )
 
-        # ✅ Create OrderItems
+        # ✅ Create OrderItems for each cart item
+        order_items = []
         for item in cart_items:
-            OrderItem.objects.create(
+            order_items.append(OrderItem(
                 order=order,
                 item=item.item,
                 quantity=item.quantity,
                 price=item.item.price,
-            )
+            ))
+        OrderItem.objects.bulk_create(order_items)  # Faster & cleaner
 
-        # ✅ Clear Cart
+        # ✅ Clear the cart after order is created
         cart_items.delete()
+
         messages.success(request, "Order placed successfully! You can track it in 'My Orders'.")
         return redirect('orders:my_orders')
 

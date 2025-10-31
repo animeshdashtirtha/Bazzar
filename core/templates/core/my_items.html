@@ -20,15 +20,14 @@
             </div>
             <div class="hidden md:block">
                     <div class="ml-8 flex items-center ">
-                        <!-- Home and Categories -->
+                        
+                        <!-- Back to adding items -->
                         <div class="ml-8 flex items-center space-x-4">
                             <a href="{% url 'core:add_item' %}" class="bg-[#ff9100] hover:bg-[#ff9c1a] text-gray-100  px-3 py-3 rounded-md text-sm font-medium">Back to adding items</a>
                         </div>
-                        <!-- User -->
-                        <!-- User Authentication Section -->
+                        
+                        <!-- User dropdown section -->
                         <div class="ml-2 flex items-center space-x-4">
-                            {% if user.is_authenticated %}
-                            <!-- User Dropdown -->
                             <div class="relative group">
                                 <div id="userButton" class="bg-teal-500 hover:bg-teal-400 text-white px-3 py-2 rounded-lg text-sm font-bold inline-flex items-center cursor-pointer">
                                     <span class="mr-2">Signed in as</span>
@@ -47,24 +46,11 @@
                                             <a href="{#}" class="block px-4 py-2 hover:bg-teal-500 hover:text-white">Inbox</a>
                                         </li>
                                         <li>
-                                            <a href="{#}" class="block px-4 py-2 hover:bg-teal-500 hover:text-white">Profile</a>
-                                        </li>
-                                        <li>
                                             <a href="{% url 'core:logout' %}" class="block px-4 py-2 hover:bg-red-500 hover:text-white">Logout</a>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
-
-                            
-                            {% else %}
-                            <a href="{% url 'core:signup' %}" class="bg-teal-500 hover:bg-teal-600 text-white px-3 py-2 rounded-lg text-md font-bold">
-                                Signup
-                            </a>
-                            <a href="{% url 'core:login' %}" class="bg-gray-700 hover:bg-gray-800 text-white px-3 py-2 rounded-lg text-md font-bold">
-                                Login
-                            </a>
-                            {% endif %}
                         </div>
 
                     </div>
@@ -74,7 +60,7 @@
     
     <!-- my items page -->
     <div class="container mx-auto px-6 py-6">
-        <h1 class="text-3xl font-bold mb-6">My Items</h1>
+        <h1 class="text-3xl font-bold mb-20 mt-4 ml-4 underline text-gray-500">Products BY {{user.username}}</h1>
 
         {% if items %}
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
@@ -119,38 +105,6 @@
 
 
 <script>
-// === CATEGORY DROPDOWN ===
-const button = document.getElementById('categoryButton');
-const menu = document.getElementById('dropdownList');
-let timeout;
-
-if (button && menu) {
-    button.addEventListener('mouseenter', () => {
-        clearTimeout(timeout);
-        menu.classList.remove('opacity-0', 'invisible');
-        menu.classList.add('opacity-100');
-    });
-
-    button.addEventListener('mouseleave', () => {
-        timeout = setTimeout(() => {
-            menu.classList.remove('opacity-100');
-            menu.classList.add('opacity-0', 'invisible');
-        }, 200); // stays open 200ms after mouse leaves
-    });
-
-    menu.addEventListener('mouseenter', () => {
-        clearTimeout(timeout); // keep open if mouse moves into menu
-    });
-
-    menu.addEventListener('mouseleave', () => {
-        timeout = setTimeout(() => {
-            menu.classList.remove('opacity-100');
-            menu.classList.add('opacity-0', 'invisible');
-        }, 200);
-    });
-}
-
-
 
 // === USER DROPDOWN ===
 const userButton = document.getElementById('userButton');

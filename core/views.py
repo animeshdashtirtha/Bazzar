@@ -6,10 +6,11 @@ from django.http import JsonResponse
 from django.core.paginator import Paginator
 from django.contrib.auth.models import User
 from item.models import item
+from django.template.loader import render_to_string
 
 
 def index(request):
-    items = item.objects.filter(is_sold=False).order_by('-created_at')[:8]
+    items = item.objects.filter(is_sold=False).order_by('-created_at')[:9]
     return render(request, 'core/index.html', {'items': items})
 
 def about(request):
@@ -126,34 +127,22 @@ def add_item(request):
 
 @login_required
 def my_items(request):
-    user_items = item.objects.filter(created_by=request.user)
+    user_items = item.objects.filter(created_by=request.user).order_by('-created_at')
     return render(request, 'core/my_items.html', {'items': user_items})
 
 
 # ------------------ AJAX pagination / lazy loading ------------------
 
 def load_more_items(request):
-    page = int(request.GET.get('page', 1))
-    per_page = 8
-    items_list = item.objects.filter(is_sold=False).order_by('-created_at')
+    offset = int(request.GET.get('offset', 0))
+    limit = 6
 
-    paginator = Paginator(items_list, per_page)
-    try:
-        items_page = paginator.page(page)
-    except:
-        return JsonResponse({'items': [], 'has_next': False})
+    items = item.objects.filter(is_sold=False).order_by('-created_at')[offset:offset + limit]
 
-    items_data = [
-        {
-            'id': i.id,
-            'name': i.name,
-            'price': str(i.price),
-            'image': i.image.url if i.image else '',
-            'category': i.category.name if i.category else '',
-        }
-        for i in items_page
-    ]
+    # Render HTML fragment using the same template as your grid cards
+    html = render_to_string('core/item_card.html', {'items': items}, request=request)
 
-    return JsonResponse({'items': items_data, 'has_next': items_page.has_next()})
+    has_more = item.objects.filter(is_sold=False).count() > offset + limit
 
+    return JsonResponse({'html': html, 'has_more': has_more})
 
