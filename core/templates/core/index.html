@@ -3,8 +3,8 @@
 {% block title %} Welcome {% endblock %}
 
 {% block content %}
-<br><br>
-<div class="container mx-auto">
+
+<div class="container mx-auto mt-6">
     <!-- welcome to bazzar -->
     <div class="text-center mb-12">
         <h1 class="text-4xl font-extrabold text-gray-800 tracking-tight">
@@ -13,8 +13,8 @@
         <p class="text-gray-500 mt-2 text-lg">Discover amazing products and deals!</p>
     </div>
 
-    <!-- product grid -->
-    <div id="item-grid" class="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
+    <!-- item grid -->
+    <div id="item-grid" class="grid sm:grid-cols-2 md:grid-cols-5 gap-8">
         {% include 'core/item_card.html' %}
     </div>
 
@@ -28,14 +28,14 @@
 </div>
 
 <script>
-    let offset = 9; // You initially load 8 items in views.py
+    let offset = 10; // You initially load 8 items in views.py
 
     document.getElementById('load-more').addEventListener('click', function() {
         fetch(`/load-more-items/?offset=${offset}`)
             .then(response => response.json())
             .then(data => {
                 document.getElementById('item-grid').insertAdjacentHTML('beforeend', data.html);
-                offset += 6;
+                offset += 10;
                 if (!data.has_more) {
                     document.getElementById('load-more').style.display = 'none';
                 }

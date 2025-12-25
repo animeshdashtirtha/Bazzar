@@ -64,13 +64,13 @@ def checkout(request):
     total_price = sum(item.total() for item in cart_items)
 
     if request.method == "POST":
-        # ✅ Create the order
+        #  Create the order
         order = Order.objects.create(
             user=request.user,
             total_price=total_price,
         )
 
-        # ✅ Create OrderItems for each cart item
+        #  Create OrderItems for each cart item
         order_items = []
         for item in cart_items:
             order_items.append(OrderItem(
@@ -81,7 +81,7 @@ def checkout(request):
             ))
         OrderItem.objects.bulk_create(order_items)  # Faster & cleaner
 
-        # ✅ Clear the cart after order is created
+        #  Clear the cart after order is created
         cart_items.delete()
 
         messages.success(request, "Order placed successfully! You can track it in 'My Orders'.")

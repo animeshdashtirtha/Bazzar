@@ -1,6 +1,6 @@
 {% extends 'core/base.html' %}
 {% block title %}Items by {{ seller.username }}{% endblock %}
-
+{% load humanize %}
 {% block content %}
 <br><br>
 <div class="container mx-auto px-6">
@@ -22,7 +22,7 @@
                     <p class="text-gray-600 mt-2 text-sm flex-grow">{{ item.description|truncatewords:15 }}</p>
 
                     <div class="mt-4 flex items-center justify-between">
-                        <span class="text-lg font-bold text-teal-600">{{ item.price }} Tk.</span>
+                        <span class="text-lg font-bold text-teal-600">{{ item.price|floatformat:0|intcomma }} Tk.</span>
                         <span class="bg-teal-500 text-white px-3 py-2 rounded-lg text-sm font-medium">View</span>
                     </div>
                 </div>

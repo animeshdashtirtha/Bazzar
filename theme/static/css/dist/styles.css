@@ -308,6 +308,9 @@
   .my-6 {
     margin-block: calc(var(--spacing) * 6);
   }
+  .mt-0 {
+    margin-top: calc(var(--spacing) * 0);
+  }
   .mt-1 {
     margin-top: calc(var(--spacing) * 1);
   }
@@ -434,8 +437,14 @@
   .h-16 {
     height: calc(var(--spacing) * 16);
   }
+  .h-20 {
+    height: calc(var(--spacing) * 20);
+  }
   .h-48 {
     height: calc(var(--spacing) * 48);
+  }
+  .h-60 {
+    height: calc(var(--spacing) * 60);
   }
   .h-full {
     height: 100%;
@@ -457,6 +466,9 @@
   }
   .w-16 {
     width: calc(var(--spacing) * 16);
+  }
+  .w-20 {
+    width: calc(var(--spacing) * 20);
   }
   .w-48 {
     width: calc(var(--spacing) * 48);
@@ -661,6 +673,9 @@
   }
   .border-teal-300 {
     border-color: var(--color-teal-300);
+  }
+  .border-teal-500 {
+    border-color: var(--color-teal-500);
   }
   .bg-\[\#707070\] {
     background-color: #707070;
@@ -912,6 +927,9 @@
   .text-teal-600 {
     color: var(--color-teal-600);
   }
+  .text-teal-700 {
+    color: var(--color-teal-700);
+  }
   .text-teal-900 {
     color: var(--color-teal-900);
   }
@@ -1044,6 +1062,16 @@
   @media (hover: hover) {
     .hover\:bg-\[\#919191\]:hover {
       background-color: #919191;
+    }
+  }
+  @media (hover: hover) {
+    .hover\:bg-\[\#d47800\]:hover {
+      background-color: #d47800;
+    }
+  }
+  @media (hover: hover) {
+    .hover\:bg-\[\#dd7d00\]:hover {
+      background-color: #dd7d00;
     }
   }
   @media (hover: hover) {
@@ -1194,6 +1222,16 @@
     }
   }
   @media (width >= 40rem) {
+    .sm\:items-center {
+      align-items: center;
+    }
+  }
+  @media (width >= 40rem) {
+    .sm\:justify-between {
+      justify-content: space-between;
+    }
+  }
+  @media (width >= 40rem) {
     .sm\:p-8 {
       padding: calc(var(--spacing) * 8);
     }
@@ -1234,6 +1272,11 @@
     }
   }
   @media (width >= 48rem) {
+    .md\:grid-cols-5 {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+  }
+  @media (width >= 48rem) {
     .md\:flex-row {
       flex-direction: row;
     }
@@ -1247,6 +1290,11 @@
   @media (width >= 64rem) {
     .lg\:grid-cols-4 {
       grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+  @media (width >= 64rem) {
+    .lg\:grid-cols-5 {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
     }
   }
 }
@@ -1294,6 +1342,9 @@
   }
   .signupbox:focus {
     --tw-ring-color: var(--color-teal-400);
+  }
+  .stop-pulse-on-hover:hover {
+    animation: none !important;
   }
 }
 @property --tw-rotate-x {

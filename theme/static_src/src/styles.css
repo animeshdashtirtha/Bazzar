@@ -1,22 +1,27 @@
 @import "tailwindcss";
 @source "../../../**/*.{html,py,js}";
 
-
 @layer components {
+
   .btn-primary {
     @apply bg-blue-500 text-white font-bold py-2 px-4 rounded;
   }
 
-  .footerlist{
+  .footerlist {
     @apply hover:underline text-white;
   }
 
-
-  .signuplabel{
+  .signuplabel {
     @apply text-gray-800 text-lg font-bold;
   }
 
-  .signupbox{
-    @apply bg-[#fff] p-2  rounded-xl shadow-sm border-1 border-gray-300 focus:border-teal-400 focus:ring-1 focus:ring-teal-400;
+  .signupbox {
+    @apply bg-[#fff] p-2 rounded-xl shadow-sm border-1 border-gray-300 
+    focus:border-teal-400 focus:ring-1 focus:ring-teal-400;
+  }
+
+  /* 🔥 New class to stop pulse on hover */
+  .stop-pulse-on-hover:hover {
+    animation: none !important;
   }
 }

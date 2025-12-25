@@ -7,11 +7,20 @@ from django.core.paginator import Paginator
 from django.contrib.auth.models import User
 from item.models import item
 from django.template.loader import render_to_string
+from core.models import Profile
 
 
 def index(request):
-    items = item.objects.filter(is_sold=False).order_by('-created_at')[:9]
+    # Check if user is authenticated AND has a profile
+    if request.user.is_authenticated:
+        profile = getattr(request.user, 'core_profile', None)
+
+        if profile and profile.user_type == 'seller':
+            return redirect('core:my_items')
+
+    items = item.objects.filter(is_sold=False).order_by('-created_at')[:10]
     return render(request, 'core/index.html', {'items': items})
+
 
 def about(request):
     return render(request, 'core/about.html')
@@ -53,16 +62,18 @@ def user_signup(request):
         # Create user
         user = User.objects.create_user(username=username, email=email, password=password)
         
-        # Save user_type if you have it in a profile model
-        if hasattr(user, 'profile'):
-            user.profile.user_type = user_type
-            user.profile.save()
+       # Create Profile after user creation
+        Profile.objects.update_or_create(
+            user=user,
+            defaults={'user_type': user_type}
+        )
+        user.refresh_from_db() 
 
         # Log in the user
         login(request, user)
         messages.success(request, "Account created successfully!")
         if hasattr(user, 'core_profile') and user.core_profile.user_type == 'seller':
-                return redirect('core:add_item')
+                return redirect('core:my_items')
         else:
             return redirect('core:index')
 
@@ -81,7 +92,7 @@ def user_login(request):
 
             # Check user type if profile exists
             if hasattr(user, 'core_profile') and user.core_profile.user_type == 'seller':
-                return redirect('core:add_item')
+                return redirect('core:my_items')
             else:
                 return redirect('core:index')
         
@@ -135,7 +146,7 @@ def my_items(request):
 
 def load_more_items(request):
     offset = int(request.GET.get('offset', 0))
-    limit = 6
+    limit = 10
 
     items = item.objects.filter(is_sold=False).order_by('-created_at')[offset:offset + limit]
 
