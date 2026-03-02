@@ -1,8 +1,6 @@
 import os
 from pathlib import Path
 import shutil
-from dotenv import load_dotenv
-
 
 NPM_BIN_PATH = shutil.which("npm") 
 
@@ -12,6 +10,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Authentication settings
 LOGIN_URL = 'core:login'
 
+# Quick-start development settings - unsuitable for production
+# See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
+
+# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-qi77cpx9)&3js0h!ww#cot0*3u6$4y%inbe!tm%&owb36kdt8+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -127,20 +129,3 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-
-
-# Load environment variables from .env file
-load_dotenv(BASE_DIR / ".env")
-
-
-# Email Section
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
-
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

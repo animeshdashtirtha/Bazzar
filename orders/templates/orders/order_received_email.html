@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Received - Bazzar</title>
+</head>
+<body style="margin:0; padding:0; font-family: 'Segoe UI', Arial, sans-serif; background-color: #f5f7fa; color: #333;">
+    <table width="100%" cellpadding="0" cellspacing="0" style="padding:20px 0;">
+        <tr>
+            <td align="center">
+                <!-- Card container -->
+                <table width="600" style="background:#ffffff; border-radius:12px; padding:30px; box-shadow:0 4px 15px rgba(0,0,0,0.05);">
+                    <tr>
+                        <td>
+                            <h1 style="margin:0; font-size:28px; color:#1f2937;">👋 Thanks for your order, {{ user.username }}!</h1>
+                            <p style="font-size:16px; color:#4b5563; margin-top:10px;">
+                                We’ve received your order <strong>#{{ order.id }}</strong> and our team will review it shortly.
+                            </p>
+
+                            <h2 style="font-size:20px; margin-top:20px; border-bottom:1px solid #e5e7eb; padding-bottom:8px; color:#111827;">Order Summary</h2>
+
+                            <table width="100%" cellpadding="6" cellspacing="0" style="margin-top:12px;">
+                                {% for item in order.items.all %}
+                                <tr>
+                                    <td style="padding:6px 0;">{{ item.item.name }} × {{ item.quantity }}</td>
+                                    <td align="right" style="padding:6px 0;">${{ item.price }}</td>
+                                </tr>
+                                {% endfor %}
+                                <tr>
+                                    <td style="padding-top:10px; font-weight:bold; border-top:2px solid #e5e7eb;">Total</td>
+                                    <td align="right" style="padding-top:10px; font-weight:bold; border-top:2px solid #e5e7eb;">${{ order.total_price }}</td>
+                                </tr>
+                            </table>
+
+                            <p style="margin-top:20px; font-size:14px; color:#6b7280;">
+                                You’ll receive another email once your order is confirmed. Thank you for shopping with <strong>Bazzar</strong>!
+                            </p>
+
+                            <p style="margin-top:30px; font-size:14px; color:#9ca3af;">This is an automated message. Please do not reply.</p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
