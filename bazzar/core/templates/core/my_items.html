@@ -1,0 +1,177 @@
+{% load static tailwind_tags%}
+{% load static %}
+{% load humanize %}
+{% tailwind_css %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <title>MY items</title>
+</head>
+<body>
+    <div class="border-b-1 border-gray-300">
+        <div class="container mx-auto mb-8 px-4 flex items-center justify-between h-16 pt-4">
+            <div class=" flex items-center">
+                    <a href="{% url 'core:my_items' %}" class=" text-red-800 font-['Bebas_Neue'] pt-4">
+                        <img class="h-12 rounded-xl" src="{% static 'images/logo1.png' %}" alt="Logo" />
+                    </a>
+            </div>
+            <div class="hidden md:block">
+                    <div class="ml-8 flex items-center ">
+                        
+                        <!-- User dropdown section -->
+                        <div class="ml-2 flex items-center space-x-4">
+                            <div class="relative group">
+                                <div id="userButton" class="bg-teal-500 hover:bg-teal-400 text-white px-3 py-2 rounded-lg text-sm font-bold inline-flex items-center cursor-pointer">
+                                    <div class="flex items-center">
+                                        <span class="font-extrabold text-lg">{{ user.username }}</span>
+                                        <svg class="w-4 h-4 ml-1 mt-[2px]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                                        </svg>
+                                    </div>
+                                </div>
+
+                                <!-- Dropdown Menu -->
+                                <div id="userDropdown" class="absolute right-0 opacity-0 invisible bg-white border border-gray-200 shadow-lg rounded-md mt-2 w-48 z-10">
+                                    <ul class="py-2 text-gray-700 text-sm">
+                                        <li>
+                                            <a href="{% url 'core:inbox' %}" class="block px-4 py-2 hover:bg-teal-500 hover:text-white">Inbox</a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'core:logout' %}" class="block px-4 py-2 hover:bg-red-500 hover:text-white">Logout</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+            </div>
+        </div>
+    </div>
+    
+        <!-- Seller Profile Section -->
+    <div class="container mx-auto px-6 mt-8">
+        <div class="bg-white shadow-lg rounded-2xl p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between">
+            <div class="flex items-center space-x-4">
+                <img src="{% static 'images/1234.png' %}" alt="Seller Avatar"
+                    class="w-20 h-20 rounded-full border-2 border-teal-500 object-cover">
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-800">{{ user.username }}</h2>
+                    <p class="text-gray-500">Seller since {{ user.date_joined|date:"F Y" }}</p>
+                    <p class="text-sm text-gray-600">Total Products: {{ items|length }}</p>
+                </div>
+            </div>
+
+            {% if items %}
+            <div class="mt-4 sm:mt-0">
+                <a href="{% url 'core:add_item' %}"
+                class="bg-[#ff9100] hover:bg-[#dd7d00] text-white px-5 py-2 rounded-lg font-semibold transition">
+                    + Add New Product
+                </a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+
+    <!-- my items page -->
+    <div class="container mx-auto px-6 py-6">
+        <h1 class="text-3xl font-bold mb-20 mt-4 ml-4 underline text-gray-700 text-center">Products By <span class="text-teal-600">{{user.username}}</span></h1>
+
+        {% if items %}
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+                {% for item in items %}
+                    <div class="bg-white shadow-md rounded-lg p-4 flex flex-col justify-between h-full">
+                        <div>
+                            <img src="{{ item.image.url }}" alt="{{ item.name }}" class="w-full h-48 object-contain rounded-md mb-2">
+                            <h2 class="text-lg font-semibold">{{ item.name|truncatewords:10 }}</h2>
+                            <p class="text-gray-500">{{ item.category.name }}</p>
+                            <p class="text-teal-600 font-bold">{{ item.price|floatformat:0|intcomma }} Tk.</p>
+                        </div>
+
+                        <!-- Buttons fixed at bottom -->
+                        <div class="flex justify-between mt-4 pt-2 border-t border-gray-200">
+                            <a href="{% url 'item:edit_item' item.id %}" class="text-blue-500 hover:underline">Edit</a>
+                            <a href="{% url 'item:delete_item' item.id %}" class="text-red-500 hover:underline">Delete</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <!-- When no items are present -->
+        <div class="flex flex-col items-center mt-20">
+        <p class="mb-4 text-gray-700 text-lg font-medium">You haven't added any items yet.</p>
+        
+        <img src="{% static 'images/empty.png' %}" alt="Seller Avatar"
+                    class=" h-60 object-cover">
+        
+        <a href="{% url 'core:add_item' %}" 
+        class="inline-block bg-[#ff9100] text-white font-bold px-6 py-3 rounded-lg shadow-lg 
+                transform transition-all duration-300 hover:scale-105 hover:bg-[#d47800] 
+                animate-pulse stop-pulse-on-hover">
+            ➕ Add Your First Item
+        </a> 
+        </div>
+    {% endif %}
+
+</div>
+</body>
+
+
+<footer class="bg-gray-800 flex justify-between text-gray-400 py-6 px-[8%] mt-8">
+    <div class="flex items-center max-w-[70%]">
+        <div>&copy; 2025 Bazzar. All rights reserved. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maxime ab vitae ipsam accusamus a illum nobis cumququaerat recusandae et esse ea totam voluptatibus? Ipsa!</div>
+    </div>
+    
+    <ul class="text-center space-y-4">
+        <li><a href="{% url 'core:about' %}" class="footerlist">About</a></li>
+        <li><a href="{% url 'core:policy' %}" class="footerlist">Privacy Policy</a></li>
+        <li><a href="{% url 'core:terms' %}" class="footerlist">Terms of Service</a></li>
+        <li><a href="{% url 'core:contact' %}" class="footerlist">Contact Us</a></li>
+    </ul>
+</footer>
+
+
+<script>
+
+// === USER DROPDOWN ===
+const userButton = document.getElementById('userButton');
+const userDropdown = document.getElementById('userDropdown');
+let userTimeout;
+
+if (userButton && userDropdown) {
+    userButton.addEventListener('mouseenter', () => {
+        clearTimeout(userTimeout);
+        userDropdown.classList.remove('opacity-0', 'invisible');
+        userDropdown.classList.add('opacity-100');
+    });
+
+    userButton.addEventListener('mouseleave', () => {
+        userTimeout = setTimeout(() => {
+            userDropdown.classList.remove('opacity-100');
+            userDropdown.classList.add('opacity-0', 'invisible');
+        }, 200);
+    });
+
+    userDropdown.addEventListener('mouseenter', () => {
+        clearTimeout(userTimeout);
+    });
+
+    userDropdown.addEventListener('mouseleave', () => {
+        userTimeout = setTimeout(() => {
+            userDropdown.classList.remove('opacity-100');
+            userDropdown.classList.add('opacity-0', 'invisible');
+        }, 200);
+    });
+}
+</script>
+
+
+{% block scripts %}
+{% endblock %}
+
+</html>

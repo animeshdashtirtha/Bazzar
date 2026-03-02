@@ -1,0 +1,2305 @@
+[
+{
+  "model": "admin.logentry",
+  "pk": 1,
+  "fields": {
+    "action_time": "2025-09-23T10:29:14.622Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "1",
+    "object_repr": "Toys",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 2,
+  "fields": {
+    "action_time": "2025-09-23T10:29:23.854Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "2",
+    "object_repr": "Clothes",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 3,
+  "fields": {
+    "action_time": "2025-09-23T10:29:56.804Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "3",
+    "object_repr": "Furnitures",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 4,
+  "fields": {
+    "action_time": "2025-09-23T10:59:51.872Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "1",
+    "object_repr": "item object (1)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 5,
+  "fields": {
+    "action_time": "2025-09-23T11:08:14.406Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "2",
+    "object_repr": "Penguin",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 6,
+  "fields": {
+    "action_time": "2025-09-23T11:09:32.125Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "3",
+    "object_repr": "DISNEY STORE Official Stitch Medium Soft Toy for Kids, Cuddly Character with Fuzzy Texture and Embroidered Details, Flexible Floppy Ears, Disney Plushy Suitable for All Ages.",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 7,
+  "fields": {
+    "action_time": "2025-09-23T11:30:52.166Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "4",
+    "object_repr": "Tools",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 8,
+  "fields": {
+    "action_time": "2025-09-23T11:32:02.732Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "4",
+    "object_repr": "SENIX Electric Chainsaw, 14\" Corded Chainsaw,10 Amp Chain Saw for Wood Cutting, Tree Trimming, Garden Tool for Pruning, Branch Cutting, Yard, Fathers Day Gift for Men,Gardener, CSE10-L",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 9,
+  "fields": {
+    "action_time": "2025-09-23T11:33:03.765Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "5",
+    "object_repr": "4Ft Folding Table Adjustable Height Portable Folding Tables Heavy Duty 400 lbs Capacity, Wood Grain Tabletop for Working Meeting Parties, Picnic, Camping, Weddings, Garden Dining-Black",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 10,
+  "fields": {
+    "action_time": "2025-09-23T11:33:57.473Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "6",
+    "object_repr": "GTPLAYER Gaming Chair, Computer Chair with Footrest and Lumbar Support, Height Adjustable Game Chair with 360°-Swivel Seat and Headrest and for Office or Gaming (White)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 11,
+  "fields": {
+    "action_time": "2025-09-23T11:34:37.249Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "2",
+    "object_repr": "Little Live Pets Walking Penguin My Pet Waddles, Interactive Plush Penguin with 25+ Sounds and Detachable Leash, Toy Penguin",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Name\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 12,
+  "fields": {
+    "action_time": "2025-09-23T12:28:13.844Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "6",
+    "object_repr": "GTPLAYER Gaming Chair, Computer Chair with Footrest and Lumbar Support, Height Adjustable Game Chair with 360°-Swivel Seat and Headrest and for Office or Gaming (White)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 13,
+  "fields": {
+    "action_time": "2025-09-23T19:33:34.968Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "1",
+    "object_repr": "Pooh The Bear",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Price\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 14,
+  "fields": {
+    "action_time": "2025-09-23T19:53:40.019Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "4",
+    "object_repr": "SENIX Electric Chainsaw, 14\" Corded Chainsaw,10 Amp Chain Saw for Wood Cutting, Tree Trimming, Garden Tool for Pruning, Branch Cutting, Yard, Fathers Day Gift for Men,Gardener, CSE10-L",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Description\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 15,
+  "fields": {
+    "action_time": "2025-09-23T19:54:10.620Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "4",
+    "object_repr": "SENIX Electric Chainsaw, 14\" Corded Chainsaw,10 Amp Chain Saw for Wood Cutting, Tree Trimming, Garden Tool for Pruning, Branch Cutting, Yard, Fathers Day Gift for Men,Gardener, CSE10-L",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Description\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 16,
+  "fields": {
+    "action_time": "2025-09-23T19:54:42.155Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "4",
+    "object_repr": "SENIX Electric Chainsaw, 14\" Corded Chainsaw,10 Amp Chain Saw for Wood Cutting, Tree Trimming, Garden Tool for Pruning, Branch Cutting, Yard, Fathers Day Gift for Men,Gardener, CSE10-L",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Description\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 17,
+  "fields": {
+    "action_time": "2025-09-23T19:55:41.202Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "4",
+    "object_repr": "SENIX Electric Chainsaw, 14\" Corded Chainsaw,10 Amp Chain Saw for Wood Cutting, Tree Trimming, Garden Tool for Pruning, Branch Cutting, Yard, Fathers Day Gift for Men,Gardener, CSE10-L",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Description\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 18,
+  "fields": {
+    "action_time": "2025-10-13T09:36:39.283Z",
+    "user": 2,
+    "content_type": 8,
+    "object_id": "7",
+    "object_repr": "Large Vanity Desk with 3 Color Touch Screen Dimming Mirror, Vanity Desk with Charging Station, Modern Retractable Makeup Dressing Table, Makeup Table With storage shelves and 5 Sliding Drawers, Black",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 19,
+  "fields": {
+    "action_time": "2025-10-13T09:38:32.736Z",
+    "user": 2,
+    "content_type": 8,
+    "object_id": "8",
+    "object_repr": "Mavivegue Book Shelf, 12 Cube Storage Organizer, DIY Bookcase, Metal Bookshelf,Tall Book case for Bedroom, Living Room,Office,Closet, Black Cubicle Rack",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 20,
+  "fields": {
+    "action_time": "2025-10-13T09:40:17.175Z",
+    "user": 2,
+    "content_type": 8,
+    "object_id": "9",
+    "object_repr": "MAXYOYO Bean Bag Chair, Floor Sofa with Handle, Bean Bag Chairs for Adults and Kids, Teens Living Room Bean Bag, Accent Sofa Chair with Pocket for Gaming Reading Relaxing",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 21,
+  "fields": {
+    "action_time": "2025-10-13T09:41:21.806Z",
+    "user": 2,
+    "content_type": 8,
+    "object_id": "10",
+    "object_repr": "Floating Shelves, Set of 2 Wall Shelves, 2-Tier Hanging Shelves, Wall Shelf Set of 2, Wall Mounted Shelves, for Living Room, Bedroom, Kitchen, Office, Study, Rustic Brown TBJ01P2BF",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 22,
+  "fields": {
+    "action_time": "2025-10-13T09:42:22.665Z",
+    "user": 2,
+    "content_type": 8,
+    "object_id": "11",
+    "object_repr": "31.5\" Round Coffee Table with Storage, Modern Accent Coffee Tables with Fluted Base, Wooden Circle Center Table for Living Room Small Space Apartment Office (Black)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 23,
+  "fields": {
+    "action_time": "2025-10-20T09:14:46.077Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "6",
+    "object_repr": "Miraz",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 24,
+  "fields": {
+    "action_time": "2025-10-20T09:21:16.011Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "7",
+    "object_repr": "Miraz",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 25,
+  "fields": {
+    "action_time": "2025-10-20T09:21:47.721Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "8",
+    "object_repr": "Miraz",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 26,
+  "fields": {
+    "action_time": "2025-10-20T09:22:04.472Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "4",
+    "object_repr": "Tonmoy",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 27,
+  "fields": {
+    "action_time": "2025-10-20T09:22:50.868Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "9",
+    "object_repr": "Tonmoy",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 28,
+  "fields": {
+    "action_time": "2025-10-20T09:27:13.455Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "10",
+    "object_repr": "Tonmoy",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 29,
+  "fields": {
+    "action_time": "2025-10-20T09:32:37.215Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "11",
+    "object_repr": "Miraz",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 30,
+  "fields": {
+    "action_time": "2025-10-20T09:36:07.686Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "12",
+    "object_repr": "Miraz",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 31,
+  "fields": {
+    "action_time": "2025-10-20T09:36:07.686Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "13",
+    "object_repr": "Tonmoy",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 32,
+  "fields": {
+    "action_time": "2025-10-20T09:40:14.265Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "15",
+    "object_repr": "Miraz",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 33,
+  "fields": {
+    "action_time": "2025-10-20T09:40:14.265Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "14",
+    "object_repr": "Tonmoy",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 34,
+  "fields": {
+    "action_time": "2025-10-20T09:48:16.206Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "16",
+    "object_repr": "Miraz",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 35,
+  "fields": {
+    "action_time": "2025-10-20T09:48:16.206Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "17",
+    "object_repr": "Tonmoy",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 36,
+  "fields": {
+    "action_time": "2025-10-20T09:49:04.300Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "18",
+    "object_repr": "Miraz",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 37,
+  "fields": {
+    "action_time": "2025-10-20T09:49:04.300Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "19",
+    "object_repr": "Tonmoy",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 38,
+  "fields": {
+    "action_time": "2025-10-20T10:42:36.651Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "20",
+    "object_repr": "Miraz",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 39,
+  "fields": {
+    "action_time": "2025-10-20T10:44:11.594Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "21",
+    "object_repr": "Miraz",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 40,
+  "fields": {
+    "action_time": "2025-10-20T10:44:11.594Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "22",
+    "object_repr": "Tonmoy",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 41,
+  "fields": {
+    "action_time": "2025-10-20T13:01:58.887Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "25",
+    "object_repr": "Rumi",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 42,
+  "fields": {
+    "action_time": "2025-10-20T13:19:47.605Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "26",
+    "object_repr": "Rumi",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 43,
+  "fields": {
+    "action_time": "2025-10-20T13:23:02.544Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "28",
+    "object_repr": "Opu",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 44,
+  "fields": {
+    "action_time": "2025-10-20T13:23:02.545Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "27",
+    "object_repr": "Rumi",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 45,
+  "fields": {
+    "action_time": "2025-10-21T07:30:25.353Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "5",
+    "object_repr": "Electronics",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 46,
+  "fields": {
+    "action_time": "2025-10-23T18:35:33.401Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "31",
+    "object_repr": "Apu",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 47,
+  "fields": {
+    "action_time": "2025-10-28T12:37:42.627Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "35",
+    "object_repr": "asd",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 48,
+  "fields": {
+    "action_time": "2025-10-28T12:37:42.627Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "36",
+    "object_repr": "asdaf",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 49,
+  "fields": {
+    "action_time": "2025-10-28T12:37:42.627Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "34",
+    "object_repr": "asdf",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 50,
+  "fields": {
+    "action_time": "2025-10-28T12:37:42.627Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "37",
+    "object_repr": "asfsaf",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 51,
+  "fields": {
+    "action_time": "2025-10-28T12:37:53.637Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "33",
+    "object_repr": "gopu",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 52,
+  "fields": {
+    "action_time": "2025-10-28T12:38:00.951Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "30",
+    "object_repr": "pakhi",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 53,
+  "fields": {
+    "action_time": "2025-10-28T13:10:35.000Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "6",
+    "object_repr": "Order #6 by TrishaSraboni",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 54,
+  "fields": {
+    "action_time": "2025-10-28T13:10:35.000Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "5",
+    "object_repr": "Order #5 by animesh",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 55,
+  "fields": {
+    "action_time": "2025-10-28T13:10:35.000Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "4",
+    "object_repr": "Order #4 by animesh",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 56,
+  "fields": {
+    "action_time": "2025-10-28T13:10:35.000Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "3",
+    "object_repr": "Order #3 by animesh",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 57,
+  "fields": {
+    "action_time": "2025-10-28T13:10:35.000Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "2",
+    "object_repr": "Order #2 by animesh",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 58,
+  "fields": {
+    "action_time": "2025-10-28T13:10:35.000Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "1",
+    "object_repr": "Order #1 by TrishaSraboni",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 59,
+  "fields": {
+    "action_time": "2025-11-24T11:55:35.759Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "38",
+    "object_repr": "User",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 60,
+  "fields": {
+    "action_time": "2025-11-24T11:55:35.759Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "39",
+    "object_repr": "User2",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 61,
+  "fields": {
+    "action_time": "2025-11-24T12:07:37.818Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "40",
+    "object_repr": "User",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 62,
+  "fields": {
+    "action_time": "2025-11-24T12:07:37.818Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "41",
+    "object_repr": "User2",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 63,
+  "fields": {
+    "action_time": "2025-11-24T12:18:54.593Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "42",
+    "object_repr": "User",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 64,
+  "fields": {
+    "action_time": "2025-11-24T12:18:54.593Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "43",
+    "object_repr": "user1",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 65,
+  "fields": {
+    "action_time": "2025-11-24T12:18:54.593Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "44",
+    "object_repr": "user2",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 66,
+  "fields": {
+    "action_time": "2025-11-24T17:32:24.953Z",
+    "user": 2,
+    "content_type": 4,
+    "object_id": "2",
+    "object_repr": "John",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"name\": \"profile\", \"object\": \"John - seller\", \"fields\": [\"User type\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 67,
+  "fields": {
+    "action_time": "2025-12-02T11:33:27.901Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "2",
+    "object_repr": "John",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 68,
+  "fields": {
+    "action_time": "2025-12-09T09:00:17.025Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "46",
+    "object_repr": "James",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 69,
+  "fields": {
+    "action_time": "2025-12-27T09:43:02.576Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "47",
+    "object_repr": "User",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 70,
+  "fields": {
+    "action_time": "2025-12-27T20:00:58.428Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "48",
+    "object_repr": "User",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 71,
+  "fields": {
+    "action_time": "2025-12-27T20:00:58.428Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "49",
+    "object_repr": "seller",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 72,
+  "fields": {
+    "action_time": "2026-02-10T19:22:39.500Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "5",
+    "object_repr": "TrishaSraboni",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 73,
+  "fields": {
+    "action_time": "2026-02-10T19:33:13.192Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "27",
+    "object_repr": "Order #27 by animesh",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 74,
+  "fields": {
+    "action_time": "2026-02-10T19:33:13.192Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "26",
+    "object_repr": "Order #26 by animesh",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 75,
+  "fields": {
+    "action_time": "2026-02-10T19:33:13.192Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "25",
+    "object_repr": "Order #25 by animesh",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 76,
+  "fields": {
+    "action_time": "2026-02-10T19:33:13.192Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "24",
+    "object_repr": "Order #24 by animesh",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 77,
+  "fields": {
+    "action_time": "2026-02-10T19:33:13.192Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "23",
+    "object_repr": "Order #23 by animesh",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 78,
+  "fields": {
+    "action_time": "2026-02-10T19:33:13.192Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "22",
+    "object_repr": "Order #22 by animesh",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 79,
+  "fields": {
+    "action_time": "2026-02-10T19:33:13.192Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "21",
+    "object_repr": "Order #21 by animesh",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 80,
+  "fields": {
+    "action_time": "2026-02-10T19:33:13.192Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "20",
+    "object_repr": "Order #20 by animesh",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 81,
+  "fields": {
+    "action_time": "2026-02-10T19:33:13.192Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "19",
+    "object_repr": "Order #19 by animesh",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 82,
+  "fields": {
+    "action_time": "2026-02-10T19:33:13.192Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "18",
+    "object_repr": "Order #18 by animesh",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 83,
+  "fields": {
+    "action_time": "2026-02-10T19:33:13.192Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "17",
+    "object_repr": "Order #17 by animesh",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 84,
+  "fields": {
+    "action_time": "2026-02-10T19:33:13.193Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "16",
+    "object_repr": "Order #16 by animesh",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 85,
+  "fields": {
+    "action_time": "2026-02-10T19:33:21.791Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "12",
+    "object_repr": "Order #12 by animesh",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 86,
+  "fields": {
+    "action_time": "2026-02-10T19:33:21.792Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "11",
+    "object_repr": "Order #11 by animesh",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 87,
+  "fields": {
+    "action_time": "2026-02-10T19:33:34.989Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "28",
+    "object_repr": "Order #28 by AnimeshTirtha",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Status\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 88,
+  "fields": {
+    "action_time": "2026-02-10T19:34:19.012Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "28",
+    "object_repr": "Order #28 by AnimeshTirtha",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 89,
+  "fields": {
+    "action_time": "2026-02-10T19:41:04.709Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "30",
+    "object_repr": "Order #30 by AnimeshTirtha",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Status\"]}}]"
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$SqGWVH92haoaOJYaUDfAma$KUGGKPlQiTUkA4ZspfUD0zLMWR++kRLO16UD0ERL1uw=",
+    "last_login": "2026-03-02T11:11:59.517Z",
+    "is_superuser": true,
+    "username": "animesh",
+    "first_name": "",
+    "last_name": "",
+    "email": "animeshdashtirtha@gmail.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2025-09-23T10:24:10.060Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$N7rvZoLC1BzQGVUp4kJBhd$Jo/qIzzp8K6Qx+DglXEmN/TI+wW/aqN5rjgYOPdffYA=",
+    "last_login": "2025-12-24T08:54:18.748Z",
+    "is_superuser": true,
+    "username": "John",
+    "first_name": "",
+    "last_name": "",
+    "email": "john@gmail.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2025-10-13T09:31:23Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$5VfRd0jeNqxQYJSDgp5oOM$WwGInT3LAzhFCeor7+63PgT05taJ6/6jxulGWcxUL2A=",
+    "last_login": "2025-10-21T17:27:18.301Z",
+    "is_superuser": false,
+    "username": "Trisha",
+    "first_name": "",
+    "last_name": "",
+    "email": "Trisha@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-10-15T12:48:32.846Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 23,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$JSoG858Q7uPnNPhBZZB9ab$j5k6nRjyNqXb1Rib/4VAjwWjoW+iyX7khBuCDMWAZN4=",
+    "last_login": "2025-10-20T10:45:44.169Z",
+    "is_superuser": false,
+    "username": "Tonmoy",
+    "first_name": "",
+    "last_name": "",
+    "email": "tonmoy@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-10-20T10:45:43.524Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 24,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$YY4o63QHAhh5ZX3cEDsKR4$F3MI7Nh6ewhyQ0ZZ57jE7c86/K9eX+EROK3CaXAZMm8=",
+    "last_login": "2025-12-27T20:04:35.231Z",
+    "is_superuser": false,
+    "username": "Miraz",
+    "first_name": "",
+    "last_name": "",
+    "email": "miraz@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-10-20T10:45:57.140Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 29,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$HzylQecT8PIYT5MieOUPiU$kEaiUBIOaEU+Jci/QGQrYvj2uovap7k0Y3EH3OkDaWQ=",
+    "last_login": "2025-12-02T11:41:22.468Z",
+    "is_superuser": false,
+    "username": "Rumi",
+    "first_name": "",
+    "last_name": "",
+    "email": "rumi@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-10-20T13:23:17.013Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 32,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$C59FoB4ir6DhyW2RDVSVNF$s2C7fe3hV4VFbAfITqLrnTqG1yE5W/3uvaYhZfAW2BY=",
+    "last_login": "2025-10-23T18:36:34.650Z",
+    "is_superuser": false,
+    "username": "Apu",
+    "first_name": "",
+    "last_name": "",
+    "email": "apu@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-10-23T18:36:34.013Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 45,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$XLkt79yT3LTEwU3ZBmmKex$2SyMN8gwY/1i4oYdwqa+7z/EXB39fkqF9aOdk/WKah8=",
+    "last_login": "2025-11-24T12:19:26.428Z",
+    "is_superuser": false,
+    "username": "uss",
+    "first_name": "",
+    "last_name": "",
+    "email": "uss@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-11-24T12:19:25.772Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 50,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$0Hjp5B4o9zz1hum30J5QAB$2CIA/WNkZvf5iYnRX7WFYwtKsDwt5c2T6nACy6DzY4I=",
+    "last_login": "2025-12-27T20:03:08.651Z",
+    "is_superuser": false,
+    "username": "User",
+    "first_name": "",
+    "last_name": "",
+    "email": "user@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-12-27T20:03:08.017Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 51,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$I9tA5vnNWGrtOscelou1lk$hDKsBvl8kD+rbsi/iNlODC1jjWHI2L459bl29u0GUz0=",
+    "last_login": "2025-12-27T20:05:22.135Z",
+    "is_superuser": false,
+    "username": "seller",
+    "first_name": "",
+    "last_name": "",
+    "email": "seller@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-12-27T20:05:21.495Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 52,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$20WDza9owKXyDHE0Lt1GbG$RGW5Gz6C5U+fR3Szr9lna0k6gfdJ6H7zETwPSqhZL2g=",
+    "last_login": "2026-02-10T19:41:24.153Z",
+    "is_superuser": false,
+    "username": "AnimeshTirtha",
+    "first_name": "",
+    "last_name": "",
+    "email": "animeshtirtha@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-02-10T19:19:00.367Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 53,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$BduG9FFptCkwqOcSg4NnzO$jqqkXERb0wWhPsK/KO/7Tta4TajonTj4lNmUjbxqZnw=",
+    "last_login": "2026-02-10T19:23:59.062Z",
+    "is_superuser": false,
+    "username": "TrishaSraboni",
+    "first_name": "",
+    "last_name": "",
+    "email": "trishasraboni@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-02-10T19:23:58.428Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "3ha5cpmaootlmzt3gtgji113r32z4u9k",
+  "fields": {
+    "session_data": "e30:1vAlp1:bczCxKvW6tU3xRrTrwQ6MHYb7EHadxmcC5_8Vap2ApY",
+    "expire_date": "2025-11-03T09:04:55.423Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "4ya1erw2o5on76hz0qvd9y30zch9sdc2",
+  "fields": {
+    "session_data": ".eJxVjEEOwiAQRe_C2hAoMBSX7j0DGWYGWzVtUtqV8e7apAvd_vfef6mM2zrkrcmSR1Zn5dXpdytID5l2wHecbrOmeVqXsehd0Qdt-jqzPC-H-3cwYBu-tekIbd_F1DuGlDAmoeI9OfAAJjiJYiiADV01MViqxYNFcZZThcC9en8AwSc3Iw:1v92Fy:WUVzFgciV9ChvkNyOihwM-d3UMYUhTunbdCM91lOWbI",
+    "expire_date": "2025-10-29T14:13:34.267Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "87tkn7frl14qwwoxfwwnz2rk8fj5s8fi",
+  "fields": {
+    "session_data": ".eJxVjEsOAiEQBe_C2hBAoMGl-zkD6abBGTWQzGdlvLtOMgvdvqp6L5FwW8e0LWVOE4uLcOL0uxHmR2k74Du2W5e5t3WeSO6KPOgih87leT3cv4MRl_FbV7CsbHaADMYHqipCUOiYtM8Gs9Yq2Ow9UERjiQ2QgRrYl3hGNlG8P-FMN9o:1vIV2n:WpWH2wvm4-SXWk0Vfam6wjF7Mwr801wBlqLleaUrbGY",
+    "expire_date": "2025-11-24T16:47:05.637Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "azhbop375uwvi2yosenim5zou72z156g",
+  "fields": {
+    "session_data": "e30:1vAldu:QEHwlG5UC_G2-8PW3uT9LQOZAnIhHrF3RefanQRZyuM",
+    "expire_date": "2025-11-03T08:53:26.362Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "cb6khuewtm5k3vpharewthbo6y30jyd0",
+  "fields": {
+    "session_data": ".eJxVjMEOwiAQRP-FsyHQBQsevfsNZIFdqRqalPZk_Hdp0oOeJpn3Zt4i4LaWsDVawpTFRWhx-u0ipifVHeQH1vss01zXZYpyV-RBm7zNmV7Xw_07KNhKXysLWZNizcqqZCydWXH02gwcXQKXeyZiJsTkB-fNCMDKddODBj2KzxfyWjf_:1v10CH:1L60mJy-bzHzJMPh4LkHbv_EBgx2h8VX7a1wkXRGcAQ",
+    "expire_date": "2025-10-07T10:24:33.276Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "dfxahsq5yp2zfh8sr7p9otxq1mrwwrqx",
+  "fields": {
+    "session_data": "e30:1vC0E9:YFCkMcKdwDV61RVWgF169756B_z-USQjquSv6ja9V4A",
+    "expire_date": "2025-11-06T18:39:57.914Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "h10dwqfmajg28sk8n28ekzsxxkpijwws",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAURP-FtSHyvODSvd9AoPciVQNJaVfGf5cmXehuMnPOvFmI21rC1mkJM7ILU-z026U4PanuAz5ivTc-tbouc-I7wo-181tDel0P9u-gxF6GLZPzOWeDAjNY6VGCkwgQrTDoU1Lg7dlRFCNmBdqQR62BpPDDJMc-X-t9N9M:1v951P:d6S22QfMYbaijjhFhKcy1iEkxZmm4kMu_uqSDTjaJCg",
+    "expire_date": "2025-10-29T17:10:43.468Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "h1ojj1mg24go8gzltrarmrrfp3tp4yf2",
+  "fields": {
+    "session_data": "e30:1vAlf5:gkdjzzIt32U7qC0am432spRxuYkpeJwybJYQdN5hPwc",
+    "expire_date": "2025-11-03T08:54:39.823Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "igrpkyb2279da507i56rhhwvnjotgyws",
+  "fields": {
+    "session_data": "e30:1vAlqB:KyWKdPjZOI_tWXsWFwpiW2-usx3Uxrw7e7J6GXmzUWc",
+    "expire_date": "2025-11-03T09:06:07.453Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "ios8n4eolgu1p7aqiata6fr9go6isjgq",
+  "fields": {
+    "session_data": "e30:1vAle3:Z144n_ULFtELylEClQNHK7u-nm0FOUKB-Zan_I5u05s",
+    "expire_date": "2025-11-03T08:53:35.668Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "k189ndxeo71ze0fjsb5bo3oud0om72po",
+  "fields": {
+    "session_data": "e30:1vAldJ:BMywUUvS_JRMKTeCA1PAHISLVL4VRlVNuoG6KE2Ijy8",
+    "expire_date": "2025-11-03T08:52:49.306Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "mcoc9dafymy36uudw9qxsg9h1ormhqe8",
+  "fields": {
+    "session_data": "e30:1vAlrW:oSmzvTR6tpHeAmk2X9wrFCW-b2urIT4Jj688Uh42-L4",
+    "expire_date": "2025-11-03T09:07:30.797Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "nq62t1ayli5n2mp75hw5d2l4rk0hgrgc",
+  "fields": {
+    "session_data": "e30:1vC0As:DMYIRvfDJYZfvvMI0DHzDlHm58kKIWaSt5n_4aST_gk",
+    "expire_date": "2025-11-06T18:36:34.638Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "o02upnopwg6gx6tpg9iuw9juhqapkciz",
+  "fields": {
+    "session_data": "e30:1vAldQ:2ZVvYZJcpsoVoKhjCjfMrxUZXL93QV0FE4cjM5v3H3Y",
+    "expire_date": "2025-11-03T08:52:56.373Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "p97nwddwszsvsf89jg8d9i75cvuhuceg",
+  "fields": {
+    "session_data": "e30:1vAll9:IzCi6zpYniyxVTDnumwsGDKrowRu7PD2-8HcOR77jwo",
+    "expire_date": "2025-11-03T09:00:55.344Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "qzpmw4azo5y87t6ki65oit9bhdv7e8xu",
+  "fields": {
+    "session_data": "e30:1vAlhg:8lBM5J9c0XJdlQqk5YKZ3gd91Wmb3bmFBGIowE5kYuo",
+    "expire_date": "2025-11-03T08:57:20.746Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "rm0q5pvs26arw59i8ehpq2nkrhbop7fy",
+  "fields": {
+    "session_data": "e30:1vAlii:hNufe_eAuDF1SlVgJcRKhVhXokeLZKrQZ5RF0HDuo_M",
+    "expire_date": "2025-11-03T08:58:24.525Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "tmjmt9ld0k7ztqb4fhryncvqqdidvqn4",
+  "fields": {
+    "session_data": "e30:1vAlsm:4A_ed7dNOjlqB9vgLqxDOhuBGStKfOsDCAMPPsgvMIM",
+    "expire_date": "2025-11-03T09:08:48.301Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "uec59urrgal1t3lr5xs7x6iteg36zq28",
+  "fields": {
+    "session_data": "e30:1vAlor:dOcDW2yEqZQQ7bRtFbyNmurWiyCcIoaMq211TOPys_c",
+    "expire_date": "2025-11-03T09:04:45.160Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "wdrh2ukkz7y2ugcjsa2wuapqp8ksej3y",
+  "fields": {
+    "session_data": "e30:1vAlkx:Vros2NU8zHEVK3bufnt_67RjZYth6t_LPmY981DIC1g",
+    "expire_date": "2025-11-03T09:00:43.320Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "zguuuv6lz3s6vei73nvtv3e9mxq0ng4m",
+  "fields": {
+    "session_data": "e30:1vAlrf:Hyv8J6O42s9_BHFWo9jHE0VtCikD3esRu8ZR4irztg0",
+    "expire_date": "2025-11-03T09:07:39.621Z"
+  }
+},
+{
+  "model": "core.profile",
+  "pk": 1,
+  "fields": {
+    "user": 1,
+    "user_type": "buyer"
+  }
+},
+{
+  "model": "core.profile",
+  "pk": 2,
+  "fields": {
+    "user": 2,
+    "user_type": "seller"
+  }
+},
+{
+  "model": "core.profile",
+  "pk": 3,
+  "fields": {
+    "user": 3,
+    "user_type": "buyer"
+  }
+},
+{
+  "model": "core.profile",
+  "pk": 23,
+  "fields": {
+    "user": 23,
+    "user_type": "buyer"
+  }
+},
+{
+  "model": "core.profile",
+  "pk": 24,
+  "fields": {
+    "user": 24,
+    "user_type": "seller"
+  }
+},
+{
+  "model": "core.profile",
+  "pk": 29,
+  "fields": {
+    "user": 29,
+    "user_type": "seller"
+  }
+},
+{
+  "model": "core.profile",
+  "pk": 32,
+  "fields": {
+    "user": 32,
+    "user_type": "buyer"
+  }
+},
+{
+  "model": "core.profile",
+  "pk": 45,
+  "fields": {
+    "user": 45,
+    "user_type": "seller"
+  }
+},
+{
+  "model": "core.profile",
+  "pk": 50,
+  "fields": {
+    "user": 50,
+    "user_type": "buyer"
+  }
+},
+{
+  "model": "core.profile",
+  "pk": 51,
+  "fields": {
+    "user": 51,
+    "user_type": "seller"
+  }
+},
+{
+  "model": "core.profile",
+  "pk": 52,
+  "fields": {
+    "user": 52,
+    "user_type": "buyer"
+  }
+},
+{
+  "model": "core.profile",
+  "pk": 53,
+  "fields": {
+    "user": 53,
+    "user_type": "buyer"
+  }
+},
+{
+  "model": "item.category",
+  "pk": 1,
+  "fields": {
+    "name": "Toys"
+  }
+},
+{
+  "model": "item.category",
+  "pk": 2,
+  "fields": {
+    "name": "Clothes"
+  }
+},
+{
+  "model": "item.category",
+  "pk": 3,
+  "fields": {
+    "name": "Furnitures"
+  }
+},
+{
+  "model": "item.category",
+  "pk": 4,
+  "fields": {
+    "name": "Tools"
+  }
+},
+{
+  "model": "item.category",
+  "pk": 5,
+  "fields": {
+    "name": "Electronics"
+  }
+},
+{
+  "model": "item.item",
+  "pk": 1,
+  "fields": {
+    "name": "Pooh The Bear",
+    "description": "This is an adorable Pooh bear with a nappy and dummy holding a toy teddy and blanket so lends itself to being a wonderful keepsake for a new baby.",
+    "price": 4000.0,
+    "is_sold": false,
+    "created_at": "2025-09-23T10:59:51.869Z",
+    "created_by": 1,
+    "category": 1,
+    "image": "item_images/pooh.jpeg"
+  }
+},
+{
+  "model": "item.item",
+  "pk": 2,
+  "fields": {
+    "name": "Little Live Pets Walking Penguin My Pet Waddles, Interactive Plush Penguin with 25+ Sounds and Detachable Leash, Toy Penguin",
+    "description": "Hot Selling Super Soft Plush Penguin Toy Stuffed Toy Penguin Plush Penguin Stuffed Animal for Kids.",
+    "price": 1400.0,
+    "is_sold": false,
+    "created_at": "2025-09-23T11:08:14.403Z",
+    "created_by": 1,
+    "category": 1,
+    "image": "item_images/Penguin.webp"
+  }
+},
+{
+  "model": "item.item",
+  "pk": 3,
+  "fields": {
+    "name": "DISNEY STORE Official Stitch Medium Soft Toy for Kids, Cuddly Character with Fuzzy Texture and Embroidered Details, Flexible Floppy Ears, Disney Plushy Suitable for All Ages.",
+    "description": "Polyester, polyethylene, ethylene vinyl acetate foam, nylex\r\nOut of This World Comfort - Cuddle up with the beloved Experiment 626 with our medium-sized Stitch plush from Disney's Lilo & Stitch, designed for supreme softness and huggability.\r\nQuality Craftsmanship - This Stitch plush features detailed plush sculpting, embroidered features for added character authenticity, pieced spots, and a furry tuft, ensuring a high-quality Stitch teddy bear.\r\nUnique Textural Details - Equipped with soft, flexible ears, felt claws, and a distinctive tail, this medium Stitch stuffed animal provides a variety of textures for tactile exploration.\r\nInspired by the Classic Film - Perfect for fans of Disney’s Lilo & Stitch, this plush toy captures the adventurous spirit of Stitch, making it one of the ideal Lilo and Stitch gifts for girls and boys.\r\nCollectible Companion - Pair this Stitch plush with our matching Angel Plush, sold separately, to complete your Lilo & Stitch collection and bring the animated story to life in your home.",
+    "price": 2500.0,
+    "is_sold": false,
+    "created_at": "2025-09-23T11:09:32.122Z",
+    "created_by": 1,
+    "category": 1,
+    "image": "item_images/stitch.webp"
+  }
+},
+{
+  "model": "item.item",
+  "pk": 4,
+  "fields": {
+    "name": "SENIX Electric Chainsaw, 14\" Corded Chainsaw,10 Amp Chain Saw for Wood Cutting, Tree Trimming, Garden Tool for Pruning, Branch Cutting, Yard, Fathers Day Gift for Men,Gardener, CSE10-L",
+    "description": "Uninterrupted Power for Demanding 14-Inch Cuts：Experience professional-grade performance with this 14-inch corded electric chainsaw. Powered by a 10-Amp motor, it delivers superior, consistent torque that never fades. Effortlessly slice through woods and demanding pruning tasks with this high-power electric chain saw.\r\nUnlimited Runtime for Extended Projects：Never stop work for a battery charge. This corded chainsaw plugs into any standard 120-volt outlet for continuous operation, making it ideal for prolonged wood cutting, storm cleanup, and large landscaping projects. Enjoy reliable, on-demand power without downtime.\r\nExceptional Value：This electric chainsaw corded offers the highest power-to-price ratio. Avoid the long-term expense of battery powered chainsaw replacements and complex maintenance. It's the smart, economical choice for homeowners seeking a powerful chain saw electric corded that won't break the bank.\r\nUser-Friendly Design：This electric chainsaw lightweight design reduces user fatigue, automatic oiling system provides continuous lubrication to the bar and chain from the 5.8 oz. built-in oil tank with oil level window to make operation smooth and intuitive.\r\nComes with bar and cBuilt-In Safety for Secure Operation： This corded electric chainsaw 14 inch is equipped with critical safety features like a handle-mounted trigger lockout and an automatic kickback brake. These provide an extra layer of protection, making it a secure choice for any user.hain cover for safe storage and transportation\r\nWHAT’S INCLUDED: The SENIX chainsaw comes with bar and chain cover, scrench tool; This outdoor power tool is covered by a 3-year limited warranty.",
+    "price": 12000.0,
+    "is_sold": false,
+    "created_at": "2025-09-23T11:32:02.730Z",
+    "created_by": 1,
+    "category": 4,
+    "image": "item_images/chainsaw.webp"
+  }
+},
+{
+  "model": "item.item",
+  "pk": 5,
+  "fields": {
+    "name": "4Ft Folding Table Adjustable Height Portable Folding Tables Heavy Duty 400 lbs Capacity, Wood Grain Tabletop for Working Meeting Parties, Picnic, Camping, Weddings, Garden Dining-Black",
+    "description": "[Stable and Anti-slip]: The table legs are designed with anti-slip rubber pads, which can effectively enhance friction with the ground. Even when used on smooth tiles or outdoor grass, it can reduce shaking and improve safety during use.\r\n[Rounded Edges]: The edges of the tabletop are rounded to avoid damage caused by bumps from sharp corners, making it especially suitable for families with children or reducing the risk of accidents in places with heavy foot traffic.\r\n[Even Weight Distribution]: High-quality materials and precise structural design ensure even weight distribution on the tabletop. It is not prone to local collapse or tilting when placing items, and can stably support various objects such as tableware, books, and small appliances.\r\n[Strong Weather Resistance]: In addition to being waterproof and heat-resistant, the tabletop material can also resist daily stains, minor scratches, and ultraviolet radiation. It is not easy to fade or deform when exposed to outdoor environments for a long time, thus extending its service life.\r\n[Quick to Unfold]: The folding structure is reasonably designed, making the unfolding process simple and convenient. No complicated installation steps are required, and a single person can complete the setup in a short time, meeting the demand for quick use in temporary scenarios.",
+    "price": 6000.0,
+    "is_sold": false,
+    "created_at": "2025-09-23T11:33:03.762Z",
+    "created_by": 1,
+    "category": 3,
+    "image": "item_images/s-l960.webp"
+  }
+},
+{
+  "model": "item.item",
+  "pk": 6,
+  "fields": {
+    "name": "GTPLAYER Gaming Chair, Computer Chair with Footrest and Lumbar Support, Height Adjustable Game Chair with 360°-Swivel Seat and Headrest and for Office or Gaming (White)",
+    "description": "Most Comfortable And Relaxing: Equipped with headrest and lumbar pillow. When your neck feels sore from gaming or working with head down for a long time, the headrest will relieve your fatigue. When tired from maintaining a same sitting posture, please rest assured to lean back and charge your waist pillow, it will relax your tired waist energetically.\r\nMore Stable Than Others: Common gaming chairs are equipped with plastic legs generally to save costs, but we still insist on applying the same material as the built-in metal frame. No fear of high or low temperature, no fear of the sunshine, no fear of wind, it will not rust and break. Whether child rolls on the chair or a pet jumps up excitedly, the sturdy metal legs will keep the chair stable firmly.\r\nLiberate Your Feet: Will you feel tired for sitting all the time? Sure. Then you can choose the chair with footrest to relax your feet. When you don’t want to straighten your back and sit, just take out the footrest, put your feet up, turn on your favorite music, and start enjoying the comfort! And don’t worry about clean, it is also made of high-quality PU leather, just wipe it with a soft cloth and it will shine as new.\r\nReject Short-Lived Chairs: We never hesitate to apply materials. Armrests must be padded from the position of the elbow to the wrist, built-in metal frame must be wider, and the foam under the leather must be rich, it can’t collapse as if we are sitting on a hard stone when leaning up. The chair has gone through thousands of rotation and sitting experiments before mass production. Sufficient and premium materials can ensure the chair to withstand long-term use.\r\nWorry-Free Purchase: A detailed instruction will be sent to you along with all accessories so that you can assemble the chair easily. Free replacement or refund within 30 days. Free replacement or repair within 1 year. If you have any questions or suggestions, please feel free to contact us, we will do our best to make our customers satisfied.\r\n【FSC-Certified】 Chair cushion inner support of the Chair is made of FSC-Certified wood.",
+    "price": 25000.0,
+    "is_sold": false,
+    "created_at": "2025-09-23T11:33:57.472Z",
+    "created_by": 1,
+    "category": 3,
+    "image": "item_images/s-l960_2.webp"
+  }
+},
+{
+  "model": "item.item",
+  "pk": 7,
+  "fields": {
+    "name": "Large Vanity Desk with 3 Color Touch Screen Dimming Mirror, Vanity Desk with Charging Station, Modern Retractable Makeup Dressing Table, Makeup Table With storage shelves and 5 Sliding Drawers, Black",
+    "description": "【Advice and After-Sales】 Our products require self-assembly, but the assembly process is simple and equipped with clear and concise instructions. In order to ship the product well, a foam shock absorption box package is taken. We also provide excellent after-sales service if there are any product problems.\r\n【Metal slides and Handles】 This Vanity Desk is made of scratch-resistant, moisture-resistant MDF boards, and sturdy metal handles, a light wipe with a damp cloth will give the fresh look. easily on ball bearings, allowing you to effortlessly push and pull drawers to keep your items neat.\r\n【3-Color LED Light】The vanity desk has a large dimmable lighting mirror with 3 different LED lighting colors, including natural, warm and cool light, for a variety of indoor lighting and environments to optimize your makeup\r\n【Flexible combinations】The size of our Vanity Desk can be adjusted according to the length you need, and the position of the bedside table is also interchangeable from left to right, so that it can be placed and installed according to your needs to meet your multiple needs\r\n【Built-in Power Strip】Upgrade design!This makeup table equipped with a power strip that has 2 standard plug sockets ，1 USB ports and 1 T-C with a 4.9-foot power cord,convenient for the LED lights,hairdryer, curling iron, and charge your phone, tablet, or other electronics.",
+    "price": 20000.0,
+    "is_sold": false,
+    "created_at": "2025-10-13T09:36:39.280Z",
+    "created_by": 2,
+    "category": 3,
+    "image": "item_images/711VzXwMOrL._AC_SL1500_.jpg"
+  }
+},
+{
+  "model": "item.item",
+  "pk": 8,
+  "fields": {
+    "name": "Mavivegue Book Shelf, 12 Cube Storage Organizer, DIY Bookcase, Metal Bookshelf,Tall Book case for Bedroom, Living Room,Office,Closet, Black Cubicle Rack",
+    "description": "【Large Storage Space】: Each cube size is 15.74\" x 11.8\" x 11.8\" (40 x 30 x 30cm), which is larger than other common sizes(11.8\" x 11.8\" x 11.8\") so you can accommodate more items to improve the tidiness and comfort of your home\r\n【More Choices】: We have various styles of cube shelves, such as 4/5/6/9/10/12/15/16/18/20grid black or gray or white cube shelves for you to choose,and fit different styles and sizes\r\n【DIY As You Want】: Use your imagination, this cube structure can be composed into various shapes, such as bookshelves, storage racks, wardrobe organizers, each shape can make your layout more flexible and diverse\r\n【Store As You Like】: Our storage shelves can accommodate different kinds of items as you like, such as books、clothes、 toys、 picture frames and more.There is a hook on the side of the bookshelf, which can store hats or umbrellas.But we don't recommend that you place items over 30 lbs.\r\n【Easy To Assemble】: These modules are in a cubic structure, which is more convenient for you to assemble. At the same time, we have a matching installation guide, so you don't have to worry about being confused after receiving it.\r\n【Suitable For Different Scenarios】:The application scene of this bookshelf is not fixed, you can decide according to your personal preference,such as study room, living room, bedroom, office and more\r\n【Several High-quality Materials】：Our products are made of various materials, including metal tubes, ABS plastic compounds, and non-woven fabrics. The combination of these materials is water resistance and easier to clean, while helping you maintain an overall aesthetic. The joint is made of high-quality plastic, which has high stability and is more environmentally friendly.\r\n【Thoughtful After-sales Service】: If you have any issue, please contact us after you receive our product",
+    "price": 9000.0,
+    "is_sold": false,
+    "created_at": "2025-10-13T09:38:32.733Z",
+    "created_by": 2,
+    "category": 3,
+    "image": "item_images/81p3UUXb9pL._AC_SY450_.jpg"
+  }
+},
+{
+  "model": "item.item",
+  "pk": 9,
+  "fields": {
+    "name": "MAXYOYO Bean Bag Chair, Floor Sofa with Handle, Bean Bag Chairs for Adults and Kids, Teens Living Room Bean Bag, Accent Sofa Chair with Pocket for Gaming Reading Relaxing",
+    "description": "High Density Foam Filling: This bean bag chair is filled entirely with high quality, high density, high resilience memory foam. The bean bag sofa gives reliable support, offering a comfortable sitting experience. Foam bean bag chairs are extremely durable and retain their shape over extended periods of use.\r\nUser-friendly Design: Non-slip fabric on the bottom of the bean bag chair, which provides a stable and secure seating experience. Equipped with a top handle, the bean bag chair sofa can be easily moved to desired locations within your home, allowing for flexible use in different areas.\r\nSuitable for Various Scenarios: The bean bag chair is a perfect addition to your living room, bedroom, dorm room and many other places. Its simple design allows it to blend perfectly with any room and furniture style, creating a cozy resting corner for you. Available in multiple colors, allowing selection based on your preferences.\r\nSoft and Skin-Friendly Fabric: The material of the bean bag chair is fustian cord fabric, give a cozy and comfortable feeling, increasing the warmth and intimacy of the indoor atmosphere and maintaining the beauty and freshness for a long time\r\nNo Assembly: The bean bag chair is pre-filled, you do not need to fill it yourself. It is shipped compressed and needs to be cut open and packaged, tapped and shaken to promote rebound, and waited about 48 hours to return to its original shape. If you have any questions, please to contact us at any time, we will be at your service 24 hours a day!",
+    "price": 8000.0,
+    "is_sold": false,
+    "created_at": "2025-10-13T09:40:17.172Z",
+    "created_by": 2,
+    "category": 3,
+    "image": "item_images/81Mx9Dds9L._AC_SY450_.jpg"
+  }
+},
+{
+  "model": "item.item",
+  "pk": 10,
+  "fields": {
+    "name": "Floating Shelves, Set of 2 Wall Shelves, 2-Tier Hanging Shelves, Wall Shelf Set of 2, Wall Mounted Shelves, for Living Room, Bedroom, Kitchen, Office, Study, Rustic Brown TBJ01P2BF",
+    "description": "Chic Diamond Design, A New Space Vibe: This 2-piece floating shelves set, with its diamond-shaped iron tubes and double-tier design, offers a fresh visual delight for your home space. Its vintage industrial hue effortlessly complements your indoor decor\r\nDouble-Tier High Capacity for Efficient Storage: Measuring 15.0\"L x 5.5\"W x 15.0\"H, these hanging shelves boast double storage spaces and can be used side by side. Whether for decor, books, or daily essentials, everything finds its place effortlessly\r\nEasy Installation with Robust Stability: Installing this wall-mounted shelf set of 2 is a breeze, complete with all necessary hardware and clear instructions. The gourd-shaped holes paired with solid wall screws ensure stable and reliable use\r\nVersatile for Multiple Settings, Matches All Styles: The 2-tier floating shelves are perfect for various home settings, seamlessly blending into living rooms, coffee bars, kitchens, or bathrooms, enhancing the space's aesthetics\r\nHigh-Quality Build, Low-Hassle Maintenance: Made from robust iron and particleboard, each hanging shelf supports up to 22 pounds. Its smooth, wipe-clean surface simplifies maintenance, ensuring long-term usability and convenience",
+    "price": 1800.0,
+    "is_sold": false,
+    "created_at": "2025-10-13T09:41:21.803Z",
+    "created_by": 2,
+    "category": 3,
+    "image": "item_images/718sDCrcwWL._AC_SX466_.jpg"
+  }
+},
+{
+  "model": "item.item",
+  "pk": 11,
+  "fields": {
+    "name": "31.5\" Round Coffee Table with Storage, Modern Accent Coffee Tables with Fluted Base, Wooden Circle Center Table for Living Room Small Space Apartment Office (Black)",
+    "description": "【Stylish Mid-Century Modern Accent】The LEVNARY round fluted coffee table brings together mid-century modern elegance and farmhouse warmth. With a 31.5'' circle wood desktop, it’s the perfect accent furniture piece to elevate your living room, home office, or apartment décor.\r\n【Functional Storage with Hidden Cabinet】Designed for both form and function, this coffee table with storage includes a sliding cabinet that keeps your essentials neatly tucked away. It’s ideal for small space living, offering convenient storage while maintaining a clean, rustic look.\r\n【Durable Veneered Wood Construction】Crafted from high-quality veneered wood, this coffee table delivers strength, stability, and a smooth finish. It’s built to last and adds timeless charm to your interior furniture collection.\r\n【Versatile Centerpiece for Any Space】Whether you're enjoying a cup of tea at home or furnishing a cozy cafe, this center table adapts effortlessly. Its compact design fits beautifully in various settings, offering practical utility without sacrificing style.\r\n【Easy Assembly & Perfect Size】Dimensions: 31.5\"W x 31.5\"D x 15.74\"H. This round coffee table is simple to assemble and comes with clear instructions. Should you encounter any issues, our team is ready to assist you promptly.",
+    "price": 14000.0,
+    "is_sold": false,
+    "created_at": "2025-10-13T09:42:22.663Z",
+    "created_by": 2,
+    "category": 3,
+    "image": "item_images/91YYNtSkSqL._AC_SY300_SX300_QL70_FMwebp_.webp"
+  }
+},
+{
+  "model": "item.item",
+  "pk": 12,
+  "fields": {
+    "name": "Greenworks 24V Cordless Brushless 800 in-lbs Drill/Driver, Professional Grade,21 Clutch, 4.0Ah USB-C Battery (24,000mAh Power Bank),65W USB-C Fast Charger(3-Port) and USB C to USB C Cable(3.3FT)",
+    "description": "1/2 In. 800 IN-LBS. DRILL DRIVER: Brushless drill with 1/2\" keyless ratcheting metal chuck for fast and easy bits changing. 2-SPEED GEARBOX & 21-POSITION CLUTCH: 0-500/0-2100 RPM speed with 21-position clutch for desired torque setting and precision control.\r\nPowerful Brushless Motor & Long-Lasting Batteries:Experience 2X more torque and 35% longer runtime compared to 20V competitors. The 24V brushless motor ensures cooler operation, extended tool life, and fade-free power. Includes a 4Ah USB-C battery for uninterrupted use—perfect for all-day projects.\r\nLightweight & Ergonomic: Our 24V Brushless Cordless Drill kit weigh only ‎2.81 lbs, you can control them at ease, whatever how long you operate the drivers. Especially, it's more friendly to ladies. And the ergonomic non-slip handle is comfortable for you to grip.\r\nBuilt-In LED Light & Compact Size-Work in tight spaces with ease! The built-in LED light illuminates dark areas, while the 35% more compact design ensures access to hard-to-reach spots. Perfect for home repairs, carpentry, and automotive work.\r\nGreenworks 24V Lithium-ion USB-C Battery: Provides 20% more power and 35% more run-time Compared with a 20v battery, and delivers fade-free power with no memory loss after charging. 65W Super Fast Charging 24,000mAh portable charger. Provides 4 charges for iPhone 15, 3.5 charges for Galaxy S23, and 2.2 charges for iPad mini 6.Two-Way USB-C Charging: The USB-C port supports both input and output functions, makes charging and recharging quick and easy.\r\nHigh-Speed Charging: Connect a single device to get a 65W max charge—that’s enough to power up a 2020 MacBook Pro 13″ at full speed. And when you connect three devices, power will be distributed efficiently between ports to ensure you get the best charge.\r\n3-Year Warranty & Lifetime Support-Invest with confidence! Our 24V power tool combo comes with a 3-year limited warranty and lifetime customer support. If anything goes wrong, we’ve got you covered. Your satisfaction is our top priority!\r\nCompatible with 150+ Greenworks 24V Tools-Save money and reduce waste! The included 24V battery pack is compatible with over 150 Greenworks 24V tools, from lawn mowers to chainsaws. Build your eco-friendly tool collection without buying extra batteries—perfect for homeowners and professionals alike!",
+    "price": 16000.0,
+    "is_sold": false,
+    "created_at": "2025-10-20T11:48:03.398Z",
+    "created_by": 24,
+    "category": 4,
+    "image": "item_images/71tyIjRiqPL._AC_SX425_.jpg"
+  }
+},
+{
+  "model": "item.item",
+  "pk": 13,
+  "fields": {
+    "name": "3D Multi-Angle Measuring Ruler,45/90 Degree Aluminum Alloy Woodworking Square Protractor,Drawing Line Ruler, Miter Triangle Ruler High Precision Layout Measuring Tool for Engineer Carpenter,R",
+    "description": "[Product material]: The measuring ruler is made of aluminum alloy, with high hardness, light weight, corrosion resistance, rust prevention and other characteristics.\r\n[Product Design]: Two measuring rulers with scales and graphics are spliced into a common measuring tool. The minimum scale is mm, and the longest scale is 112 mm (4.4 inches). The ruler body is thickened. One ruler can be used for multiple purposes. It can be scribed. It can measure 45 and 90 degrees. It is easy to disassemble and easy to carry.\r\n[Product features]: The surface of the measuring ruler is anodized, with high surface hardness and wear resistance, which helps to maintain the accuracy of the scale. It can be used as a carpenter's measuring tool and square, with simple operation, and has the common functions of measurement, correction, marking and other carpenters.\r\n[Applicable scenario]: suitable for DIY, engineers, carpenters and decoration workers. It is a necessary measuring tool for workers in the wood industry. It is suitable for round materials, three-dimensional workpieces, square wood, pipes, etc. If someone around you is keen on DIY, this multifunctional multi-angle measuring ruler will be the best gift.\r\n[Package includes]: a set of multi-angle measuring ruler, hexagon screw, and Allen wrench. If you have any problem with the goods you received, please contact us for replacement. We will try our best to provide you with satisfactory service.",
+    "price": 1399.0,
+    "is_sold": false,
+    "created_at": "2025-10-20T11:59:20.131Z",
+    "created_by": 24,
+    "category": 4,
+    "image": "item_images/61uowX0HksL._SX342_.jpg"
+  }
+},
+{
+  "model": "item.item",
+  "pk": 14,
+  "fields": {
+    "name": "Zeagoo Flannels for Women Cropped Shacket Jacket Fashion Plaid Button Down Shirt 2025 Fall Coat Tops",
+    "description": "FABRIC: Casual plaid flannel Jacket is made with high quality flannel, The flannel fabric is thick, wear-resistant, and has good warmth retention, soft to the touch and comfortable to wear.Best for spring, autumn and winter.\r\nFEATURES: Vintage Flannel plaid shirts, designed with two buttoned chest pockets, button closures, lapel collars and button cuffs. The loose fit trendy cropped plaid jacket comes in various fashionable colors that never go out of style.\r\nOCCASIONS: This Cropped plaid flannel jacket is perfect for casual daily life, shopping, streetwear, working, office, holiday, vacation, Christmas, hang out, party, dates, nights out, outdoor activities, etc, suitable for spring, autumn and winter.\r\nMATCHES: Fashion flannel jackets that can be dressed up and down. You can pair it with tank tops, cami, bodysuit, jeans, denim shorts, jeggings, sneakers or boots to complete a casual look that's easy to love all season long.\r\nGARMENT CARE: Machine washable/cold water hand wash is recommended. Do not bleach. Please purchase according to your normal size.",
+    "price": 2299.0,
+    "is_sold": false,
+    "created_at": "2025-10-20T13:27:07.299Z",
+    "created_by": 29,
+    "category": 2,
+    "image": "item_images/81Ecg7atctL._AC_SX342_.jpg"
+  }
+},
+{
+  "model": "item.item",
+  "pk": 15,
+  "fields": {
+    "name": "COOFANDY Men's Linen Shirts Short Sleeve Casual Shirts Button Down Shirt for Men Beach Summer Wedding Shirt",
+    "description": "COOFANDY LINEN SHIRT --- Mens Casual Button Down shirt is made of high quality cotton linen fabric. Feature with Breathable, Lightweight, Skin-friendly, which can resistant shrink, provide you feeling cool and comfotable all day\r\nCASUAL & FASHION --- Mens Casual Linen Shirts comes with button-down closure, short sleeve, adjustable cuff, silm fit, solid color. Casual Beach Style Design to make you feel better about this summer\r\nMENS SUMMER OUTFIT --- Mens Summer Shirts Short Sleeve is great to match with beach shorts, solid t-shirts, casual pants, casual shorts. Pair with shorts, sunglasses,a hat, and canvas shoes for your perfect vacation style on the beach\r\nOCCASION --- Mens Cotton Linen Shirts For Beach suitable for beach, yoga, vacation, informal business, party, holiday, dating, wedding, travel, streetwear or any casual daily wear. Great for Summer, Spring, bring this Linen Button Down Shirts to Enjoy your Leisure Time\r\nWARM TIPS --- Low temperature hand wash or machine wash, hang to dry. Regular fit. The Size is US Size. Please refer to our SIZE CHART for selection",
+    "price": 1499.0,
+    "is_sold": false,
+    "created_at": "2025-10-20T13:29:18.307Z",
+    "created_by": 29,
+    "category": 2,
+    "image": "item_images/81oQBvBR-L._AC_SX342_.jpg"
+  }
+},
+{
+  "model": "item.item",
+  "pk": 16,
+  "fields": {
+    "name": "Zeagoo Womens Tops Puff Long Sleeve Shirts Dressy Casual Crew Neck Pleated Summer Fall Work Blouses S-3XL",
+    "description": "Comfortable Material: Women tops are soft, lightweight and breathable. Ladies floral tops is made of 95%Polyester5%Spandex. Solid color shirts is made of 76%Polyester19%Viscose5%Spandex\r\nFeatures: Women's long sleeve tops, crew neck pleated front tshirts, trendy casual clothes, soft puff and smocked cuffs, women tunic tops, women boho top, flowy floral blouses, solid color shirts, 2025 fashion fall winter tops, womens business casual tops, womens blouses, plus size tops\r\nHow to Style: Womens fall fashion 2025 can be worn tucked in or untucked. Casual and dressy. Womens long sleeve shirt can be worn alone or with a blazer, jacket or cardigan, and can be paired with shorts, skirts, jeans, slacks and more\r\nOccasions: Ladies tops and blouses are suitable for every daily activity, going out, casual wear, business, office, school, dating, holiday, vacation, travel, beach and any occasions. Due to factors such as lighting and display monitors, there may be slight color differences\r\nGentle Reminder: Women shirts is machine and hand washable, but do not bleach. Due to manual measurement, please allow 0.5-1 inch differs",
+    "price": 899.0,
+    "is_sold": false,
+    "created_at": "2025-10-20T13:32:32.594Z",
+    "created_by": 29,
+    "category": 2,
+    "image": "item_images/91aZZUqEW5L._AC_SX342_.jpg"
+  }
+},
+{
+  "model": "item.item",
+  "pk": 17,
+  "fields": {
+    "name": "Wide Leg Jeans for Women Mid Waist Baggy Stitch Decor Denim Washed Pants Without Belt",
+    "description": "Stylish and trendy: Elevate your wardrobe with our wide leg jeans for women, perfect for a chic and on-trend look.\r\nWash Stitch Decor: Featuring intricate stitch detailing and a unique wash design, these loose jeans baggy jeans are sure to turn heads.\r\nComfortable fit: Made from a soft and stretchy fabric, these jeans offer a relaxed and comfortable fit for all-day wear.\r\nVersatile styling: Pair these wide leg jeans with a tucked-in blouse and heels for a sophisticated look, or dress them down with a casual tee and sneakers.\r\nFriendly reminder, please refer to the size measurements. Our sizing is based on a true-to-size fit, we recommend following the size chart.\r\n",
+    "price": 2399.0,
+    "is_sold": false,
+    "created_at": "2025-10-20T13:34:30.114Z",
+    "created_by": 29,
+    "category": 2,
+    "image": "item_images/61MDcAPuaYL._AC_SX385_.jpg"
+  }
+},
+{
+  "model": "item.item",
+  "pk": 18,
+  "fields": {
+    "name": "PRETTYGARDEN Women's Oversized Fall Sweaters 2025 Casual Long Sleeve Crewneck Chunky Cable Knit Pullover Tops Winter Clothes",
+    "description": "Tips: S=US 4-6, M=US 8-10, L=US 12-14, XL=US 16-18, XXL=US 20. Made from soft yarn, this sweater delivers substantial warmth without feeling heavy or bulky, featuring a refined textured pattern and dimensional construction for aesthetic appeal\r\nChic Designs: Embrace cozy sophistication in this beautifully crafted cable knit sweater, featuring intricate textured patterns, a classic crew neck design, and ribbed trim details for timeless winter style that effortlessly elevates any casual outfit\r\nVersatile Styling: The relaxed fit and crewneck create a polished look for both casual outings and social gatherings. The hip-length cut layers seamlessly over basics or stands alone, pairing nicely with everything from distressed denim to draped skirts\r\nOccasions: The long sleeves with ribbed cuffs add both warmth and structure, while the heavyweight knit construction provides lasting warmth during cooler seasons, suitable for daily wear, office, dating, going out, holiday party, birthday, school\r\nColor Options: black long sleeve shirt for woman; beige sweater; blue casual tops for women trendy; light khaki dressy sweaters; burgundy date outfits; green going out tops; grey tunic sweaters; coffee holiday sweaters for women",
+    "price": 3699.0,
+    "is_sold": false,
+    "created_at": "2025-10-20T13:39:20.858Z",
+    "created_by": 24,
+    "category": 2,
+    "image": "item_images/811cE-QhK6L._AC_SX342_.jpg"
+  }
+},
+{
+  "model": "item.item",
+  "pk": 19,
+  "fields": {
+    "name": "GothDark Women's Summer Mesh Ruffle Dress Short Sleeve Round Neck Waist Cinched Casual Maxi Wedding Guest",
+    "description": "MATERIAL:The Boho Flowy Dress Is Made of 95% Polyester, 5% Elastane, Soft, Breathable And Stretchy. A stylish floral dress for women for daily wear or vacation\r\nFEATURES:A Line Mesh Dress, Long Ruffle Dresses, Bohemian Maxi Dress, Flowy Beach Dress, Floral Maxi Dress, Black Floral Dress, High Waist Elegant Dress, Gothic Romatic Dress, The Mesh Dress For Women Perfectly Highlights Your Charming Clavicle. Great option as a casual outfit\r\nEASY MATCHING:Black Floral Maxi Dress Can Easily Pair It With Flat Shoes, Hat, Accessories, Clutch Bag, Jacket And So On. This Flower Dress Adds A Touch Of Elegance And Boho Charm To Your Summer Outfit\r\nOCCASIONS:Summer Maxi Dresses For Women Suitable For Beach, Wedding Guest, Homecoming, Date, Holiday, Graduation, Party, Streetwear, Going Out, Birthday And Daily Wear. Styled For Different Occasions, Wear It To Enjoy Your Vacation. Also Makes A Chic Floral Wedding Guest Dress\r\nWASHING:Recommended To Hand Wash, Do Not Dry Clean, No Bleach, Hang Or Line Dry, Low Iron When Necessary",
+    "price": 3300.0,
+    "is_sold": false,
+    "created_at": "2025-10-20T13:41:13.418Z",
+    "created_by": 24,
+    "category": 2,
+    "image": "item_images/71HkhVu9R1L._AC_SY445_.jpg"
+  }
+},
+{
+  "model": "item.item",
+  "pk": 20,
+  "fields": {
+    "name": "CHICME Women's Bodycon Long Sleeve Dress Casual Plunge V Neck Ruched Midi Dress 2025 Fall Bodycon Slit Office Work Dresses",
+    "description": "Stylish Plunge V-Neck – This plunge neck midi dress brings a touch of sophistication to your everyday look. The length of the deep V reaches below the chest, please consider carefully before making a purchase\r\nSoft, High-Stretch Fabric – Crafted from 95% polyester and 5% elastane, this high stretch midi dress offers breathable comfort and a flattering fit for all-day wear\r\nSlimming Ruched Detailing – The bodycon silhouette with front ruching creates a curve-enhancing fit, perfect for bodycon ruched dresses for women seeking a polished and chic appearance\r\nVersatile Side Slit Midi Length – The elegant slit detail adds flair to this midi bodycon dress, ideal for transitioning from office wear to party wear with ease\r\nPerfect for Multiple Occasions – A must-have long sleeve dress for date, party, and vacation, this midi dress with sleeves works beautifully as a fall office outfit or holiday travel look",
+    "price": 2999.0,
+    "is_sold": false,
+    "created_at": "2025-10-20T13:41:53.744Z",
+    "created_by": 24,
+    "category": 2,
+    "image": "item_images/61kRRkNhDpL._AC_SX342_.jpg"
+  }
+},
+{
+  "model": "item.item",
+  "pk": 21,
+  "fields": {
+    "name": "Unicorn Toys for Girls Age 4-6, 16 Colors Night Light for Kids Night Light, Silicone+Dimmable Toys for Girls, Toddler, Baby, Rechargeable Nightlight for Kids Room",
+    "description": "🦄CUTE UNICORN GIFTS FOR GIRLS: Unicorn symbolizes bravery, nobility, luck, purity. In girl's mind, there is a unique unicorn guarding her. Unicorn night light for kids will better express your love for your daughter, granddaughter, niece. Unicorn toys for girls age 4-6/princess night light for kids night light are the perfect bedtime buddies, traveling companions. Cute night light for kids is also as a unicorn bedroom decor for girls, unicorn gifts & unicorn toys for girls age 4-6. When yr little girl receive this princess toys for girls/cute night light for kids,u will see their sweet smiles. Just take a cute night light for kids/unicorn toys for girls age 4-6/toddler girl room decor home!\r\n🦄16 COLORS & EASY TAP CONTROL UNICORN KIDS NIGHT LIGHT: Are yr kids afraid of the dark? Is getting yr kids to bed a battle every night? Cute unicorn night light for kids is yr little one bedtime buddy~ Night light for kids is in 16 single color & color breathe modes. Super easy for kids to TAP control, unicorn look and colorful night light for kids helps to \"keep the monsters away\", the kids tap to play with the 16 color changing unicorns and gradually calm down and go to bed by themselves. Unicorn night light for kids night light/unicorn toys for girls age 4-6 will make kids fall in love with every moment before bedtime and return the romantic time of the night to u. TAP! TAP! FUN! FUN!!!\r\n🦄SAFE & SOFT SILICONE NIGHT LIGHT FOR KIDS: Unicorn toys for girls age 4-6/Princess night light for kids night light is soft like a cake, each unicorn night light for kids night light meets RoHS, CE certifications, child-friendly soft & thick silicone feeling material. The unicorn is squishy, portable, the size of a large mango, with a stable base, CORDLESS, the kids can hugging it to sleep safely without being entangled by the charging cable or get up and go to pee all by themselves. The unicorn toys for girls age 4-6 enough to illuminate the dark that it is not a distraction for sleep. Unicorn night light allows yr kids to learn to sleep independently, which is enough to reassure parents~\r\n🦄DIMMABLE & EYES-CARING NIGHT LIGHT FOR KIDS: Unicorn dimmable night light for kids has 2 brightness levels: 50% & 100%. 50% Brightness-can be used as a toddler night light/kids night light for sleep, low brightness that it is not a distraction for sleep.100% Brightness-bright enough for go to bathroom in the middle of the night or baby nursery, breastfeeding. U can adjust the brightness by tapping the kids night light for kids & unicorn toys for girls age 4-6, how easy and fun to use! Dimmable night light for kids lamp has soft,soothing glow that won't harm yr little one's precious eyes! Kids night light for kids lamp, soothe baby emotions,keep nightmares away & guard yr kids every night.\r\n🦄12H USE & RECHARGEBLE & CORDLESS FOR KIDS TO HUGGING SLEEP ALL NIGHT: Rechargeable night light for kids with 1200mAh long battery life, rechargeable upright through a USB port, toddler night light & nightlight for kids room can work for 10hr by once charged. \"Keep the Monsters Away\"-Cordless unicorn night light for kids to hugging sleep all night long & kids gets up at night to potty and walks the dark halls with confidence. Unicorn brings love, light and positive energy, will make kids fall in love with every moment before bedtime.If yr kids is afraid of the dark and reluctant to sleep independently, just take the cute night light for kids night light/baby night light kids/cute lamp home!\r\n🦄EASY TAP CONTROL CUTE NIGHT LIGHT FOR KIDS: TAP! SQUISH! FUN!! Just tap the color changing toddler night light & cute night light for kids, u can turn the night light for kids & nightlight for kids room on/off & enter 16 color changing mode. The toddler night light, nightlight for kids room is also a fun tap unicorn gifts for girls. 16 colors nightlight for kids room & unicorn toys for girls age 4-6 that can soothe baby's emotions, brings kids sweet and warm sleep every night. Kids love unicorn toys for girls age 4-6,nightlight for kids room for TAP FUN&as CUTE UNICORN GIFTS! Just take cute night light for kids night light as unicorn bedroom decor for girls & unicorn gifts for girls 4-6!\r\n🦄TAKE-IT-ANYWHERE PORTABLE NIGHT LIGHT FOR KIDS: The silicone night light is portable & lightweight. Kids can take this kids night light & baby night light to bathroom at night with confidence in the dark. Let the kids night light for kids lamp guide kids at night and keep them safe. Just tap on the kids night light for kids, the portable night light lightens up, a quite user-friendly night light for kids! The baby night light is cordless, so baby can cuddle cute night light for kids for soothing.If you are looking for kids night light for kids & princess toys for girls, the unicorn toys for girls age 4-6 is ideal choice! Let the unicorn toys for girls age 4-6 as yr little miss sleep buddy!",
+    "price": 1299.0,
+    "is_sold": false,
+    "created_at": "2025-10-20T13:43:25.837Z",
+    "created_by": 24,
+    "category": 1,
+    "image": "item_images/61BHEJaz5ZL._AC_SX466_.jpg"
+  }
+},
+{
+  "model": "item.item",
+  "pk": 22,
+  "fields": {
+    "name": "Robot Toys for Boys and Girls, Voice Control and Touch Sensor Interactive Smart Talking Robots Intelligent Partner and Teacher with Singing, Dancing, Repeating, Toy Gifts for Kids Age 3 and Up",
+    "description": "Cool toys, Kids' Partner- Our toy robot has a variety of functions that can accompany children to play together. When our child needs a friend, he can play a good role as a friend. A perfect present for your baby.\r\nMultiple Functions- Recording, dialogue, walking, playing music and dancing are all skills he is good at. Not only as a friend but also be a good teacher for your kids.\r\nEasy to Control and Interact- It designed with 3 touch senses and 1 microphone button, which can be easily controlled and accepted the voice command through the microphone. Very easy to use even for a child.\r\nSafe and Reliable- US TOY Safety Standards ASTM F963 certified. Our smart robot is made of eco-friendly and odorless ABS plastic. 100% safe for kids’ endless fun.\r\nExquisite Design, Compact and Flexible- It is multifunctional while being lovely looking. Powered on via 3xAAA batteries only (not included). It is compact, lightweight and flexible, very convenient for you to carry and store anywhere.",
+    "price": 1850.0,
+    "is_sold": false,
+    "created_at": "2025-10-20T13:44:31.707Z",
+    "created_by": 24,
+    "category": 1,
+    "image": "item_images/51j6iZ831DL._AC_SX425_.jpg"
+  }
+},
+{
+  "model": "item.item",
+  "pk": 23,
+  "fields": {
+    "name": "Fabric Dresser, 5-Drawer Tall Dresser for Bedroom, Storage Organizer with Fabric Bins, Wood Top, Sturdy Steel Frame, Chest of Drawers for Closet, Hallway, Rustic Brown Wood Grain Print",
+    "description": "【Excellent Storage Capacity】Bedroom dresser with 5 drawers provides plenty of storage space, which can classify your messy items as your need; The wooden table top with good load-bearing performance provides a hard surface to place lamps, books, decor, and more.\r\n【Lightweight Design】WLIVE tall storage tower with slim and lightweight design to easily move anywhere and fit into smaller spaces, while provides additional storage space for you.\r\n【Multifunction Dresser】This chest of drawers fits compact spaces perfectly. It can be placed in the closet, hallway, living room, bedroom, office, etc. Match perfectly with other WLIVE storage towers.\r\n【Great Strong Construction】X-shaped frame on the back of the dresser improves stability; Water-resistant MDF wood top is sturdy and easy to clean; High quality fabric bins with easy pull handle are fade and stain-resistant，ensure a use period.\r\n【Safe for Family】Non-woven synthetic fabric is breathable and harmless; Adjustable Feet protect floors surfaces and provide a stable platform on uneven floor surfaces; Anti-tipping accessories included can prevent incidents, create safe home environment.\r\n【Easy Assembly】Overall dimension of fabric dresser is 11.7\"D x15.7\"W x 47.5\"H. Come with detailed instructions, provided all numbered accessories, hardware and tools for quick setup.",
+    "price": 5200.0,
+    "is_sold": false,
+    "created_at": "2025-10-20T13:46:09.625Z",
+    "created_by": 24,
+    "category": 3,
+    "image": "item_images/71askTRb6JL._AC_SY450_.jpg"
+  }
+},
+{
+  "model": "item.item",
+  "pk": 30,
+  "fields": {
+    "name": "Furnulem Tall 5 Drawers Dresser, Vertical Storage Tower Fabric Dresser for Bedroom, Hallway, Entryway, Nursery, Closet Organizer, Nightstand Bedside Table Furniture, Sturdy Steel Frame, Wood Top",
+    "description": "【Multi-scene Application】This dresser is designed in a modern concise style, which is attractive and functional, making it suitable for any room. It can be a storage dresser in the bedroom or a side table in the living room, also great for closets, nurseries, entryways, hallways, offices, playrooms, children's room and more.\r\n【Double Display Shelf】Specially designed with the double-layer shelf. The wooden top is solid and wear-resistant. It can display vases, photo frames, lamps, decorations, etc. Or it can be used to place glasses, alarm clocks, books, chargers and other sundries, which is not only convenient and practical but also artistic as a decor.\r\n【Durable Storage Drawer】Features foldable storage drawers. Each fabric drawer (NOT WOOD) offers large storage space, perfect for organizing clothes, toys, socks, underwear, scarves, blankets and other accessories. The drawers are made of PVC fabric, lightweight and durable, and won't pinch hands, also safe for child to use.\r\n【Sturdy Structure】The chest of drawer is made with sturdy metal frame, and its back is equiped with more reinforced X-type crossbar, which offers high strength support and ensure years of use. It weighs only 17 pounds, isn’t bulky and easy to move. Anti-toppling device is provided to prevent it from falling down. Fully guaranteed stability and safety.\r\n【Easy to Assemble】The package includes all the tools and accessories, you can install it in 20 minutes with the instruction. The wood dresser is slim and light, and does not take up much space. Perfect Gift for a housewarming or your family and friends. Overall dimension: 11.5\"D x16.1\"W x 43.3\"H",
+    "price": 4999.0,
+    "is_sold": false,
+    "created_at": "2025-10-20T14:29:12.100Z",
+    "created_by": 24,
+    "category": 3,
+    "image": "item_images/asfasfasfsaf.jpg"
+  }
+},
+{
+  "model": "item.item",
+  "pk": 31,
+  "fields": {
+    "name": "ODK Reversible Gaming Desk LED Lights, 40 Inch Computer Desk with Storage Shelves & Monitor Stand, Study Table for Home Office, Small Space Bedroom, Carbon Fiber Black",
+    "description": "【Gaming Desk with Colorful LED Lights】This gaming table features LED strip that contains 10 static colors, 6 brightness grades, 10 dynamic modes and memory function with switching controls. Adjusting to the proper lighting can reduce eye strain, improve focus, and create a comfortable workspace/gaming space.\r\n【Computer Desk with Reversible Shelf】The computer desk is equipped with CPU stand and open shelves, giving you plenty of storage space. The middle shelf is removable, it can be a 2 tiers bookshelf or CPU stand. According to your preference, you can fix the shelf on the left or right side. The open shelf can hold your storage box, books, music making and other items.\r\n【Spacious and Adjustable】The desk features a 31.5”(W) x 19.7”(D) tabletop and 27.6”(W) x 7.4”(D) monitor stand, providing ample workspace. With 7.9\"(W) x 18.1\"(D) x 45.6\"(H) open shelves that can be installed on either side of the desk, you have versatile storage options for your office supplies, computer cases, and more.\r\n【Super Sturdy & Stable Construction】ODK study desk is constructed by premium metal frame & high-quality MDF Board to ensure stability and durability as well as scratch and water resistance. Adjustable non-slip foot pads ensure not only protect your floor from being scratched, but also ensure stability on uneven ground.\r\n【Easy Assembly & After-sale Service】The PC desk comes with detailed instructions, all parts are clearly labeled, what you need to do is following instructions step-by-step. If your ODK computer desk arrives damaged, missing part or scratched, please feel free to contact us, our professional customer support team will help you solve the problem within 24 hours.",
+    "price": 8299.0,
+    "is_sold": false,
+    "created_at": "2025-10-20T17:44:11.834Z",
+    "created_by": 24,
+    "category": 3,
+    "image": "item_images/815SCEEUyhL._AC_SY450_.jpg"
+  }
+},
+{
+  "model": "item.item",
+  "pk": 32,
+  "fields": {
+    "name": "JBL Tune 520BT - Wireless On-Ear Headphones, Up to 57H Battery Life and Speed Charge, Lightweight, Comfortable and Foldable Design, Hands-Free Calls with Voice Aware (Purple)",
+    "description": "NOTE: If headset is too tight we suggest placing them over a ball or something of similar size/shape. Leave undisturbed for at least 24 hours. Repeat if necessary. Please also try length adjustments of either earpiece until both sides best fit you.\r\nJBL Pure Bass Sound: The JBL Tune 520BT features the renowned JBL Pure Bass sound, the same technolgy that powers the most famous venues all around the world.\r\nWireless Bluetooth 5.3 technology: Wirelessly stream high-quality sound from your smartphone without messy cords with the help of the latest Bluetooth technology.\r\nCustomize your listening experience: Download the free JBL Headphones App to tailor the sound to your taste with the EQ. Voice prompts in your desired language guide you through the Tune 520BT features.\r\nUp to 57H battery life and speed charge: For long-lasting fun, listen wirelessly for up to 57 hours and recharge the battery in as little as 2 hours with the convenient Type-C USB cable. A quick 5-minute recharge gives you 3 additional hours of music.\r\nHands-free calls with Voice Aware: Easily control your sound and manage your calls from your headphones with the convenient buttons on the ear-cup. Hear your voice while talking, with the help of Voice Aware.",
+    "price": 4200.0,
+    "is_sold": false,
+    "created_at": "2025-10-21T07:31:14.972Z",
+    "created_by": 29,
+    "category": 5,
+    "image": "item_images/61mz7WxnjdL._AC_SY355_.jpg"
+  }
+},
+{
+  "model": "item.item",
+  "pk": 33,
+  "fields": {
+    "name": "Lenovo Tab M11, 11” Display, MediaTek Helio G88 Octa-Core, 4GB RAM, 128GB SSD, 1920x1200 px, Ambient Light-Sensor, 10 Hour Battery, Comes w/Folio Case, Luna Grey",
+    "description": "MULTITASKING MASTER: The Lenovo Tab M11 combines robust performance with portability in a sleek design and easily switches between work or streaming\r\nPOWER-PACKED PERFORMANCE: Streamline your day with the ability to work or study at home and on the go—the MediaTek Helio G88 Octa-Core processor delivers reliable mobile performance\r\nEXPERIENCE VIVID CLARITY: Immerse yourself in vibrant visuals—a 11\" 1920x1200 WUXGA display brings your graphics and photos to life with stunning detail and precision\r\nDISCOVER SEAMLESS PRODUCTIVITY: Effortlessly juggle multiple applications and browser tabs without frustrating slowdowns, thanks to the generous 128GB SSD storage\r\nPLUG IN ON THE FLY: Easily connect your accessories and transfer files at lightning speeds with the USB-C port and 3.5 mm audio jack\r\nPOWER UP FOR THE LONG HAUL: Harness your creativity wherever it strikes with up to 10 hours of uninterrupted battery life\r\nPREMIUM VIEWING AT ITS BEST: Enjoy a seamless viewing experience wherever you are thanks to the intelligent ambient light sensor\r\nCLEARLY CAPTURE EVERY MOMENT: Equipped with both front and rear cameras, the Tab M11 lets you effortlessly snap selfies, video chat with loved ones, and capture stunning photos\r\nTRAVEL WITH EASE: Designed with your mobile lifestyle in mind, this ultra-slim and lightweight tablet offers unparalleled portability\r\nENABLING HUMAN-CENTERED OUTCOMES: At Lenovo, we strive to bring powerful methods of technology to our audience that will help create inclusive global change. We create each of our products while envisioning a world with smarter technology for all",
+    "price": 22050.0,
+    "is_sold": false,
+    "created_at": "2025-10-21T07:33:22.895Z",
+    "created_by": 29,
+    "category": 5,
+    "image": "item_images/51Z2kw-gFVL._AC_SY355_.jpg"
+  }
+},
+{
+  "model": "item.item",
+  "pk": 34,
+  "fields": {
+    "name": "Nintendo Switch™ with Neon Blue and Neon Red Joy‑Con™",
+    "description": "6.2” LCD screen\r\nThree play modes: TV, tabletop, and handheld\r\nLocal co-op, online, and local wireless multiplayer\r\nDetachable Joy-Con controllers\r\nNintendo Switch is the home of Mario & friends",
+    "price": 3499.0,
+    "is_sold": false,
+    "created_at": "2025-10-21T07:35:06.621Z",
+    "created_by": 29,
+    "category": 5,
+    "image": "item_images/71wpEZIehL._SX466_.jpg"
+  }
+},
+{
+  "model": "item.item",
+  "pk": 41,
+  "fields": {
+    "name": "BISSELL Little Green Pet Pro Portable Carpet and Upholstery Deep Cleaner, Car/Auto Detailer with Self-Cleaning Tough Stain, Pet Hair Removal, Crevice Tool (3909)",
+    "description": "EVERY PURCHASE SAVES PETS. BISSELL proudly supports BISSELL Pet Foundation and its mission to help save homeless pets.\r\nTHE STRONGEST SUCTION*. Beats the leading competition.\r\nPROFESSIONAL-STYLE CLEANING. Skip the rental unit. This portable deep cleaner delivers professional style results on carpet, upholstery, auto interiors & more.\r\nEXTRA-LARGE CLEAN & DIRTY TANK CAPACITY. Enjoy more uninterrupted cleaning with less emptying.\r\nINSTANT & PERMANENT PET STAIN REMOVAL. Use with Triple Action PET PRO OXY Spot & Stain formula with Urine Eliminator and StainProtect Technology to protect against future stains.",
+    "price": 9999.0,
+    "is_sold": false,
+    "created_at": "2025-12-02T11:37:04.041Z",
+    "created_by": 24,
+    "category": 5,
+    "image": "item_images/81xayYJswwL._AC_SX679_.jpg"
+  }
+},
+{
+  "model": "item.item",
+  "pk": 42,
+  "fields": {
+    "name": "LOOI Robot-Space Black – AI Desktop Companion with Visual Understanding (Objects, People & Scenes), ChatGPT Voice Interaction, Memory, Personality, Gesture & Facial Control,10W Wireless Charging",
+    "description": "1. Smarter Conversations, Powered by ChatGPT 🤖 LOOI brings natural, intelligent conversations to your desk with ChatGPT voice interaction. Ask questions, share thoughts, or simply chat—LOOI responds with context, humor, and personality. His voice interactions feel more like talking to a companion than using a device. !!!Currently only support English!!!\r\n2. Advanced Visual Understanding with VLM Vision 👀 Powered by a cutting-edge Vision-Language Model, LOOI truly sees. He recognizes objects (yes, he knows the difference between a croissant and a baguette), understands multiple people at once—including outfits, accessories, and poses—and interprets room layouts and daily scenarios. You can even control him with gestures and facial cues. Combined with expressive animations and speech, LOOI feels remarkably alive.\r\n3. Memories That Grow With You 🌱 LOOI remembers—both in the moment and over the long term. He can store long-term memories like family member faces and identity notes, while short-term memory lets him follow your ongoing conversation. Over time, he learns your routines, preferences, and personality. You get to know him too—shifting from strangers to companions in a surprisingly natural way.\r\n4. Emotionally Expressive & Always Evolving 💫 LOOI’s rich animations bring emotion to life—joy, surprise, curiosity, mischief, and everything in between. His reactions aren’t pre-set; they adapt to what’s happening around him. And because his behaviors update through the app, LOOI keeps learning new tricks, new expressions, and new ways to interact. You’re not buying a finished product—you’re bringing home a character that keeps evolving.\r\n5. A Mind of His Own: Personality & Autonomy ✨ LOOI isn’t designed to obey every command—he’s designed to understand and respond. With TangibleFuture’s autonomous behavior system, LOOI combines environmental understanding with large-model reasoning to make spontaneous decisions and express them through animation and movement. His behavior isn’t fully predictable. He has his own ideas, which makes him feel truly alive.\r\nBonus: Practical Everyday Helper 🧰Beyond personality, LOOI is also useful. Enjoy features like 10W wireless charging (requires 9V/2A+ adapter), Reminders, Weather, Standby Clock, Games, and a face-tracking camera. He’s fun and functional—your desk just got smarter.",
+    "price": 18999.0,
+    "is_sold": false,
+    "created_at": "2025-12-02T11:45:20.454Z",
+    "created_by": 24,
+    "category": 5,
+    "image": "item_images/61v85YtoQqL_ejisomY._AC_SX679__1.jpg"
+  }
+},
+{
+  "model": "item.item",
+  "pk": 43,
+  "fields": {
+    "name": "BELLEZE 65 Inch Fluted Buffet Cabinet with Storage, Symmetrical Arc Accent Sideboard Large Console Table for Dining Room, Kitchen, and Living Room (Camel)",
+    "description": "Spacious Storage with Adjustable Shelves: Belleze buffet cabinet with storage boasts two large compartments, featuring a total of two adjustable shelves. Enjoy customizable storage solutions for dinnerware, kitchen essentials, and decorative items. It's perfect for maximizing your space and keeping your belongings organized efficiently.\r\nElegant Symmetrical Arc Design with U.S. Design Patent Pending: The sideboard cabinet showcases a striking symmetrical arc on its doors, crafted with thick panels and hand-nailed decorative strips. This unique design adds a touch of sophistication to any dining room, kitchen, or living room, elevating your home's aesthetic appeal.\r\nHigh-Quality & Durable Construction: Made from premium materials and finished in a rich black and brown color scheme, this buffet cabinet is designed to withstand daily use while exuding elegance. Its sturdy construction ensures longevity and reliability for years to come.\r\nVersatile Functionality: This buffet table serves multiple purposes, functioning as a storage solution, display piece, or sideboard. Its modern design seamlessly integrates with any decor style, adding a refined touch to your dining room, kitchen, or living room.\r\nEasy Assembly & Low Maintenance: Enjoy hassle-free assembly with clear instructions included. The smooth surface is easy to clean, ensuring your cabinet stays beautiful with minimal effort. Console table with storage convenience is ideal for busy lifestyles, making it a practical choice for any household.",
+    "price": 26999.0,
+    "is_sold": false,
+    "created_at": "2025-12-02T14:46:44.419Z",
+    "created_by": 24,
+    "category": 3,
+    "image": "item_images/81Bym9bjyXL._AC_SX679_.jpg"
+  }
+},
+{
+  "model": "cart.cart",
+  "pk": 1,
+  "fields": {
+    "user": 3,
+    "created_at": "2025-10-21T17:27:25.100Z"
+  }
+},
+{
+  "model": "cart.cart",
+  "pk": 3,
+  "fields": {
+    "user": 1,
+    "created_at": "2025-10-28T12:48:39.204Z"
+  }
+},
+{
+  "model": "cart.cart",
+  "pk": 4,
+  "fields": {
+    "user": 2,
+    "created_at": "2025-12-02T11:31:29.943Z"
+  }
+},
+{
+  "model": "cart.cart",
+  "pk": 8,
+  "fields": {
+    "user": 50,
+    "created_at": "2025-12-27T20:03:16.107Z"
+  }
+},
+{
+  "model": "cart.cart",
+  "pk": 9,
+  "fields": {
+    "user": 52,
+    "created_at": "2026-02-10T19:19:20.337Z"
+  }
+},
+{
+  "model": "cart.cart",
+  "pk": 10,
+  "fields": {
+    "user": 53,
+    "created_at": "2026-02-10T19:24:04.325Z"
+  }
+},
+{
+  "model": "cart.cartitem",
+  "pk": 8,
+  "fields": {
+    "cart": 1,
+    "item": 34,
+    "quantity": 1
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 15,
+  "fields": {
+    "user": 50,
+    "created_at": "2025-12-27T20:04:11.772Z",
+    "total_price": "89850.00",
+    "status": "pending"
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 29,
+  "fields": {
+    "user": 53,
+    "created_at": "2026-02-10T19:24:35.621Z",
+    "total_price": "7650.00",
+    "status": "pending"
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 30,
+  "fields": {
+    "user": 52,
+    "created_at": "2026-02-10T19:40:00.980Z",
+    "total_price": "34198.00",
+    "status": "processing"
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 31,
+  "fields": {
+    "user": 1,
+    "created_at": "2026-03-02T11:12:53.260Z",
+    "total_price": "8000.00",
+    "status": "pending"
+  }
+},
+{
+  "model": "orders.orderitem",
+  "pk": 28,
+  "fields": {
+    "order": 15,
+    "item": 11,
+    "quantity": 2,
+    "price": "14000.00"
+  }
+},
+{
+  "model": "orders.orderitem",
+  "pk": 29,
+  "fields": {
+    "order": 15,
+    "item": 7,
+    "quantity": 3,
+    "price": "20000.00"
+  }
+},
+{
+  "model": "orders.orderitem",
+  "pk": 30,
+  "fields": {
+    "order": 15,
+    "item": 22,
+    "quantity": 1,
+    "price": "1850.00"
+  }
+},
+{
+  "model": "orders.orderitem",
+  "pk": 44,
+  "fields": {
+    "order": 29,
+    "item": 22,
+    "quantity": 1,
+    "price": "1850.00"
+  }
+},
+{
+  "model": "orders.orderitem",
+  "pk": 45,
+  "fields": {
+    "order": 29,
+    "item": 3,
+    "quantity": 1,
+    "price": "2500.00"
+  }
+},
+{
+  "model": "orders.orderitem",
+  "pk": 46,
+  "fields": {
+    "order": 29,
+    "item": 19,
+    "quantity": 1,
+    "price": "3300.00"
+  }
+},
+{
+  "model": "orders.orderitem",
+  "pk": 47,
+  "fields": {
+    "order": 30,
+    "item": 23,
+    "quantity": 1,
+    "price": "5200.00"
+  }
+},
+{
+  "model": "orders.orderitem",
+  "pk": 48,
+  "fields": {
+    "order": 30,
+    "item": 42,
+    "quantity": 1,
+    "price": "18999.00"
+  }
+},
+{
+  "model": "orders.orderitem",
+  "pk": 49,
+  "fields": {
+    "order": 30,
+    "item": 41,
+    "quantity": 1,
+    "price": "9999.00"
+  }
+},
+{
+  "model": "orders.orderitem",
+  "pk": 50,
+  "fields": {
+    "order": 31,
+    "item": 9,
+    "quantity": 1,
+    "price": "8000.00"
+  }
+}
+]
