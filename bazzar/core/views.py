@@ -8,18 +8,34 @@ from django.contrib.auth.models import User
 from item.models import item
 from django.template.loader import render_to_string
 from core.models import Profile
+from django.db.models import Q
 
 
 def index(request):
-    # Check if user is authenticated AND has a profile
+    # Checking if user is authenticated AND has a profile
     if request.user.is_authenticated:
         profile = getattr(request.user, 'core_profile', None)
 
         if profile and profile.user_type == 'seller':
             return redirect('core:my_items')
 
-    items = item.objects.filter(is_sold=False).order_by('-created_at')[:10]
-    return render(request, 'core/index.html', {'items': items})
+    q = request.GET.get('q', '').strip()
+    limit = 10
+
+    qs = item.objects.filter(is_sold=False)
+    if q:
+        # Searching by product name/description and category name
+        qs = qs.filter(
+            Q(name__icontains=q)
+            | Q(description__icontains=q)
+            | Q(category__name__icontains=q)
+        )
+
+    qs = qs.order_by('-created_at')
+    items = list(qs[:limit])
+    has_more = qs.count() > limit
+
+    return render(request, 'core/index.html', {'items': items, 'q': q, 'has_more': has_more})
 
 
 def about(request):
@@ -150,13 +166,23 @@ def my_items(request):
 def load_more_items(request):
     offset = int(request.GET.get('offset', 0))
     limit = 10
+    q = request.GET.get('q', '').strip()
 
-    items = item.objects.filter(is_sold=False).order_by('-created_at')[offset:offset + limit]
+    qs = item.objects.filter(is_sold=False)
+    if q:
+        qs = qs.filter(
+            Q(name__icontains=q)
+            | Q(description__icontains=q)
+            | Q(category__name__icontains=q)
+        )
 
-    # Render HTML fragment using the same template as your grid cards
+    qs = qs.order_by('-created_at')
+    items = list(qs[offset:offset + limit])
+
+    # Render HTML fragment using the same template as the grid cards
     html = render_to_string('core/item_card.html', {'items': items}, request=request)
 
-    has_more = item.objects.filter(is_sold=False).count() > offset + limit
+    has_more = qs.count() > offset + limit
 
-    return JsonResponse({'html': html, 'has_more': has_more})
+    return JsonResponse({'html': html, 'has_more': has_more, 'returned_count': len(items)})
 

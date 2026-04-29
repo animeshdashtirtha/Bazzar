@@ -13,15 +13,65 @@
 </head>
 <body class="min-h-screen flex flex-col">
     <nav class="border-b border-gray-300 bg-white sticky top-0 z-50">
-        <div class="container mx-auto px-4 h-16 flex items-center justify-between">
+        <div class="container mx-auto px-3 sm:px-4 h-16 flex items-center justify-between">
             <div class="flex items-center">
                 <a href="{% url 'core:index' %}" class="pt-2">
-                    <img class="h-10 md:h-12 rounded-xl" src="{% static 'images/logonew.png' %}" alt="Logo" />
+                    <img class="h-9 md:h-11 lg:h-12 rounded-xl" src="{% static 'images/logonew.png' %}" alt="Logo" />
                 </a>
             </div>
 
-            <div class="hidden md:flex items-center space-x-4">
+            <div class="hidden lg:flex items-center space-x-2 lg:space-x-3">
                 
+                <!-- Desktop Search (hidden panel until click) -->
+                <div class="relative" id="desktopSearchWrapper">
+                    <button
+                        id="desktopSearchToggle"
+                        type="button"
+                        class="text-gray-800 hover:text-teal-600 px-2.5 py-2 text-sm font-medium inline-flex items-center gap-2 rounded-lg transition-all"
+                        aria-expanded="false"
+                    >
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 104.5 4.5a7.5 7.5 0 0012.15 12.15z"/>
+                        </svg>
+                        Search
+                    </button>
+
+                    <div
+                        id="desktopSearchPanel"
+                        class="absolute right-0 mt-2 hidden bg-white border border-gray-200 shadow-lg rounded-lg p-3 w-72 z-50"
+                    >
+                        <form method="get" action="{% url 'core:index' %}">
+                            <input
+                                id="desktopSearchInput"
+                                type="text"
+                                name="q"
+                                value="{{ request.GET.q }}"
+                                placeholder="Search products..."
+                                class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                            />
+
+                            <div class="flex items-center gap-3 mt-3">
+                                <button
+                                    type="submit"
+                                    class="bg-teal-600 hover:bg-teal-700 text-white px-3 py-2 rounded-lg text-sm font-semibold transition-all shadow-sm w-full"
+                                >
+                                    Search
+                                </button>
+                                {% if request.GET.q %}
+                                    <a
+                                        href="{% url 'core:index' %}"
+                                        class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-3 py-2 rounded-lg text-sm font-semibold transition-all whitespace-nowrap"
+                                    >
+                                        Clear
+                                    </a>
+                                {% endif %}
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                
+                <!-- My Cart -->
                 {% if not user.is_authenticated or user.core_profile.user_type != 'seller' %}
                     <a href="{% url 'cart:view_cart' %}" class="text-gray-800 hover:text-teal-600 px-3 py-2 text-sm font-medium">My Cart 🛒</a>
                 {% endif %}
@@ -42,16 +92,18 @@
                 </div>
                 {% endif %}
 
+                
+
                 {% if user.is_authenticated %}
                 <div class="relative" id="userDropdownWrapper">
-                    <button id="userButton" class="bg-teal-500 hover:bg-teal-600 text-white px-3 py-2 rounded-lg text-sm font-bold flex items-center">
-                        {{ user.username }}
+                    <button id="userButton" class="bg-gray-800 text-white px-3 py-2 rounded-lg text-sm font-bold flex items-center">
+                        {{ user.username|truncatechars:10 }}
                         <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
                     </button>
                     <div id="userDropdown" class="absolute right-0 opacity-0 invisible bg-white border border-gray-200 shadow-lg rounded-md mt-2 w-48 transition-all duration-200">
                         <ul class="py-2 text-sm">
-                            <li><a href="{% url 'core:inbox' %}" class="block px-4 py-2 hover:bg-teal-500 hover:text-white">Inbox</a></li>
-                            <li><a href="{% url 'orders:my_orders' %}" class="block px-4 py-2 hover:bg-teal-500 hover:text-white">My Orders</a></li>
+                            <li><a href="{% url 'core:inbox' %}" class="block px-4 py-2 hover:bg-gray-800 hover:text-white">Inbox</a></li>
+                            <li><a href="{% url 'orders:my_orders' %}" class="block px-4 py-2 hover:bg-gray-800 hover:text-white">My Orders</a></li>
                             <li><a href="{% url 'core:logout' %}" class="block px-4 py-2 hover:bg-red-500 hover:text-white">Logout</a></li>
                         </ul>
                     </div>
@@ -62,15 +114,70 @@
                 {% endif %}
             </div>
 
-            <div class="md:hidden flex items-center">
+            <div class="lg:hidden flex items-center">
                 <button id="mobileMenuButton" class="text-gray-800 focus:outline-none">
                     <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>
                 </button>
             </div>
         </div>
 
-        <div id="mobileDrawer" class="hidden md:hidden bg-white border-t border-gray-200 px-4 py-4 space-y-2">
+        <div id="mobileDrawer" class="hidden lg:hidden bg-white border-t border-gray-200 px-4 py-4 space-y-2">
             
+            <!-- Mobile Search (inside drawer) -->
+            <div class="space-y-2">
+                <button
+                    id="mobileSearchToggle"
+                    type="button"
+                    class="w-full inline-flex items-center justify-between border border-gray-300 hover:border-teal-500 text-gray-800 px-4 py-2 rounded-lg font-semibold transition-all shadow-sm"
+                    aria-expanded="{% if request.GET.q %}true{% else %}false{% endif %}"
+                >
+                    <span class="inline-flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 104.5 4.5a7.5 7.5 0 0012.15 12.15z"/>
+                        </svg>
+                        Search
+                    </span>
+                    <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </button>
+
+                <div
+                    id="mobileSearchPanel"
+                    class="{% if request.GET.q %}block{% else %}hidden{% endif %}"
+                >
+                    <form method="get" action="{% url 'core:index' %}" class="pt-2 pb-3">
+                        <div class="flex flex-col gap-3">
+                            <input
+                                id="mobileSearchInput"
+                                type="text"
+                                name="q"
+                                value="{{ request.GET.q }}"
+                                placeholder="Search products..."
+                                class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                            />
+
+                            <div class="flex items-center gap-3">
+                                <button
+                                    type="submit"
+                                    class="bg-teal-600 hover:bg-teal-700 text-white px-5 py-3 rounded-lg font-semibold transition-all shadow-md w-full"
+                                >
+                                    Search
+                                </button>
+                                {% if request.GET.q %}
+                                    <a
+                                        href="{% url 'core:index' %}"
+                                        class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-3 rounded-lg font-semibold transition-all whitespace-nowrap"
+                                    >
+                                        Clear
+                                    </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
             {% if not user.is_authenticated or user.core_profile.user_type != 'seller' %}
                 <a href="{% url 'cart:view_cart' %}" class="block py-2 text-gray-800 font-bold border-b">My Cart 🛒</a>
             {% endif %}
@@ -119,6 +226,42 @@
     const mobileBtn = document.getElementById('mobileMenuButton');
     const mobileDrawer = document.getElementById('mobileDrawer');
     mobileBtn?.addEventListener('click', () => mobileDrawer.classList.toggle('hidden'));
+
+    // Toggle mobile search panel inside the drawer.
+    const mobileSearchToggle = document.getElementById('mobileSearchToggle');
+    const mobileSearchPanel = document.getElementById('mobileSearchPanel');
+    const mobileSearchInput = document.getElementById('mobileSearchInput');
+    mobileSearchToggle?.addEventListener('click', () => {
+        mobileSearchPanel?.classList.toggle('hidden');
+        const isHidden = mobileSearchPanel?.classList.contains('hidden');
+        mobileSearchToggle.setAttribute('aria-expanded', isHidden ? 'false' : 'true');
+        if (!isHidden) mobileSearchInput?.focus();
+    });
+
+    // Toggle desktop search panel inside the navbar.
+    const desktopSearchWrapper = document.getElementById('desktopSearchWrapper');
+    const desktopSearchToggle = document.getElementById('desktopSearchToggle');
+    const desktopSearchPanel = document.getElementById('desktopSearchPanel');
+    const desktopSearchInput = document.getElementById('desktopSearchInput');
+
+    const closeDesktopSearch = () => {
+        if (!desktopSearchPanel) return;
+        desktopSearchPanel.classList.add('hidden');
+        desktopSearchToggle?.setAttribute('aria-expanded', 'false');
+    };
+
+    desktopSearchToggle?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        desktopSearchPanel?.classList.toggle('hidden');
+        const isHidden = desktopSearchPanel?.classList.contains('hidden');
+        desktopSearchToggle?.setAttribute('aria-expanded', isHidden ? 'false' : 'true');
+        if (!isHidden) desktopSearchInput?.focus();
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!desktopSearchWrapper || !desktopSearchPanel) return;
+        if (!desktopSearchWrapper.contains(e.target)) closeDesktopSearch();
+    });
 
     function setupDropdown(btnId, menuId) {
         const btn = document.getElementById(btnId);

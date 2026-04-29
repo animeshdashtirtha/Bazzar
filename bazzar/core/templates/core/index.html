@@ -21,21 +21,29 @@
     <!-- Load More Button -->
     <div class="flex justify-center mt-10">
         <button id="load-more"
-            class="bg-gray-700 hover:bg-gray-800 text-white px-6 py-3 rounded-lg font-semibold transition-all shadow-md">
+            class="bg-gray-700 hover:bg-gray-800 text-white px-6 py-3 rounded-lg font-semibold transition-all shadow-md"
+            {% if not has_more %}style="display:none;"{% endif %}>
             See More
         </button>
     </div>
 </div>
 
 <script>
-    let offset = 10; // You initially load 8 items in views.py
+    const initialOffset = {{ items|length }};
+    let offset = initialOffset;
+    const q = "{{ q|escapejs }}";
 
     document.getElementById('load-more').addEventListener('click', function() {
-        fetch(`/load-more-items/?offset=${offset}`)
+        let url = `/load-more-items/?offset=${offset}`;
+        if (q) {
+            url += `&q=${encodeURIComponent(q)}`;
+        }
+
+        fetch(url)
             .then(response => response.json())
             .then(data => {
                 document.getElementById('item-grid').insertAdjacentHTML('beforeend', data.html);
-                offset += 10;
+                offset += data.returned_count || 10;
                 if (!data.has_more) {
                     document.getElementById('load-more').style.display = 'none';
                 }
