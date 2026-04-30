@@ -36,7 +36,6 @@ def remove_from_cart(request, item_id):
 def update_quantity(request, item_id):
     action = request.POST.get('action')
 
-    #  FIX — filter by cart__user, not user
     cart_item = get_object_or_404(CartItem, item_id=item_id, cart__user=request.user)
 
     if action == 'increase':
@@ -64,13 +63,11 @@ def checkout(request):
     total_price = sum(item.total() for item in cart_items)
 
     if request.method == "POST":
-        #  Create the order
         order = Order.objects.create(
             user=request.user,
             total_price=total_price,
         )
 
-        #  Create OrderItems for each cart item
         order_items = []
         for item in cart_items:
             order_items.append(OrderItem(
@@ -81,7 +78,6 @@ def checkout(request):
             ))
         OrderItem.objects.bulk_create(order_items)  # Faster & cleaner
 
-        #  Clear the cart after order is created
         cart_items.delete()
 
         messages.success(request, "Order placed successfully! You can track it in 'My Orders'.")

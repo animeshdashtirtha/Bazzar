@@ -12,7 +12,6 @@ from django.db.models import Q
 
 
 def index(request):
-    # Checking if user is authenticated AND has a profile
     if request.user.is_authenticated:
         profile = getattr(request.user, 'core_profile', None)
 
@@ -51,11 +50,7 @@ def terms(request):
     return render(request, 'core/terms.html')
 
 def inbox(request):
-    # Placeholder for inbox view
     return render(request, 'core/inbox.html')
-
-# ------------------ User Auth ------------------
-
 
 def user_signup(request):
     if request.method == 'POST':
@@ -65,12 +60,10 @@ def user_signup(request):
         repeat_password = request.POST.get('repeatpassword')  # matches your template
         user_type = request.POST.get('user_type', 'buyer')  # default to 'buyer'
 
-        # Password match check
         if password != repeat_password:
             messages.error(request, "Passwords do not match.")
             return redirect('core:signup')
 
-        # Username/email uniqueness check
         if User.objects.filter(username=username).exists():
             messages.error(request, "Username already taken.")
             return redirect('core:signup')
@@ -78,7 +71,6 @@ def user_signup(request):
             messages.error(request, "Email already registered.")
             return redirect('core:signup')
 
-        # Create user
         user = User.objects.create_user(username=username, email=email, password=password)
         
        # Create Profile after user creation
@@ -88,7 +80,6 @@ def user_signup(request):
         )
         user.refresh_from_db() 
 
-        # Log in the user
         login(request, user)
         messages.success(request, "Account created successfully!")
         if hasattr(user, 'core_profile') and user.core_profile.user_type == 'seller':
@@ -109,7 +100,6 @@ def user_login(request):
         if user is not None:
             login(request, user)
 
-            # Check user type if profile exists
             if hasattr(user, 'core_profile') and user.core_profile.user_type == 'seller':
                 return redirect('core:my_items')
             else:
@@ -128,8 +118,6 @@ def user_logout(request):
     logout(request)
     return redirect('core:index')
 
-
-# ------------------ Seller item management ------------------
 
 @login_required
 def add_item(request):
