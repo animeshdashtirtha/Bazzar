@@ -21,12 +21,13 @@ LOGIN_URL = 'core:login'
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True  
+DEBUG = False 
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1,0.0.0.0').split(',')
+# ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1,0.0.0.0').split(',')
+ALLOWED_HOSTS = ['AnimeshTirtha.pythonanywhere.com']
+
 
 # Application definition
-
 INSTALLED_APPS = [
     'tailwind',
     'theme',
