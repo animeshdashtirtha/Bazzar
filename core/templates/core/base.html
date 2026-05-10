@@ -27,7 +27,7 @@
                     <button
                         id="desktopSearchToggle"
                         type="button"
-                        class="text-gray-800 hover:text-teal-600 px-2.5 py-2 text-sm font-medium inline-flex items-center gap-2 rounded-lg transition-all"
+                        class="text-gray-800 hover:text-gray-600 px-2.5 py-2 text-sm font-medium inline-flex items-center gap-2 rounded-lg transition-all"
                         aria-expanded="false"
                     >
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -47,13 +47,13 @@
                                 name="q"
                                 value="{{ request.GET.q }}"
                                 placeholder="Search products..."
-                                class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                                class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-500"
                             />
 
                             <div class="flex items-center gap-3 mt-3">
                                 <button
                                     type="submit"
-                                    class="bg-teal-600 hover:bg-teal-700 text-white px-3 py-2 rounded-lg text-sm font-semibold transition-all shadow-sm w-full"
+                                    class="bg-gray-700 hover:bg-teal-600 text-white px-3 py-2 rounded-lg text-sm font-semibold transition-all shadow-sm w-full"
                                 >
                                     Search
                                 </button>
@@ -128,7 +128,7 @@
                 <button
                     id="mobileSearchToggle"
                     type="button"
-                    class="w-full inline-flex items-center justify-between border border-gray-300 hover:border-teal-500 text-gray-800 px-4 py-2 rounded-lg font-semibold transition-all shadow-sm"
+                    class="w-full inline-flex items-center justify-between border border-gray-300 hover:border-gray-500 text-gray-800 px-4 py-2 rounded-lg font-semibold transition-all shadow-sm"
                     aria-expanded="{% if request.GET.q %}true{% else %}false{% endif %}"
                 >
                     <span class="inline-flex items-center gap-2">
@@ -154,13 +154,13 @@
                                 name="q"
                                 value="{{ request.GET.q }}"
                                 placeholder="Search products..."
-                                class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                                class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-gray-500"
                             />
 
                             <div class="flex items-center gap-3">
                                 <button
                                     type="submit"
-                                    class="bg-teal-600 hover:bg-teal-700 text-white px-5 py-3 rounded-lg font-semibold transition-all shadow-md w-full"
+                                    class="bg-gray-800 hover:bg-gray-700 text-white px-5 py-3 rounded-lg font-semibold transition-all shadow-md w-full"
                                 >
                                     Search
                                 </button>
