@@ -1,6 +1,8 @@
+import pymysql
+pymysql.install_as_MySQLdb()
 import os
 from pathlib import Path
-import shutil
+# import shutil
 from dotenv import load_dotenv
 
 
@@ -19,9 +21,9 @@ LOGIN_URL = 'core:login'
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', 'False') == 'True'   
+DEBUG = True  
 
-ALLOWED_HOSTS =  [ os.getenv('ALLOWED_HOSTS') ] and ['localhost', '127.0.0.1', '0.0.0.0']
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1,0.0.0.0').split(',')
 
 # Application definition
 
@@ -73,17 +75,27 @@ TEMPLATES = [
 WSGI_APPLICATION = 'bazzar.wsgi.application'
 
 
+# database for mysql
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': os.getenv('MYSQL_DB'),
+#         'USER': os.getenv('MYSQL_USER'),
+#         'PASSWORD': os.getenv('MYSQL_PASSWORD'),
+#         'HOST': 'db',
+#         'PORT': os.getenv('MYSQL_PORT', '3306'),
+#         'OPTIONS': {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"},
+#     }
+# }
+
 
 # database for sqlite3
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
-
 
 # Database for postgresql
 # DATABASES = {

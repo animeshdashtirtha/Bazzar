@@ -1,14 +1,20 @@
 services:
   db:
-    image: postgres:15
-    ports:
-      - "5432:5432"  # <--- THIS LINE IS REQUIRED for pgAdmin to work!
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+    image: mysql:8.0
     environment:
-      - POSTGRES_DB=${POSTGRES_DB}
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      MYSQL_ROOT_PASSWORD: Test-123456789
+      MYSQL_DATABASE: bazzar_db
+      MYSQL_USER: root
+      MYSQL_PASSWORD:  Test-123456789
+    volumes:
+      - db_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-pTest-123456789"]
+      timeout: 5s
+      retries: 10
+      interval: 10s
 
   web:
     build: .
@@ -20,23 +26,23 @@ services:
     env_file:
       - .env
     depends_on:
-      - db
-    command:
+      db:
+        condition: service_healthy
+    command: >
       sh -c "python manage.py migrate && 
              python manage.py runserver 0.0.0.0:8000"
-    environment:
-      - DB_HOST=${DB_HOST}
-      - DB_PORT=${DB_PORT}
-  
+
   tailwind:
     build: .
     volumes:
       - .:/app
       - theme_node_modules:/app/theme/static_src/node_modules
+    depends_on:
+      - web
     command: >
       sh -c "cd theme/static_src && 
              ./node_modules/.bin/postcss ./src/styles.css -o ../static/css/dist/styles.css --watch --poll 1000"
 
 volumes:
-  postgres_data:
+  db_data:
   theme_node_modules:
