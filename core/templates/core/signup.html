@@ -1,14 +1,32 @@
-{% extends 'core/base.html' %}
+{% load static tailwind_tags %}
+{% load static %}
+{% tailwind_css %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <title>Sign Up</title>
+</head>
 
-{% block title %}Sign Up{% endblock %}
-
-{% block content %}
+<nav class="border-b border-gray-300 bg-white sticky py-2 z-50">
+        <div class="container mx-auto px-3 sm:px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center">
+                <a href="{% url 'core:index' %}" class="pt-2">
+                    <img class="h-12 md:h-16 lg:h-16 rounded-xl mb-2" src="{% static 'images/logonew.png' %}" alt="Logo" />
+                </a>
+            </div>
+        </div>
+</nav>
 
 <!-- Sign Up Segment -->
 <form action="" method="POST" class="flex flex-col mb-12 bg-white shadow-md sm:p-12 p-8 gap-6 rounded-xl text-shadow-lg sm:mx-auto sm:max-w-2xl sm:w-[60%] mx-4">
     {% csrf_token %}    
     <div class="text-center">
-        <h2 class="text-gray-600 text-2xl font-extrabold underline">Create new account</h2>
+        <h2 class="text-gray-700 text-2xl font-extrabold underline">Create new account</h2>
         <h3 class="text-gray-400 text-lg">It's quick and easy</h3>
     </div>
 
@@ -50,4 +68,3 @@
     </button>
 </form>
 
-{% endblock %}

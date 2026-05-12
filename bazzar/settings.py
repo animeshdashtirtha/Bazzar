@@ -18,13 +18,14 @@ load_dotenv(BASE_DIR / ".env")
 # Authentication settings
 LOGIN_URL = 'core:login'
 
-SECRET_KEY = os.getenv('SECRET_KEY')
+# SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = 'django-insecure-qi77cpx9)&3js0h!ww#cot0*3u6$4y%inbe!tm%&owb36kdt8+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False 
+DEBUG = True
 
-# ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1,0.0.0.0').split(',')
-ALLOWED_HOSTS = ['AnimeshTirtha.pythonanywhere.com']
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1,0.0.0.0').split(',')
+# ALLOWED_HOSTS = ['AnimeshTirtha.pythonanywhere.com']
 
 
 # Application definition

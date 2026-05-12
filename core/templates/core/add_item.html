@@ -12,10 +12,10 @@
 </head>
 <body>
     <div class="border-b-1 border-gray-300">
-        <div class="container mx-auto mb-8 px-4 flex items-center justify-between h-16 pt-4">
+        <div class="container mx-auto px-4 flex items-center justify-between">
             <div class=" flex items-center">
                     <a href="{% url 'core:my_items' %}" class=" text-red-800 font-['Bebas_Neue'] pt-4">
-                        <img class="h-12 rounded-xl" src="{% static 'images/logo1.png' %}" alt="Logo" />
+                        <img class="h-12 md:h-16 lg:h-16 rounded-xl mb-2" src="{% static 'images/logonew.png' %}" alt="Logo" />
                     </a>
             </div>
             <div class="hidden md:block">
@@ -69,12 +69,12 @@
 
 <!-- Add Item Segment -->
 <form action="" method="POST" enctype="multipart/form-data"
-      class="flex flex-col mb-12 bg-white shadow-md sm:p-8 mt-8 p-8 gap-6 rounded-xl text-shadow-lg sm:mx-auto sm:max-w-2xl sm:w-[60%] mx-4 border-2 border-teal-300">
+      class="flex flex-col mb-12 bg-white shadow-md sm:p-8 mt-8 p-8 gap-6 rounded-xl text-shadow-lg sm:mx-auto sm:max-w-2xl sm:w-[60%] mx-4 border-2 border-teal-100">
     
     {% csrf_token %}
 
     <div class="text-center">
-        <h2 class="text-teal-500 text-2xl font-extrabold underline">Add New Item</h2>
+        <h2 class="text-gray-700 text-2xl font-extrabold underline">Add New Item</h2>
         <h3 class="text-gray-400 text-lg">Fill in the details below</h3>
     </div>
 
