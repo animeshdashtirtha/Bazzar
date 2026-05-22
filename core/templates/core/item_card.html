@@ -1,20 +1,71 @@
 {% for item in items %}
 {% load humanize %}
-<a href="{% url 'item:detail' item.id %}" class="group">
-    <div class="flex flex-col h-full rounded-lg shadow-md overflow-hidden transition-transform transform group-hover:scale-105 bg-white">
-        <div class="aspect-[3/4] overflow-hidden">
-            <img class="w-full h-full object-contain" src="{{ item.image.url }}" alt="{{ item.name|truncatewords:3 }}">
+{% load item_extras %}
+<div class="item-card group relative flex flex-col h-full rounded-lg shadow-sm overflow-hidden transition-transform transform hover:scale-105 bg-white" data-price="{{ item.get_effective_price|floatformat:"2" }}">
+    {% if item|is_new:30 %}
+    <span style="position:absolute; top:12px; left:-25px; z-index:10; background: var(--color-base-1); color:white; font-size:10px; padding:4px 25px; font-weight:bold; transform: rotate(-45deg); box-shadow: 2px 2px 3px rgba(0,0,0,0.2);">NEW</span>
+    {% endif %}
+    {% if item.is_flash_discount_valid %}
+    <span class="flash-badge">
+        <span class="flash-icon">⚡</span>
+        <span class="flash-label">-{{ item.flash_discount_percentage }}%</span>
+        {% with save=item.original_price|sub:item.discounted_price %}
+        {% if save > 0 %}
+        <span class="flash-save">Save ৳{{ save|floatformat:0 }}</span>
+        {% endif %}
+        {% endwith %}
+    </span>
+    {% elif item|has_sale %}
+    <span class="absolute right-2 top-2 xxs:right-3 xxs:top-3 bg-red-500 text-white text-[10px] xxs:text-xs font-bold px-1.5 xxs:px-2 py-0.5 xxs:py-1 rounded z-10">SALE</span>
+    {% endif %}
+    {% if item.is_sold %}
+    <span class="absolute right-2 top-10 xxs:right-3 xxs:top-10 bg-gray-800 text-white text-[10px] xxs:text-xs font-bold px-1.5 xxs:px-2 py-0.5 xxs:py-1 rounded z-10">SOLD</span>
+    {% endif %}
+
+    {# --- Clickable content area linking to detail page --- #}
+    <a href="{% url 'item:detail' item.id %}" class="flex flex-col flex-grow" aria-label="View details for {{ item.name }}">
+        <div class="relative aspect-[4/3] bg-gray-50 overflow-hidden flex items-center justify-center p-3 sm:p-4">
+            {% if item.primary_image %}
+            <img class="max-w-full max-h-full object-contain rounded-2xl sm:rounded-3xl" src="{{ item.primary_image.url }}" alt="{{ item.name|truncatewords:3 }}">
+            {% else %}
+            <div class="text-gray-300 text-xs sm:text-sm">No Image</div>
+            {% endif %}
         </div>
 
-        <div class="flex flex-col flex-grow p-4">
-            <h2 class="text-lg font-bold text-gray-800 group-hover:text-teal-600">{{ item.name|truncatewords:8 }}</h2>
-            <p class="text-gray-600 mt-2 text-sm flex-grow">{{ item.description|truncatewords:15 }}</p>
+        <div class="flex flex-col flex-grow p-3 sm:p-4 card-content-bottom">
+            <h2 class="text-sm sm:text-md font-semibold text-gray-800 mb-1 group-hover:text-base-1">{{ item.name|truncatewords:8 }}</h2>
+            <p class="text-gray-500 text-xs sm:text-sm mb-2 sm:mb-3 flex-grow hidden xxs:block">{{ item.description|truncatewords:8 }}</p>
 
-            <div class="mt-4 flex items-center justify-between">
-                <span class="text-lg font-bold text-teal-600">{{ item.price|floatformat:0|intcomma }} Tk.</span>
-                <span class="bg-teal-500 text-white px-3 py-2 rounded-lg text-sm font-medium">View Details</span>
+            <div class="mt-auto flex items-center justify-between gap-2 flex-wrap">
+                <div class="flex items-baseline gap-1 sm:gap-2">
+                    {% if item.is_flash_discount_valid %}
+                    <span class="text-xs sm:text-sm text-gray-400 line-through">{{ item.original_price|floatformat:0|intcomma }}</span>
+                    <span class="text-base sm:text-lg font-bold text-red-600">{{ item.discounted_price|floatformat:0|intcomma }}</span>
+                    {% else %}
+                    <span class="text-base sm:text-lg font-bold text-gray-900">{{ item.get_effective_price|floatformat:0|intcomma }}</span>
+                    {% endif %}
+                    <span class="text-xs sm:text-sm text-gray-600">Tk.</span>
+                </div>
+                <span class="inline-flex items-center bg-white border border-base-2 text-base-1 px-2 sm:px-3 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-sm font-medium whitespace-nowrap">View</span>
             </div>
         </div>
+    </a>
+
+    {# --- Slide-up Add to Cart button (hidden for sold items) --- #}
+    {% if not item.is_sold %}
+    <div class="atc-wrapper" aria-hidden="true">
+        <a href="{% url 'cart:add_to_cart' item.id %}"
+           class="atc-btn"
+           role="button"
+           aria-label="Add {{ item.name }} to cart">
+            <svg class="atc-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+            </svg>
+            <span class="hidden sm:inline">Add to Cart</span>
+            <span class="inline sm:hidden">Cart</span>
+        </a>
     </div>
-</a>
+    {% endif %}
+</div>
 {% endfor %}

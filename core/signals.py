@@ -10,9 +10,9 @@ def create_or_update_user_profile(sender, instance, created, **kwargs):
         return
 
     if created:
-        # New user → create profile
+        # Brand-new account — drop in a fresh profile row
         Profile.objects.create(user=instance)
     else:
-        # Existing user → make sure profile exists
+        # Existing account — recover a missing profile if needed
         profile, _ = Profile.objects.get_or_create(user=instance)
         profile.save()

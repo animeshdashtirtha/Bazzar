@@ -22,4 +22,5 @@ class CartItem(models.Model):
         return f"{self.item.name} ({self.quantity})"
 
     def total(self):
-        return self.item.price * self.quantity
+        effective = self.item.get_effective_price
+        return float(effective) * self.quantity

@@ -1,70 +1,69 @@
-{% load static tailwind_tags %}
-{% load static %}
-{% tailwind_css %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-    <title>Sign Up</title>
-</head>
+{% extends 'core/base.html' %}
 
-<nav class="border-b border-gray-300 bg-white sticky py-2 z-50">
-        <div class="container mx-auto px-3 sm:px-4 h-16 flex items-center justify-between">
-            <div class="flex items-center">
-                <a href="{% url 'core:index' %}" class="pt-2">
-                    <img class="h-12 md:h-16 lg:h-16 rounded-xl mb-2" src="{% static 'images/logonew.png' %}" alt="Logo" />
-                </a>
-            </div>
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+
+<div class="container mx-auto px-4 mt-6">
+    <!-- Minimal Card -->
+    <div class="max-w-md mx-auto bg-white border border-gray-200 rounded-lg shadow-sm">
+        <!-- Header -->
+        <div class="text-center px-8 py-6 border-b border-gray-100">
+            <h2 class="text-2xl font-bold text-gray-800">Create Account</h2>
+            <p class="text-gray-500 text-sm mt-1">It's quick and easy</p>
         </div>
-</nav>
 
-<!-- Sign Up Segment -->
-<form action="" method="POST" class="flex flex-col mb-12 bg-white shadow-md sm:p-12 p-8 gap-6 rounded-xl text-shadow-lg sm:mx-auto sm:max-w-2xl sm:w-[60%] mx-4">
-    {% csrf_token %}    
-    <div class="text-center">
-        <h2 class="text-gray-700 text-2xl font-extrabold underline">Create new account</h2>
-        <h3 class="text-gray-400 text-lg">It's quick and easy</h3>
+        <!-- Form -->
+        <form action="" method="POST" class="p-8">
+            {% csrf_token %}
+
+            {% if error_signup %}
+            <div class="bg-red-50 border border-red-200 text-red-600 px-4 py-2 rounded-md text-sm mb-4">
+                {{ error_signup }}
+            </div>
+            {% endif %}
+
+            <div class="space-y-4">
+                <div>
+                    <label for="username" class="block text-sm font-medium text-gray-600">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Enter username" class="w-full border border-gray-200 rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-base-2 mt-1" required>
+                </div>
+
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-600">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Enter email" class="w-full border border-gray-200 rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-base-2 mt-1" required>
+                </div>
+
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-600">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter password" class="w-full border border-gray-200 rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-base-2 mt-1" required>
+                </div>
+
+                <div>
+                    <label for="repeatpassword" class="block text-sm font-medium text-gray-600">Confirm Password</label>
+                    <input type="password" id="repeatpassword" name="repeatpassword" placeholder="Confirm password" class="w-full border border-gray-200 rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-base-2 mt-1" required>
+                </div>
+
+                <div>
+                    <label for="user_type" class="block text-sm font-medium text-gray-600">Register as</label>
+                    <select id="user_type" name="user_type" class="w-full border border-gray-200 rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-base-2 mt-1 bg-white">
+                        <option value="buyer" selected>Buyer</option>
+                        <option value="seller">Seller</option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit" class="w-full bg-base-2 hover:bg-base-1 text-white font-semibold py-2.5 rounded-md mt-6 transition-colors">
+                Sign Up
+            </button>
+
+            <p class="text-center text-gray-500 text-sm mt-4">
+                Already have an account?
+                <a href="{% url 'core:login' %}" class="text-base-1 hover:text-teal-700 font-medium">Login</a>
+            </p>
+        </form>
     </div>
+</div>
 
-    <hr class="my-0 w-full border-[1px] border-gray-200">
-
-    {% if error_signup %}
-    <div class="mx-auto text-teal-900 text-shadow-2xs">
-        <p class="text-2xl">{{ error_signup }}</p>
-    </div>
-    {% endif %}
-
-    <div class="flex flex-col gap-2">
-        <label for="username" class="signuplabel">Username</label>
-        <input type="text" id="username" name="username" placeholder="Enter Username..." class="signupbox" required>
-
-        <label for="email" class="signuplabel">Email</label>
-        <input type="email" id="email" name="email" placeholder="Enter Email..." class="signupbox" required>
-
-        <label for="password" class="signuplabel">Password</label>
-        <input type="password" id="password" name="password" placeholder="Password..." class="signupbox" required>
-
-        <label for="repeatpassword" class="signuplabel">Re-enter Password</label>
-        <input type="password" id="repeatpassword" name="repeatpassword" placeholder="Password..." class="signupbox" required>
-
-        <!-- 👇 New section for user type -->
-        <label for="user_type" class="signuplabel">Register as</label>
-        <select id="user_type" name="user_type" class="signupbox cursor-pointer">
-            <option value="buyer" selected>Buyer</option>
-            <option value="seller">Seller</option>
-        </select>
-    </div>
-
-    <button class="p-2 font-bold rounded mt-4 mx-auto w-64 hover:scale-110 bg-teal-400 hover:bg-teal-400 text-gray-100 shadow-lg">
-        Create account
-    </button>
-    
-    <button type="button" onclick="window.location.href='/login/'" class="p-2 font-bold rounded mt-1 mx-auto w hover:scale-110 bg-[#707070] hover:bg-[#919191] text-gray-200 text-sm shadow-lg">
-        Already have an account??
-    </button>
-</form>
+{% endblock %}
 

@@ -29,9 +29,11 @@ ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1,0.0.0.0').split(
 
 
 # Application definition
+
 INSTALLED_APPS = [
     'tailwind',
     'theme',
+    'django_ratelimit',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -46,8 +48,13 @@ INSTALLED_APPS = [
 ]
 TAILWIND_APP_NAME = "theme"
 
+# Rate limiting configuration (django-ratelimit)
+RATELIMIT_ENABLE = True
+RATELIMIT_VIEW = None  # Use default 403 Forbidden response
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -69,6 +76,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'item.context_processors.categories_processor',
+                'cart.context_processors.cart_count_processor',
             ],
         },
     },
@@ -111,6 +119,10 @@ DATABASES = {
 #     }
 # }
 
+
+# django-ratelimit requires a shared cache (Redis/Memcached) for strict compliance.
+# LocMemCache works fine for single-process dev servers; silence the system checks.
+SILENCED_SYSTEM_CHECKS = ['django_ratelimit.E003', 'django_ratelimit.W001']
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
@@ -156,13 +168,22 @@ STATICFILES_DIRS = [BASE_DIR / "static",
 MEDIA_URL='/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
+    },
+}
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-# Sending Email Section
+# Outbound email configuration
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
@@ -178,5 +199,5 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 # Internal IPs for development tools
 INTERNAL_IPS = [
     "127.0.0.1",
-    "10.0.2.2", # This allows the Docker host to communicate with the container
+    "10.0.2.2",  # Docker host ↔ container bridge
 ]

@@ -1,65 +1,52 @@
-{% load static tailwind_tags %}
-{% load static %}
-{% tailwind_css %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-    <title>login</title>
-</head>
+{% extends 'core/base.html' %}
 
-<nav class="border-b border-gray-300 bg-white sticky py-2 z-50">
-        <div class="container mx-auto px-3 sm:px-4 h-16 flex items-center justify-between">
-            <div class="flex items-center">
-                <a href="{% url 'core:index' %}" class="pt-2">
-                    <img class="h-12 md:h-16 lg:h-16 rounded-xl mb-2" src="{% static 'images/logonew.png' %}" alt="Logo" />
-                </a>
-            </div>
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+<div class="container mx-auto px-4 mt-6">
+    <!-- Minimal Card -->
+    <div class="max-w-md mx-auto bg-white border border-gray-200 rounded-lg shadow-sm">
+        <!-- Header -->
+        <div class="text-center px-8 py-6 border-b border-gray-100">
+            <h2 class="text-2xl font-bold text-gray-800">Sign In</h2>
+            <p class="text-gray-500 text-sm mt-1">Welcome back!</p>
         </div>
-</nav>
 
-<!-- Login Segment -->
-<form action="" method="POST" class="flex flex-col mb-12 bg-white shadow-md sm:p-12 p-8 gap-6 rounded-xl text-shadow-lg sm:mx-auto sm:max-w-2xl sm:w-[60%] mx-4">
-    {% csrf_token %}
+        <!-- Form -->
+        <form action="" method="POST" class="p-8">
+            {% csrf_token %}
 
-    <div class="text-center">
-        <h2 class="text-gray-600 text-2xl font-extrabold underline">Sign In</h2>
-        <h3 class="text-gray-400 text-lg">Welcome back! Please login to continue</h3>
+            {% if error_login %}
+            <div class="bg-red-50 border border-red-200 text-red-600 px-4 py-2 rounded-md text-sm mb-4">
+                {{ error_login }}
+            </div>
+            {% endif %}
+
+            <div class="space-y-4">
+                <div>
+                    <label for="username" class="block text-sm font-medium text-gray-600">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Enter username" class="w-full border border-gray-200 rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-base-2 mt-1">
+                </div>
+
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-600">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter password" class="w-full border border-gray-200 rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-base-2 mt-1">
+                </div>
+            </div>
+
+            <button type="submit" class="w-full bg-base-2 hover:bg-base-1 text-white font-semibold py-2.5 rounded-md mt-6 transition-colors">
+                Login
+            </button>
+
+            <p class="text-center text-gray-500 text-sm mt-4">
+                Don't have an account?
+                <a href="{% url 'core:signup' %}" class="text-base-1 hover:text-teal-700 font-medium">Sign up</a>
+            </p>
+        </form>
     </div>
+</div>
 
-    <hr class="my-0 w-full border-[1px] border-gray-200">
-
-    {% if error_login %}
-    <div class="mx-auto text-teal-900 text-shadow-2xs">
-        <p class="text-xl font-semibold">{{ error_login }}</p>
-    </div>
-    {% endif %}
-
-    <div class="flex flex-col gap-2">
-        <label for="username" class="signuplabel">
-            Username
-        </label>
-        <input type="text" id="username" name="username" placeholder="Enter Username..." class="signupbox">
-
-        <label for="password" class="signuplabel">
-            Password
-        </label>
-        <input type="password" id="password" name="password" placeholder="Enter Password..." class="signupbox">
-    </div>
-
-    <button type="submit" class="p-2 font-bold rounded mt-4 mx-auto w-64 hover:scale-110 bg-teal-400 hover:bg-teal-500 text-gray-100 shadow-lg transition duration-200">
-        Log In
-    </button>
-
-    <a href="{% url 'core:signup' %}" class="mx-auto">
-        <button type="button" class="p-2 font-bold rounded mt-1 hover:scale-110 bg-[#707070] hover:bg-[#919191] text-gray-200 text-sm shadow-lg w-64 transition duration-200">
-            Create a new account
-        </button>
-    </a>
-</form>
+{% endblock %}
 
 

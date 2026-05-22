@@ -9,7 +9,7 @@ from .services.email_service import (
 
 @receiver(pre_save, sender=Order)
 def track_previous_status(sender, instance, **kwargs):
-    # Skip signal during fixture loading
+    # Stay quiet when loading fixtures
     if kwargs.get('raw', False):
         return
 
@@ -21,11 +21,11 @@ def track_previous_status(sender, instance, **kwargs):
 
 @receiver(post_save, sender=Order)
 def order_email_handler(sender, instance, created, **kwargs):
-    # Skip emails during fixture loading
+    # Stay quiet when loading fixtures
     if kwargs.get('raw', False):
         return
 
-    # ORDER RECEIVED (on creation)
+    # Brand-new order — send "we got it" email
     if created:
         send_email_async(
             send_order_received,
@@ -33,7 +33,7 @@ def order_email_handler(sender, instance, created, **kwargs):
             instance
         )
 
-    # ORDER CONFIRMED (status change)
+    # Status flipped from pending → processing — send confirmation
     if (
         not created and
         getattr(instance, '_previous_status', None) == 'pending' and

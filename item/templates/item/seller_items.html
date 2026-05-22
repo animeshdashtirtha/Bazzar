@@ -1,11 +1,11 @@
 {% extends 'core/base.html' %}
 {% block title %}Items by {{ seller.username }}{% endblock %}
-{% load humanize %}
+{% load static humanize %}
 {% block content %}
 <br><br>
 <div class="container mx-auto px-6">
     <h1 class="text-3xl font-extrabold text-gray-800 mb-8 underline underline-offset-4 ">
-        Products by <span class="text-teal-600">{{ seller.username }}</span>
+        Products by <span class="text-base-1">{{ seller.username }}</span>
     </h1>
 
     {% if items %}
@@ -14,16 +14,20 @@
         <a href="{% url 'item:detail' item.id %}" class="group">
             <div class="flex flex-col h-full rounded-lg shadow-md overflow-hidden transition-transform transform group-hover:scale-105 bg-white">
                 <div class="aspect-[3/4] overflow-hidden bg-gray-50">
-                    <img class="w-full h-full object-contain" src="{{ item.image.url }}" alt="{{ item.name }}">
+                    {% if item.primary_image %}
+                    <img class="w-full h-full object-contain" src="{{ item.primary_image.url }}" alt="{{ item.name }}">
+                    {% else %}
+                    <img class="w-full h-full object-contain" src="{% static 'images/empty.png' %}" alt="{{ item.name }}">
+                    {% endif %}
                 </div>
 
                 <div class="flex flex-col flex-grow p-4">
-                    <h2 class="text-lg font-bold text-gray-800 group-hover:text-teal-600">{{ item.name|truncatewords:10 }}</h2>
+                    <h2 class="text-lg font-bold text-gray-800 group-hover:text-base-1">{{ item.name|truncatewords:10 }}</h2>
                     <p class="text-gray-600 mt-2 text-sm flex-grow">{{ item.description|truncatewords:15 }}</p>
 
                     <div class="mt-4 flex items-center justify-between">
-                        <span class="text-lg font-bold text-teal-600">{{ item.price|floatformat:0|intcomma }} Tk.</span>
-                        <span class="bg-teal-500 text-white px-3 py-2 rounded-lg text-sm font-medium">View</span>
+                        <span class="text-lg font-bold text-base-1">{{ item.price|floatformat:0|intcomma }} Tk.</span>
+                        <span class="bg-base-2 text-white px-3 py-2 rounded-lg text-sm font-medium">View</span>
                     </div>
                 </div>
             </div>

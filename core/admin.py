@@ -31,7 +31,7 @@ admin.site.unregister(User)
 admin.site.register(User, CustomUserAdmin)
 
 
-# Keep Profile in admin too (optional)
+# Also register Profile so admins can tweak user-type assignments
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ('user', 'user_type')

@@ -1,73 +1,140 @@
 {% extends 'core/base.html' %}
 {% load humanize %}
+{% load item_extras %}
 {% load static %}
 {% block title %} {{ category.name }} | Bazzar {% endblock %}
 
 {% block content %}
 
-<div class="container mx-auto px-6 pb-6 ">
-
-    <!-- Breadcrumb -->
-    <nav class="text-sm mb-6 text-gray-600">
-        <a href="{% url 'core:index' %}" class="hover:text-teal-600 font-semibold">Home</a>
-        <span class="mx-2">›</span>
-        <span class="text-gray-800 font-semibold">{{ category.name }}</span>
-    </nav>
+<div class="container mx-auto px-4 mt-6">
 
     <!-- Category Header -->
-    <div class="text-center mb-10">
-        <h1 class="text-4xl font-extrabold text-gray-800  tracking-tight">
-            {{ category.name }}
-        </h1>
-        <p class="text-gray-500 mt-2 text-lg">
-            Explore the latest products in the <span class="text-teal-600 font-semibold">{{ category.name }}</span> category.
-        </p>
+    <div class="text-center mb-8">
+        <h1 class="text-2xl font-bold text-gray-800">{{ category.name }}</h1>
+        <p class="text-gray-500 text-sm mt-1">Explore the latest products in this category.</p>
+    </div>
+
+    <!-- Curated Category Highlights -->
+    <div class="mb-8">
+        <div class="flex items-center justify-between mb-4">
+            <div>
+                <h3 class="text-lg font-bold text-gray-800">Browse More Categories</h3>
+                <p class="text-sm text-gray-500 mt-0.5">Discover what else we have in store</p>
+            </div>
+        </div>
+        <div class="category-highlights-container">
+            <div class="flex gap-3 overflow-x-auto pb-2 scrollbar-hide snap-x snap-mandatory -mx-1 px-1">
+                {% for cat in categories %}
+                <a href="{% url 'item:categories' cat.id %}"
+                   class="category-highlight-chip flex-shrink-0 snap-start inline-flex items-center gap-2.5 px-5 py-3 rounded-xl border {% if cat.id == category.id %}border-base-2/40 bg-base-2/10{% else %}border-gray-100 bg-white{% endif %} shadow-sm hover:shadow-md hover:border-base-2/30 hover:bg-base-2/5 transition-all duration-200 group cursor-pointer no-underline">
+                    <span class="w-9 h-9 rounded-lg bg-gradient-to-br from-base-1/10 to-base-2/10 flex items-center justify-center text-base-1 group-hover:from-base-1 group-hover:to-base-2 group-hover:text-white transition-all duration-300">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 20h16"/><path d="M5 20V8h14v12"/><path d="M9 12h6"/><path d="M12 9v6"/>
+                        </svg>
+                    </span>
+                    <span class="text-sm font-semibold {% if cat.id == category.id %}text-base-1{% else %}text-gray-700{% endif %} group-hover:text-gray-900 whitespace-nowrap">{{ cat.name }}</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="{% if cat.id == category.id %}text-base-1{% else %}text-gray-300{% endif %} group-hover:text-base-1 transition-colors">
+                        <polyline points="9 18 15 12 9 6"/>
+                    </svg>
+                </a>
+                {% empty %}
+                <span class="text-sm text-gray-400 italic px-5 py-3">No categories available yet.</span>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Toolbar: Product count + Sort dropdown -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
+        <h2 class="text-xl font-bold text-gray-800">Products in {{ category.name }}</h2>
+        <div class="flex items-center gap-4 flex-wrap">
+            <span class="text-sm text-gray-500">{{ paginator.count }} products</span>
+            <div class="sort-control">
+                <label for="sort-select" class="text-sm font-medium text-gray-600 mr-2">Sort by:</label>
+                <select id="sort-select"
+                        class="sort-select appearance-none bg-white border border-gray-200 rounded-lg px-4 py-2 pr-10 text-sm font-medium text-gray-700 cursor-pointer hover:border-base-2/40 focus:outline-none focus:ring-2 focus:ring-base-2/30 focus:border-base-2 transition-all"
+                        aria-label="Sort products">
+                    <option value="random" {% if sort == 'random' or not sort %}selected{% endif %}>Most Popular</option>
+                    <option value="newest" {% if sort == 'newest' %}selected{% endif %}>Newest</option>
+                    <option value="price_asc" {% if sort == 'price_asc' %}selected{% endif %}>Price: Low to High</option>
+                    <option value="price_desc" {% if sort == 'price_desc' %}selected{% endif %}>Price: High to Low</option>
+                </select>
+            </div>
+        </div>
     </div>
 
     <!-- Product Grid -->
     {% if Categoryitems %}
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
-        {% for item in Categoryitems %}
-        <a href="{% url 'item:detail' item.id %}" class="group">
-            <div class="flex flex-col h-full bg-white rounded-2xl shadow-md overflow-hidden transition-transform transform hover:scale-105 hover:shadow-lg">
-                
-                <div class="aspect-[3/4] overflow-hidden">
-                    <img src="{{ item.image.url }}" alt="{{ item.name|truncatewords:3 }}"
-                        class="w-full h-full object-contain transition-transform duration-300 group-hover:scale-110">
-                </div>
-
-                <div class="flex flex-col flex-grow p-4">
-                    <h2 class="text-lg font-bold text-gray-800 group-hover:text-teal-600 truncate">
-                        {{ item.name }}
-                    </h2>
-                    <p class="text-gray-600 mt-2 text-sm flex-grow line-clamp-2">
-                        {{ item.description|truncatewords:15 }}
-                    </p>
-
-                    <div class="mt-4 flex items-center justify-between">
-                        <span class="text-lg font-bold text-teal-600">Tk {{ item.price|floatformat:0|intcomma }}</span>
-                        <span class="bg-teal-500 text-white px-3 py-2 rounded-lg text-sm font-medium">
-                            View Details
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </a>
-        {% endfor %}
+    <div id="item-grid" class="grid grid-cols-1 xxs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 xxs:gap-4 sm:gap-6">
+        {% include 'core/item_card.html' with items=Categoryitems %}
     </div>
+
+    <!-- Pagination -->
+    {% if paginator.num_pages > 1 %}
+    <div class="flex justify-center items-center gap-2 mt-10">
+        {% if page_obj.has_previous %}
+        <a href="?page=1&sort={{ sort }}"
+           class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-200 text-gray-400 hover:text-base-1 hover:border-teal-300 hover:bg-teal-50 transition-all duration-200" title="First page">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M11 19l-7-7 7-7M18 19l-7-7 7-7" />
+            </svg>
+        </a>
+        <a href="?page={{ page_obj.previous_page_number }}&sort={{ sort }}"
+           class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-200 text-gray-400 hover:text-base-1 hover:border-teal-300 hover:bg-teal-50 transition-all duration-200" title="Previous page">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+        </a>
+        {% endif %}
+
+        {% for num in paginator.page_range %}
+            {% if num == page_obj.number %}
+            <span class="w-10 h-10 flex items-center justify-center rounded-full bg-base-2 text-white text-sm font-medium shadow-sm">{{ num }}</span>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+            <a href="?page={{ num }}&sort={{ sort }}"
+               class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-200 text-gray-600 text-sm font-medium hover:text-base-1 hover:border-teal-300 hover:bg-teal-50 transition-all duration-200">{{ num }}</a>
+            {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}&sort={{ sort }}"
+           class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-200 text-gray-400 hover:text-base-1 hover:border-teal-300 hover:bg-teal-50 transition-all duration-200" title="Next page">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+        </a>
+        <a href="?page={{ paginator.num_pages }}&sort={{ sort }}"
+           class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-200 text-gray-400 hover:text-base-1 hover:border-teal-300 hover:bg-teal-50 transition-all duration-200" title="Last page">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13 5l7 7-7 7M6 5l7 7-7 7" />
+            </svg>
+        </a>
+        {% endif %}
+    </div>
+    {% endif %}
 
     {% else %}
     <!-- Empty Category State -->
-    <div class="text-center mt-20">
-        <img src="{% static 'images/empty.png' %}" alt="No items" class="mx-auto w-80 opacity-80 mb-4">
-        <h3 class="text-xl font-semibold text-gray-700">No items found in this category</h3>
-        <p class="text-gray-500 mt-2">Please check back later or browse other categories.</p>
-        <a href="{% url 'core:index' %}" class="inline-block mt-6 bg-teal-500 hover:bg-teal-600 text-white px-6 py-2 rounded-lg shadow-md transition">
+    <div class="text-center bg-white rounded-lg shadow-sm border border-gray-100 py-16">
+        <img src="{% static 'images/empty.png' %}" alt="No items" class="mx-auto w-32 opacity-70 mb-4">
+        <h3 class="text-lg font-semibold text-gray-700">No items found in this category</h3>
+        <p class="text-gray-500 text-sm mt-1">Please check back later or browse other categories.</p>
+        <a href="{% url 'core:index' %}" class="inline-block mt-4 bg-base-2 hover:bg-base-1 text-white px-5 py-2 rounded-lg text-sm">
             Back to Home
         </a>
     </div>
     {% endif %}
 
 </div>
+
+<script>
+    // Handle sort dropdown change — always reload so the backend
+    // returns fully sorted data and pagination stays consistent.
+    document.getElementById('sort-select').addEventListener('change', function() {
+        var newSort = this.value;
+        var url = window.location.pathname + '?page=1&sort=' + newSort;
+        window.location.href = url;
+    });
+</script>
 
 {% endblock %}

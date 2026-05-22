@@ -1,4 +1,11 @@
 @import "tailwindcss";
+
+@theme {
+  --color-base-1: #5900e7;
+  --color-base-2: #670ff5;
+  --breakpoint-xxs: 400px;
+}
+
 @source "/app/core/templates/**/*.html";
 @source "/app/theme/templates/**/*.html";
 @source "/app/cart/templates/**/*.html";
@@ -22,12 +29,1385 @@
   }
 
   .signupbox {
-    @apply bg-[#fff] p-2 rounded-xl shadow-sm border-1 border-gray-300 
+    @apply bg-[#fff] p-2 rounded-xl shadow-sm border-1 border-gray-300
     focus:border-teal-400 focus:ring-1 focus:ring-teal-400;
   }
 
   /* 🔥 New class to stop pulse on hover */
   .stop-pulse-on-hover:hover {
     animation: none !important;
+  }
+
+  /* ── Flash Badge — attention-grabbing fire gradient with intense glow ── */
+  .flash-badge {
+    @apply absolute z-20 flex items-center gap-1;
+    top: 0.3rem;
+    right: 0.3rem;
+    padding: 0.3rem 0.7rem 0.3rem 0.55rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+    color: #fff;
+    background: linear-gradient(135deg, #ff4d00 0%, #ff6a00 40%, #ff3d00 100%);
+    border: 1.5px solid rgba(255, 215, 0, 0.6);
+    border-radius: 9999px;
+    box-shadow:
+      0 3px 12px rgba(255, 60, 0, 0.45),
+      0 0 20px rgba(255, 100, 0, 0.25),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    overflow: hidden;
+    user-select: none;
+    pointer-events: none;
+    animation: flash-urgent-pulse 1.6s ease-in-out infinite;
+  }
+
+  /* Shimmer swipe — fast bright highlight */
+  .flash-badge::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -120%;
+    width: 70%;
+    height: 100%;
+    background: linear-gradient(
+      110deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0) 35%,
+      rgba(255, 255, 255, 0.35) 50%,
+      rgba(255, 255, 255, 0) 65%,
+      transparent 100%
+    );
+    animation: flash-shimmer 2.5s ease-in-out infinite;
+    animation-delay: 0.3s;
+    pointer-events: none;
+  }
+
+  /* Flash icon — bigger with a warm glow */
+  .flash-badge .flash-icon {
+    font-size: 0.8rem;
+    line-height: 1;
+    filter: drop-shadow(0 0 4px rgba(255, 200, 0, 0.8)) drop-shadow(0 0 8px rgba(255, 150, 0, 0.4));
+    animation: flash-icon-bounce 1.2s ease-in-out infinite;
+    animation-delay: 0.1s;
+  }
+
+  .flash-badge .flash-label {
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    opacity: 1;
+    color: #fff;
+    -webkit-text-stroke: 0.6px rgba(255, 255, 255, 0.4);
+    text-shadow:
+      0 0 8px rgba(255, 255, 255, 0.6),
+      0 0 16px rgba(255, 200, 0, 0.3);
+  }
+
+  /* ── Save amount sub-badge ── */
+  .flash-badge .flash-save {
+    font-size: 0.5rem;
+    font-weight: 700;
+    color: #ffd700;
+    letter-spacing: 0.03em;
+    margin-left: 1px;
+    text-shadow: 0 0 6px rgba(255, 215, 0, 0.5);
+  }
+
+  /* ═══════════════════════════════════════════════
+     Keyframes
+     ═══════════════════════════════════════════════ */
+
+  @keyframes flash-urgent-pulse {
+    0%, 100% {
+      box-shadow:
+        0 3px 12px rgba(255, 60, 0, 0.45),
+        0 0 20px rgba(255, 100, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      transform: scale(1);
+    }
+    50% {
+      box-shadow:
+        0 4px 18px rgba(255, 60, 0, 0.65),
+        0 0 35px rgba(255, 100, 0, 0.4),
+        0 0 50px rgba(255, 60, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+      transform: scale(1.04);
+    }
+  }
+
+  @keyframes flash-shimmer {
+    0%   { left: -120%; }
+    50%  { left: 100%; }
+    100% { left: 120%; }
+  }
+
+  @keyframes flash-icon-bounce {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1) rotate(0deg);
+    }
+    25% {
+      opacity: 1;
+      transform: scale(1.2) rotate(-5deg);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.1) rotate(3deg);
+    }
+    75% {
+      transform: scale(1.15) rotate(-2deg);
+    }
+  }
+
+  /* Pause all animations on hover for calm interaction */
+  .flash-badge:hover,
+  .flash-badge:hover::after,
+  .flash-badge:hover .flash-icon {
+    animation-play-state: paused;
+  }
+
+  /* ── Responsive: slightly larger on sm+ ── */
+  @media (min-width: 640px) {
+    .flash-badge {
+      top: 0.45rem;
+      right: 0.45rem;
+      padding: 0.35rem 0.85rem 0.35rem 0.65rem;
+      font-size: 0.75rem;
+    }
+    .flash-badge .flash-icon {
+      font-size: 0.9rem;
+    }
+    .flash-badge .flash-label {
+      font-size: 0.68rem;
+    }
+    .flash-badge .flash-save {
+      font-size: 0.55rem;
+    }
+  }
+  /* ── Responsive: push badge further into corner on medium screens ── */
+  @media (min-width: 768px) {
+    .flash-badge {
+      top: 0.7rem;
+      right: 0.7rem;
+      padding: 0.35rem 0.85rem 0.35rem 0.65rem;
+      font-size: 0.75rem;
+    }
+    .flash-badge .flash-icon {
+      font-size: 0.85rem;
+    }
+    .flash-badge .flash-label {
+      font-size: 0.65rem;
+    }
+    .flash-badge .flash-save {
+      font-size: 0.55rem;
+    }
+  }
+  .flash-detail-save {
+    font-size: 0.6rem;
+  }
+}
+
+/* ── Flash Detail Badge — same fire style, inline variant ── */
+.flash-detail-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.3rem 0.75rem 0.3rem 0.6rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #fff;
+  background: linear-gradient(135deg, #ff4d00 0%, #ff6a00 40%, #ff3d00 100%);
+  border: 1.5px solid rgba(255, 215, 0, 0.6);
+  border-radius: 9999px;
+  box-shadow:
+    0 3px 12px rgba(255, 60, 0, 0.45),
+    0 0 20px rgba(255, 100, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  animation: flash-urgent-pulse 1.6s ease-in-out infinite;
+  user-select: none;
+  margin-bottom: 0.5rem;
+}
+
+.flash-detail-icon {
+  font-size: 0.85rem;
+  line-height: 1;
+  filter: drop-shadow(0 0 4px rgba(255, 200, 0, 0.8)) drop-shadow(0 0 8px rgba(255, 150, 0, 0.4));
+  animation: flash-icon-bounce 1.2s ease-in-out infinite;
+  animation-delay: 0.1s;
+}
+
+.flash-detail-label {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: #fff;
+  -webkit-text-stroke: 0.6px rgba(255, 255, 255, 0.4);
+  text-shadow:
+    0 0 8px rgba(255, 255, 255, 0.6),
+    0 0 16px rgba(255, 200, 0, 0.3);
+}
+
+.flash-detail-save {
+  font-size: 0.55rem;
+  font-weight: 700;
+  color: #ffd700;
+  letter-spacing: 0.03em;
+  text-shadow: 0 0 6px rgba(255, 215, 0, 0.5);
+}
+
+.flash-detail-badge:hover {
+  animation-play-state: paused;
+}
+
+/* =====================================================================
+   Item Detail Page — Modern Card-Based Split Layout
+   ===================================================================== */
+
+:root {
+  --detail-accent: #5900e7;
+  --detail-accent-hover: #670ff5;
+  --detail-accent-light: rgba(89, 0, 231, 0.06);
+  --detail-accent-glow: rgba(89, 0, 231, 0.15);
+  --detail-surface: #ffffff;
+  --detail-bg: #f8f9fb;
+  --detail-text-primary: #1a1a2e;
+  --detail-text-secondary: #5a5a7a;
+  --detail-text-muted: #8e8ea0;
+  --detail-border: #e8e8f0;
+  --detail-border-light: #f0f0f5;
+  --detail-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --detail-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.05), 0 2px 6px rgba(0, 0, 0, 0.04);
+  --detail-shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.06), 0 4px 12px rgba(0, 0, 0, 0.04);
+  --detail-radius-sm: 10px;
+  --detail-radius-md: 14px;
+  --detail-radius-lg: 18px;
+  --detail-radius-xl: 22px;
+  --detail-transition: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --detail-font: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
+.detail-page {
+  font-family: var(--detail-font);
+  background: var(--detail-bg);
+  min-height: 100vh;
+}
+
+.detail-page * {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* --- Breadcrumb --- */
+.detail-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  padding: 0.75rem 0 0.25rem;
+  font-size: 0.875rem;
+  color: var(--detail-text-muted);
+}
+
+.detail-breadcrumb a {
+  color: var(--detail-text-secondary);
+  text-decoration: none;
+  transition: color var(--detail-transition);
+}
+
+.detail-breadcrumb a:hover {
+  color: var(--detail-accent);
+}
+
+.detail-breadcrumb .breadcrumb-sep {
+  color: var(--detail-border);
+  user-select: none;
+}
+
+.detail-breadcrumb .breadcrumb-current {
+  color: var(--detail-text-primary);
+  font-weight: 500;
+  pointer-events: none;
+}
+
+/* --- Main Split Layout --- */
+.detail-split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .detail-split {
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .detail-split {
+    grid-template-columns: 5fr 4fr;
+    gap: 4rem;
+  }
+}
+
+/* --- Scrollbar hide utility (for thumbnail strip) --- */
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* --- Scroll-triggered reveal animations --- */
+.gallery-reveal {
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+/* Mobile dot indicators for gallery */
+.gallery-dot {
+  transition: all 0.3s ease-out;
+}
+
+/* Respect reduced-motion preference for reveal animations */
+@media (prefers-reduced-motion: reduce) {
+  .gallery-reveal {
+    transition: none;
+  }
+  .gallery-main img {
+    transition: none;
+  }
+  .gallery-dot {
+    transition: none;
+  }
+}
+
+/* --- Info Section --- */
+.info-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Category & Seller badges */
+.info-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.info-meta .meta-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: all var(--detail-transition);
+  white-space: nowrap;
+}
+
+.meta-badge.meta-category {
+  background: var(--detail-accent-light);
+  color: var(--detail-accent);
+}
+
+.meta-badge.meta-category:hover {
+  background: var(--detail-accent);
+  color: #fff;
+}
+
+.meta-badge.meta-seller {
+  background: #f0f0f5;
+  color: var(--detail-text-secondary);
+}
+
+.meta-badge.meta-seller:hover {
+  background: #e0e0ea;
+  color: var(--detail-text-primary);
+}
+
+/* Title */
+.info-title {
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: var(--detail-text-primary);
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+}
+
+@media (min-width: 768px) {
+  .info-title {
+    font-size: 1.85rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .info-title {
+    font-size: 2rem;
+  }
+}
+
+/* Price */
+.info-price-block {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.info-price {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--detail-accent);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+@media (min-width: 768px) {
+  .info-price {
+    font-size: 2.35rem;
+  }
+}
+
+.info-tax-note {
+  font-size: 0.8rem;
+  color: var(--detail-text-muted);
+  font-weight: 400;
+}
+
+/* Description */
+.info-description {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--detail-text-secondary);
+}
+
+/* Divider */
+.info-divider {
+  height: 1px;
+  background: var(--detail-border-light);
+  border: none;
+  margin: 0;
+}
+
+/* --- Quantity Selector --- */
+.qty-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.qty-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--detail-text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.qty-controls {
+  display: inline-flex;
+  align-items: center;
+  border: 1.5px solid var(--detail-border);
+  border-radius: var(--detail-radius-sm);
+  overflow: hidden;
+  background: var(--detail-surface);
+  width: fit-content;
+}
+
+.qty-btn {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--detail-text-primary);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all var(--detail-transition);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.qty-btn:hover {
+  background: var(--detail-accent-light);
+  color: var(--detail-accent);
+}
+
+.qty-btn:active {
+  background: var(--detail-accent);
+  color: #fff;
+}
+
+.qty-btn:focus-visible {
+  outline: 2px solid var(--detail-accent);
+  outline-offset: -2px;
+  z-index: 1;
+}
+
+.qty-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.qty-input {
+  width: 52px;
+  height: 42px;
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--detail-text-primary);
+  border: none;
+  border-left: 1.5px solid var(--detail-border);
+  border-right: 1.5px solid var(--detail-border);
+  background: transparent;
+  -moz-appearance: textfield;
+  outline: none;
+}
+
+.qty-input::-webkit-outer-spin-button,
+.qty-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.qty-input:focus {
+  background: var(--detail-accent-light);
+}
+
+/* --- Action Buttons --- */
+.action-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+@media (min-width: 480px) {
+  .action-group {
+    flex-direction: row;
+  }
+}
+
+.btn-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.9rem 1.8rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: var(--detail-radius-sm);
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: all var(--detail-transition);
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-action:focus-visible {
+  outline: 2.5px solid var(--detail-accent);
+  outline-offset: 3px;
+}
+
+.btn-action:active {
+  transform: scale(0.97);
+}
+
+.btn-cart {
+  background: var(--detail-accent-hover);
+  color: #fff;
+  flex: 1;
+}
+
+.btn-cart:hover {
+  background: var(--detail-accent);
+  box-shadow: 0 6px 20px rgba(89, 0, 231, 0.3);
+}
+
+.btn-buy {
+  background: #f97316;
+  color: #fff;
+  flex: 1;
+}
+
+.btn-buy:hover {
+  background: #ea580c;
+  box-shadow: 0 6px 20px rgba(249, 115, 22, 0.35);
+}
+
+.btn-contact {
+  background: #1e1e2e;
+  color: #fff;
+}
+
+.btn-contact:hover {
+  background: #2d2d44;
+  box-shadow: 0 6px 20px rgba(30, 30, 46, 0.3);
+}
+
+.btn-contact-secondary {
+  background: var(--detail-surface);
+  color: var(--detail-text-primary);
+  border: 1.5px solid var(--detail-border);
+}
+
+.btn-contact-secondary:hover {
+  border-color: var(--detail-text-secondary);
+  background: #fafafa;
+}
+
+/* --- Info Cards --- */
+.info-card {
+  background: var(--detail-surface);
+  border-radius: var(--detail-radius-md);
+  box-shadow: var(--detail-shadow-sm);
+  padding: 1.25rem 1.5rem;
+}
+
+.info-card h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--detail-text-primary);
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.01em;
+}
+
+.info-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.info-card ul li {
+  font-size: 0.9rem;
+  color: var(--detail-text-secondary);
+  padding-left: 1.6rem;
+  position: relative;
+  line-height: 1.5;
+}
+
+.info-card ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--detail-accent);
+  opacity: 0.6;
+}
+
+/* Reviews placeholder */
+.reviews-card {
+  background: var(--detail-surface);
+  border-radius: var(--detail-radius-md);
+  box-shadow: var(--detail-shadow-sm);
+  padding: 1.25rem 1.5rem;
+  text-align: center;
+}
+
+.reviews-card .reviews-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  opacity: 0.3;
+}
+
+.reviews-card p {
+  font-size: 0.9rem;
+  color: var(--detail-text-muted);
+}
+
+/* --- Sticky Mobile Add-to-Cart Bar --- */
+.mobile-sticky-bar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--detail-surface);
+  border-top: 1px solid var(--detail-border);
+  box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.08);
+  padding: 0.75rem 1rem;
+  z-index: 50;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media (max-width: 767px) {
+  .mobile-sticky-bar {
+    display: flex;
+  }
+  .detail-page {
+    padding-bottom: 5rem;
+  }
+}
+
+.mobile-sticky-bar .mobile-price {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--detail-accent);
+  white-space: nowrap;
+}
+
+.mobile-sticky-bar .mobile-atc {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.65rem 1.4rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--detail-accent-hover);
+  border: none;
+  border-radius: var(--detail-radius-sm);
+  cursor: pointer;
+  transition: all var(--detail-transition);
+  text-decoration: none;
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+}
+
+.mobile-sticky-bar .mobile-atc:hover {
+  background: var(--detail-accent);
+}
+
+/* --- Utility: focus ring --- */
+.detail-page :focus-visible {
+  outline: 2.5px solid var(--detail-accent);
+  outline-offset: 2px;
+}
+
+/* Skip link for keyboard a11y */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  background: var(--detail-accent);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 0 0 var(--detail-radius-sm) var(--detail-radius-sm);
+  z-index: 100;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: top 200ms ease;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* =====================================================================
+   Item Card — Slide-Up Add-to-Cart Button
+   ===================================================================== */
+
+/* ----- Card container must clip the sliding button ----- */
+.item-card {
+  --atc-height: 3rem;
+}
+
+/* ----- Dynamic bottom padding via CSS variable (replaces pb-16) ----- */
+.item-card .card-content-bottom {
+  padding-bottom: calc(var(--atc-height) + 0.75rem);
+}
+
+/* ----- Wrapper clips the button below the card bottom edge ----- */
+.item-card .atc-wrapper {
+position: absolute;
+bottom: 0;
+left: 0;
+right: 0;
+height: var(--atc-height);
+overflow: hidden;
+pointer-events: none;           /* let clicks pass through to link when hidden */
+}
+
+.item-card:hover .atc-wrapper,
+.item-card:focus-within .atc-wrapper {
+pointer-events: auto;
+}
+
+/* ----- The button itself: starts translated down (hidden) ----- */
+.item-card .atc-btn {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+gap: 0.5rem;
+width: 100%;
+height: var(--atc-height);
+padding: 0 1rem;
+font-size: 0.875rem;
+font-weight: 600;
+line-height: 1;
+letter-spacing: 0.01em;
+color: #fff;
+text-decoration: none;
+white-space: nowrap;
+border: none;
+border-radius: 0 0 8px 8px;     /* 8px rounded bottom corners */
+background: #5900e7;             /* base-1 */
+cursor: pointer;
+user-select: none;
+-webkit-user-select: none;
+-webkit-tap-highlight-color: transparent;
+
+/* Slide-down hidden state */
+transform: translateY(100%);
+opacity: 0;
+transition:
+  transform 0.3s ease-out,
+  opacity 0.3s ease-out;
+}
+
+/* ----- Reveal on hover / focus-within ----- */
+.item-card:hover .atc-btn,
+.item-card:focus-within .atc-btn {
+transform: translateY(0);
+opacity: 1;
+}
+
+/* Hover micro-interaction on the button itself */
+.item-card .atc-btn:hover {
+background: #670ff5;             /* base-2 */
+box-shadow: 0 4px 14px rgba(89, 0, 231, 0.35);
+}
+
+/* Active/press state */
+.item-card .atc-btn:active {
+transform: translateY(0) scale(0.97);
+background: #4a00c4;
+}
+
+/* ----- Focus-visible ring (keyboard a11y) ----- */
+.item-card .atc-btn:focus-visible {
+outline: 2.5px solid #5900e7;
+outline-offset: 2px;
+}
+
+/* Focus-visible on the card itself — ring the whole card */
+.item-card:focus-within {
+outline: 2px solid #5900e7;
+outline-offset: 2px;
+}
+
+/* Remove default outline when focus-within provides it */
+.item-card:focus-within .atc-btn:focus-visible {
+outline: none;
+}
+
+/* ----- SVG icon sizing ----- */
+.item-card .atc-icon {
+flex-shrink: 0;
+}
+
+/* =====================================================================
+   Touch-Device Fallback — always-visible button
+        + Mobile-first responsive refinements
+   ===================================================================== */
+
+/* On coarse-pointer (touch) devices the button is always visible,
+   since there is no persistent hover state. */
+@media (pointer: coarse) {
+  .item-card .atc-btn {
+    transform: translateY(0);
+    opacity: 1;
+    padding: 0 0.65rem;
+    gap: 0.3rem;
+  }
+
+  .item-card .atc-wrapper {
+    pointer-events: auto;
+  }
+}
+
+/* Medium phones (400px–640px) — moderate button size */
+@media (pointer: coarse) and (min-width: 400px) and (max-width: 640px) {
+  .item-card {
+    --atc-height: 2.75rem;
+  }
+
+  .item-card .atc-btn {
+    font-size: 0.8rem;
+  }
+
+  .item-card .atc-icon {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* Small phones (< 400px) — compact button */
+@media (pointer: coarse) and (max-width: 399px) {
+  .item-card {
+    --atc-height: 2.5rem;
+  }
+
+  .item-card .atc-btn {
+    font-size: 0.75rem;
+    border-radius: 0 0 6px 6px;
+  }
+
+  .item-card .atc-icon {
+    width: 15px;
+    height: 15px;
+  }
+
+  /* Pull badges tighter on tiny screens */
+  .item-card .card-content-bottom {
+    padding-bottom: calc(var(--atc-height) + 0.5rem);
+  }
+}
+
+/* Larger touch devices / tablets (≥641px) — full-size button */
+@media (pointer: coarse) and (min-width: 641px) {
+  .item-card {
+    --atc-height: 3rem;
+  }
+
+  .item-card .atc-btn {
+    font-size: 0.875rem;
+    padding: 0 1rem;
+    gap: 0.5rem;
+  }
+}
+
+/* =====================================================================
+ Respect prefers-reduced-motion
+ ===================================================================== */
+@media (prefers-reduced-motion: reduce) {
+.item-card .atc-btn {
+  transition: none;
+}
+
+.item-card:hover .atc-btn,
+.item-card:focus-within .atc-btn {
+  transition: none;
+}
+}
+
+/* =====================================================================
+   Category Highlights — Promotional Chips Row
+   ===================================================================== */
+
+.category-highlights-container {
+  position: relative;
+}
+
+/* Hide scrollbar across browsers */
+.category-highlights-container .scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.category-highlights-container .scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.category-highlight-chip {
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  text-decoration: none;
+}
+
+.category-highlight-chip:focus-visible {
+  outline: 2.5px solid #5900e7;
+  outline-offset: 3px;
+}
+
+.category-highlight-chip:active {
+  transform: scale(0.96);
+}
+
+/* Gradient icon pill on hover — override inline gradient */
+.category-highlight-chip:hover span:first-of-type {
+  background: linear-gradient(135deg, #5900e7, #670ff5) !important;
+  color: #fff !important;
+}
+
+/* Subtle lift + shadow on hover */
+.category-highlight-chip:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(89, 0, 231, 0.1), 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .category-highlight-chip,
+  .category-highlight-chip:hover {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+/* =====================================================================
+   Sort Dropdown — Accessible & Polished
+   ===================================================================== */
+
+.sort-control {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.sort-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 12px;
+  padding-right: 2.25rem;
+  min-width: 180px;
+}
+
+.sort-select:focus-visible {
+  outline: 2.5px solid #5900e7;
+  outline-offset: 2px;
+}
+
+@media (max-width: 639px) {
+  .sort-control {
+    width: 100%;
+  }
+  .sort-select {
+    flex: 1;
+    min-width: 0;
+  }
+}
+
+/* ============================================================
+   MULTI-IMAGE UPLOAD AREA (add_item.html + edit_item.html)
+   ============================================================ */
+
+.image-upload-area {
+  @apply space-y-3;
+}
+
+.image-dropzone {
+  @apply border-2 border-dashed border-gray-300 rounded-xl p-6 text-center
+         transition-all duration-200 cursor-pointer bg-gray-50/50;
+}
+
+.image-dropzone:hover,
+.image-dropzone-active {
+  @apply border-teal-400 bg-teal-50/50;
+}
+
+.image-preview-grid {
+  @apply grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3;
+}
+
+.image-preview-card {
+  @apply relative rounded-lg overflow-hidden border border-gray-200
+         bg-gray-50 aspect-square
+         transition-all duration-200 cursor-grab;
+}
+
+.image-preview-card.dragging {
+  @apply opacity-50 scale-95 border-teal-400;
+}
+
+.image-preview-thumb {
+  @apply w-full h-full object-contain p-2;
+}
+
+.image-remove-btn {
+  @apply absolute top-1.5 right-1.5 w-6 h-6 flex items-center justify-center
+         rounded-full bg-red-500 text-white opacity-0
+         transition-opacity duration-150 hover:bg-red-600
+         focus:opacity-100 focus:outline-none;
+}
+
+.image-preview-card:hover .image-remove-btn {
+  @apply opacity-100;
+}
+
+.image-order-input {
+  @apply hidden;
+}
+
+/* ============================================================
+   LIGHTBOX (detail.html)
+   ============================================================ */
+
+.lightbox-overlay {
+  @apply fixed inset-0 z-50 flex items-center justify-center;
+  background: rgba(0, 0, 0, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  animation: lightboxFadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.lightbox-overlay.closing {
+  animation: lightboxFadeOut 0.25s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes lightboxFadeIn {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(12px);
+  }
+}
+
+@keyframes lightboxFadeOut {
+  from {
+    opacity: 1;
+    backdrop-filter: blur(12px);
+  }
+  to {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+}
+
+.lightbox-img {
+  @apply max-w-[90vw] max-h-[85vh] object-contain select-none;
+  border-radius: 8px;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  opacity: 1;
+  transform: scale(1);
+}
+
+.lightbox-img.switching {
+  opacity: 0;
+  transform: scale(0.96);
+}
+
+.lightbox-close {
+  @apply absolute z-20 flex items-center justify-center
+         border-0 cursor-pointer;
+  top: 1.25rem;
+  right: 1.25rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-size: 1.4rem;
+  line-height: 1;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  transition: all 0.25s ease;
+}
+
+.lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.22);
+  transform: scale(1.1);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+
+.lightbox-close:active {
+  transform: scale(0.93);
+}
+
+.lightbox-close:focus-visible {
+  @apply outline-none;
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.5);
+}
+
+.lightbox-nav {
+  @apply absolute top-1/2 -translate-y-1/2 z-20
+         flex items-center justify-center
+         border-0 cursor-pointer;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  transition: all 0.25s ease;
+}
+
+.lightbox-nav svg {
+  filter: drop-shadow(0 1px 3px rgba(0,0,0,0.4));
+}
+
+.lightbox-nav:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-50%) scale(1.12);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.35);
+}
+
+.lightbox-nav:active {
+  transform: translateY(-50%) scale(0.92);
+}
+
+.lightbox-nav:focus-visible {
+  @apply outline-none;
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.5);
+}
+
+.lightbox-prev {
+  left: 1.25rem;
+}
+
+.lightbox-next {
+  right: 1.25rem;
+}
+
+/* Lightbox image counter */
+.lightbox-counter {
+  @apply absolute z-20;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: rgba(255,255,255,0.85);
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.35rem 1rem;
+  border-radius: 999px;
+  letter-spacing: 0.04em;
+  pointer-events: none;
+}
+
+/* ============================================================
+   PREMIUM SHARED ANIMATIONS & UTILITIES
+   ============================================================ */
+
+@keyframes premiumFadeIn {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes premiumFadeInUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes premiumScaleIn {
+  from { opacity: 0; transform: scale(0.94); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes premiumPulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(89, 0, 231, 0.3); }
+  50%      { box-shadow: 0 0 0 12px rgba(89, 0, 231, 0); }
+}
+
+.animate-premium-fade-in {
+  animation: premiumFadeIn 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+  opacity: 0;
+}
+
+.animate-premium-fade-in-up {
+  animation: premiumFadeInUp 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+  opacity: 0;
+}
+
+.animate-premium-scale-in {
+  animation: premiumScaleIn 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+  opacity: 0;
+}
+
+/* Staggered card entrance */
+.premium-stagger > * {
+  opacity: 0;
+  animation: premiumFadeIn 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+.premium-stagger > *:nth-child(1)  { animation-delay: 0.05s; }
+.premium-stagger > *:nth-child(2)  { animation-delay: 0.10s; }
+.premium-stagger > *:nth-child(3)  { animation-delay: 0.15s; }
+.premium-stagger > *:nth-child(4)  { animation-delay: 0.20s; }
+.premium-stagger > *:nth-child(5)  { animation-delay: 0.25s; }
+.premium-stagger > *:nth-child(6)  { animation-delay: 0.30s; }
+.premium-stagger > *:nth-child(7)  { animation-delay: 0.35s; }
+.premium-stagger > *:nth-child(8)  { animation-delay: 0.40s; }
+.premium-stagger > *:nth-child(9)  { animation-delay: 0.45s; }
+.premium-stagger > *:nth-child(10) { animation-delay: 0.50s; }
+.premium-stagger > *:nth-child(11) { animation-delay: 0.55s; }
+.premium-stagger > *:nth-child(12) { animation-delay: 0.60s; }
+
+/* Premium card base */
+.premium-card {
+  @apply bg-white rounded-2xl border border-gray-100/80;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.03), 0 4px 16px rgba(0,0,0,0.04);
+  transition: all 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.premium-card:hover {
+  box-shadow: 0 4px 24px rgba(0,0,0,0.07), 0 8px 36px rgba(89, 0, 231, 0.05);
+  transform: translateY(-2px);
+}
+
+/* Refined form input */
+.premium-input {
+  @apply w-full px-4 py-3 bg-gray-50/70 border border-gray-200 rounded-xl
+         text-gray-800 text-sm
+         placeholder:text-gray-400
+         focus:bg-white focus:border-base-2 focus:ring-4 focus:ring-base-2/10
+         transition-all duration-200 outline-none;
+}
+
+.premium-label {
+  @apply text-sm font-semibold text-gray-700 tracking-wide;
+  letter-spacing: 0.035em;
+}
+
+/* Premium button variants */
+.premium-btn-primary {
+  @apply inline-flex items-center justify-center gap-2 px-6 py-3
+         bg-base-2 hover:bg-base-1 text-white font-semibold text-sm
+         rounded-xl shadow-lg shadow-base-2/20
+         hover:shadow-xl hover:shadow-base-1/25
+         active:scale-[0.97]
+         transition-all duration-200;
+}
+
+.premium-btn-secondary {
+  @apply inline-flex items-center justify-center gap-2 px-6 py-3
+         bg-white hover:bg-gray-50 text-gray-700 font-semibold text-sm
+         border border-gray-200 hover:border-gray-300
+         rounded-xl
+         active:scale-[0.97]
+         transition-all duration-200;
+}
+
+.premium-btn-danger {
+  @apply inline-flex items-center justify-center gap-2 px-6 py-3
+         bg-red-500 hover:bg-red-600 text-white font-semibold text-sm
+         rounded-xl shadow-lg shadow-red-500/20
+         hover:shadow-xl hover:shadow-red-500/30
+         active:scale-[0.97]
+         transition-all duration-200;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-premium-fade-in,
+  .animate-premium-fade-in-up,
+  .animate-premium-scale-in,
+  .premium-stagger > * {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .premium-card,
+  .premium-card:hover {
+    transition: none !important;
+    transform: none !important;
   }
 }

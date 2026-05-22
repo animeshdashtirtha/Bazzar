@@ -9,7 +9,7 @@ def send_order_confirmation(to_email, order):
     
     subject = f"Order #{order.id} Confirmation - Bazzar"
 
-    # Render HTML template
+    # Build the HTML body from the order-confirmation template
     html_content = render_to_string(
         'orders/order_confirmation_email.html',
         {'user': order.user, 'order': order}
@@ -18,7 +18,7 @@ def send_order_confirmation(to_email, order):
     # Fallback plain text
     text_content = f"Thank you for your order #{order.id}! Total: ${order.total_price}"
 
-    # Create email
+    # Wire up subject, plain-text fallback, and HTML alternative
     email = EmailMultiAlternatives(
         subject, text_content, settings.DEFAULT_FROM_EMAIL, [to_email]
     )

@@ -4,38 +4,68 @@
 
 {% block content %}
 
-<div class="container mx-auto px-6">
+<div class="max-w-4xl mx-auto px-4 py-8">
     <div class="text-center mb-10">
-        <h1 class="text-4xl font-bold text-gray-800 mb-3">About Bazzar</h1>
-        <p class="text-gray-600 max-w-2xl mx-auto">
-            Welcome to <span class="font-extrabold text-teal-500">Bazzar</span> — your go-to online shopping destination for quality and convenience.
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-3">About Bazzar</h1>
+        <p class="text-gray-500 text-sm md:text-base max-w-2xl mx-auto">
+            Welcome to <span class="font-semibold text-base-1">Bazzar</span> — your go-to online shopping destination for quality and convenience.
         </p>
     </div>
 
-    <div class="max-w-4xl mx-auto bg-white shadow-lg rounded-2xl p-8">
-        <h2 class="text-2xl font-semibold text-gray-800 mb-4">Our Story</h2>
-        <p class="text-gray-600 leading-relaxed mb-6">
-            Bazzar is a practice project built with passion and creativity by 
-            <span class="text-teal-500 font-extrabold">Animesh Das Tirtha</span>.  
-            This project was developed to explore full-stack web development with Django, Tailwind CSS, and modern web design principles.  
-        </p>
+    <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+        <!-- Hero Section -->
+        <div class="bg-gradient-to-r from-base-2 to-base-1 px-8 py-12 text-center">
+            <h2 class="text-white text-2xl md:text-3xl font-bold mb-2">Building the Future of E-Commerce</h2>
+            <p class="text-teal-100 text-sm md:text-base">A journey of learning and innovation</p>
+        </div>
 
-        <h2 class="text-2xl font-semibold text-gray-800 mb-4">Our Mission</h2>
-        <p class="text-gray-600 leading-relaxed mb-6">
-            Our mission is to create a seamless, user-friendly, and visually appealing e-commerce experience — 
-            while learning and implementing real-world technologies that power today's online marketplaces.
-        </p>
+        <!-- Content -->
+        <div class="p-8 space-y-8">
+            <section>
+                <h2 class="text-xl font-semibold text-gray-800 mb-3 flex items-center gap-2">
+                    <span class="w-8 h-8 bg-teal-100 rounded-full flex items-center justify-center">
+                        <i class="fa-solid fa-book text-base-1 text-sm"></i>
+                    </span>
+                    Our Story
+                </h2>
+                <p class="text-gray-600 leading-relaxed text-sm md:text-base">
+                    Bazzar is a practice project built with passion and creativity by
+                    <span class="font-semibold text-base-1">Animesh Das Tirtha</span>.
+                    This project was developed to explore full-stack web development with Django, Tailwind CSS, and modern web design principles.
+                </p>
+            </section>
 
-        <h2 class="text-2xl font-semibold text-gray-800 mb-4">Our Vision</h2>
-        <p class="text-gray-600 leading-relaxed mb-6">
-            Although this is a practice project, the vision behind Bazzar is to develop the foundation for a scalable and robust 
-            platform that could serve as inspiration for future commercial applications.
-        </p>
+            <section>
+                <h2 class="text-xl font-semibold text-gray-800 mb-3 flex items-center gap-2">
+                    <span class="w-8 h-8 bg-teal-100 rounded-full flex items-center justify-center">
+                        <i class="fa-solid fa-bullseye text-base-1 text-sm"></i>
+                    </span>
+                    Our Mission
+                </h2>
+                <p class="text-gray-600 leading-relaxed text-sm md:text-base">
+                    Our mission is to create a seamless, user-friendly, and visually appealing e-commerce experience —
+                    while learning and implementing real-world technologies that power today's online marketplaces.
+                </p>
+            </section>
 
-        <div class="border-t border-gray-200 mt-16 pt-6 text-center">
-            <p class="text-gray-500 text-sm">
-                © 2025 Bazzar. Created by <span class="text-teal-500 font-extrabold">Animesh Das Tirtha</span> as a practice project.  
-                All rights reserved.
+            <section>
+                <h2 class="text-xl font-semibold text-gray-800 mb-3 flex items-center gap-2">
+                    <span class="w-8 h-8 bg-teal-100 rounded-full flex items-center justify-center">
+                        <i class="fa-solid fa-eye text-base-1 text-sm"></i>
+                    </span>
+                    Our Vision
+                </h2>
+                <p class="text-gray-600 leading-relaxed text-sm md:text-base">
+                    Although this is a practice project, the vision behind Bazzar is to develop the foundation for a scalable and robust
+                    platform that could serve as inspiration for future commercial applications.
+                </p>
+            </section>
+        </div>
+
+        <!-- Footer -->
+        <div class="border-t border-gray-100 px-8 py-6 bg-gray-50">
+            <p class="text-center text-gray-500 text-sm">
+                &copy; 2025 Bazzar. Created by <span class="font-semibold text-base-1">Animesh Das Tirtha</span> as a practice project.
             </p>
         </div>
     </div>

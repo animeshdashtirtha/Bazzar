@@ -7,187 +7,479 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-    <title>MY items</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Edit Item — Bazzar</title>
 </head>
-<body>
-    <div class="border-b-1 border-gray-300">
-        <div class="container mx-auto mb-8 px-4 flex items-center justify-between h-16 pt-4">
-            <div class=" flex items-center">
-                    <a href="{% url 'core:my_items' %}" class=" text-red-800 font-['Bebas_Neue'] pt-4">
-                        <img class="h-12 rounded-xl" src="{% static 'images/logo1.png' %}" alt="Logo" />
-                    </a>
-            </div>
-            <div class="hidden md:block">
-                    <div class="ml-8 flex items-center ">
-                        <!-- Home and Categories -->
-                        <div class="ml-8 flex items-center space-x-4">
-                            <a href="{% url 'core:add_item' %}" class="bg-[#ff9100] hover:bg-[#ff9c1a] text-gray-100  px-3 py-3 rounded-md text-sm font-medium">Back to adding items</a>
-                        </div>
-                        <!-- User -->
-                        <!-- User Authentication Section -->
-                        <div class="ml-2 flex items-center space-x-4">
-                            {% if user.is_authenticated %}
-                            <!-- User Dropdown -->
-                            <div class="relative group">
-                                <div id="userButton" class="bg-teal-500 hover:bg-teal-400 text-white px-3 py-2 rounded-lg text-sm font-bold inline-flex items-center cursor-pointer">
-                                    <span class="mr-2">Signed in as</span>
-                                    <div class="flex items-center">
-                                        <span class="font-extrabold text-lg">{{ user.username }}</span>
-                                        <svg class="w-4 h-4 ml-1 mt-[2px]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                                        </svg>
-                                    </div>
-                                </div>
+<body class="min-h-screen flex flex-col bg-gray-50">
 
-                                <!-- Dropdown Menu -->
-                                <div id="userDropdown" class="absolute right-0 opacity-0 invisible bg-white border border-gray-200 shadow-lg rounded-md mt-2 w-48 z-10">
-                                    <ul class="py-2 text-gray-700 text-sm">
-                                        <li>
-                                            <a href="{#}" class="block px-4 py-2 hover:bg-teal-500 hover:text-white">Inbox</a>
-                                        </li>
-                                        <li>
-                                            <a href="{#}" class="block px-4 py-2 hover:bg-teal-500 hover:text-white">Profile</a>
-                                        </li>
-                                        <li>
-                                            <a href="{% url 'core:logout' %}" class="block px-4 py-2 hover:bg-red-500 hover:text-white">Logout</a>
-                                        </li>
-                                    </ul>
+    <!-- ===== HEADER ===== -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+            <!-- Logo -->
+            <div class="flex items-center">
+                <a href="{% url 'core:my_items' %}" class="font-['Bebas_Neue']">
+                    <img class="h-14 md:h-14 lg:h-16 w-auto rounded-lg" src="{% static 'images/logonew.png' %}" alt="Bazzar Logo" />
+                </a>
+            </div>
+            <!-- Right side navigation -->
+            <div class="hidden md:flex items-center gap-3">
+                <a href="{% url 'core:my_items' %}"
+                   class="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-lg transition-all duration-200">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                        <line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/>
+                    </svg>
+                    My Items
+                </a>
+                <!-- User Dropdown -->
+                <div class="relative" id="userDropdownWrapper" data-dropdown>
+                    <button id="userButton"
+                        class="bg-base-2 hover:bg-base-1 text-white pl-3.5 pr-2.5 py-2 rounded-lg text-sm font-semibold inline-flex items-center cursor-pointer transition-all duration-300 transform hover:translate-y-[-2px] hover:shadow-lg shadow-md">
+                        <span class="mr-1.5 opacity-90 font-normal text-xs">Signed in as</span>
+                        <span class="font-bold text-sm">{{ user.username }}</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="ml-1.5 transition-transform duration-200" aria-hidden="true">
+                            <polyline points="6 9 12 15 18 9"/>
+                        </svg>
+                    </button>
+                    <div id="userDropdown"
+                         class="absolute right-0 opacity-0 invisible translate-y-[-6px] bg-white border border-gray-100 shadow-xl rounded-xl mt-2 w-48 z-10 overflow-hidden transition-all duration-200">
+                        <div class="py-1.5">
+                            <div class="px-4 py-2.5 border-b border-gray-50">
+                                <p class="text-xs text-gray-400 font-medium">Signed in as</p>
+                                <p class="text-sm font-semibold text-gray-800">{{ user.username }}</p>
+                            </div>
+                            <a href="{% url 'core:inbox' %}" class="flex items-center gap-2.5 px-4 py-2.5 text-sm text-gray-700 hover:bg-base-2/5 hover:text-base-1 transition-colors" role="menuitem">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                    <path d="M3 7a2 2 0 012-2h14a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V7z"/><path d="M3 7l9 6 9-6"/>
+                                </svg>
+                                Inbox
+                            </a>
+                            <a href="{% url 'core:my_items' %}" class="flex items-center gap-2.5 px-4 py-2.5 text-sm text-gray-700 hover:bg-base-2/5 hover:text-base-1 transition-colors" role="menuitem">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                    <rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/>
+                                </svg>
+                                My Items
+                            </a>
+                            <div class="border-t border-gray-50 mt-1 pt-1">
+                                <a href="{% url 'core:logout' %}" class="flex items-center gap-2.5 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition-colors" role="menuitem">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                        <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/>
+                                    </svg>
+                                    Logout
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="flex-grow flex items-start justify-center py-10 sm:py-16 px-4">
+        <form method="POST" enctype="multipart/form-data"
+              class="animate-premium-fade-in w-full sm:w-[60%] sm:max-w-2xl">
+
+            <!-- Premium Form Card -->
+            <div class="bg-white rounded-2xl border border-gray-100/80 overflow-hidden"
+                 style="box-shadow: 0 1px 3px rgba(0,0,0,0.03), 0 8px 30px rgba(89,0,231,0.06), 0 2px 8px rgba(0,0,0,0.04);">
+                {% csrf_token %}
+
+                <!-- Gradient Accent Bar -->
+                <div class="h-1 bg-gradient-to-r from-base-2 via-base-1 to-base-2"></div>
+
+                <!-- Card Header -->
+                <div class="relative bg-gradient-to-br from-base-2/5 via-white to-gray-50 px-6 sm:px-10 py-8 text-center border-b border-gray-100">
+                    <div class="mx-auto w-14 h-14 rounded-2xl bg-base-2/10 flex items-center justify-center mb-4">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-base-1" aria-hidden="true">
+                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                        </svg>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800 font-['Inter']">Edit Item</h2>
+                    <p class="text-sm text-gray-500 mt-1 font-['Inter']">Update your product details and images</p>
+                </div>
+
+                <!-- Error Alert (only visible when form has errors) -->
+                {% if form.errors %}
+                <div class="mx-6 sm:mx-10 mt-6 p-4 bg-red-50 border border-red-200 rounded-xl text-red-700 text-sm font-medium">
+                    <div class="flex items-center gap-2">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true" class="flex-shrink-0">
+                            <circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/>
+                        </svg>
+                        <span>Please fix the errors below before updating.</span>
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- Form Fields -->
+                <div class="px-6 sm:px-10 py-8 space-y-6">
+                    <!-- Item Name -->
+                    <div class="space-y-1.5">
+                        <label for="name" class="premium-label">Item Name</label>
+                        <input type="text" id="name" name="name" value="{{ item.name }}" class="premium-input" required>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="space-y-1.5">
+                        <label for="description" class="premium-label">Description</label>
+                        <textarea id="description" name="description" class="premium-input" rows="4" required>{{ item.description }}</textarea>
+                    </div>
+
+                    <!-- Price & Category (2-column on sm+) -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <div class="space-y-1.5">
+                            <label for="price" class="premium-label">Price</label>
+                            <input type="number" id="price" name="price" value="{{ item.price }}" class="premium-input" step="0.01" min="0" required>
+                        </div>
+                        <div class="space-y-1.5">
+                            <label for="category" class="premium-label">Category</label>
+                            <select id="category" name="category" class="premium-input cursor-pointer appearance-none bg-[url('data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%2212%22%20height=%2212%22%20viewBox=%220%200%2024%2024%22%20fill=%22none%22%20stroke=%22%236b7280%22%20stroke-width=%222.5%22%3E%3Cpolyline%20points=%226%209%2012%2015%2018%209%22/%3E%3C/svg%3E')] bg-[length:12px] bg-[right_16px_center] bg-no-repeat pr-10" required>
+                                {% for cat in categories %}
+                                <option value="{{ cat.id }}" {% if item.category.id == cat.id %}selected{% endif %}>{{ cat.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Manage Images -->
+                    <div class="space-y-1.5">
+                        <label class="premium-label">Manage Images <span class="text-xs font-normal text-gray-400">(Up to 5)</span></label>
+
+                        <div class="image-upload-area bg-gray-50/70 rounded-xl p-4 sm:p-5 border border-gray-200/80" id="imageUploadArea">
+                            <!-- Existing Images Grid -->
+                            <div class="image-preview-grid" id="existingImagesGrid">
+                                {% for img in item.images.all %}
+                                <div class="image-preview-card relative" draggable="true" data-image-id="{{ img.id }}">
+                                    <input type="hidden" name="existing_images" value="{{ img.id }}">
+                                    <input type="hidden" name="order_{{ img.id }}" value="{{ img.order }}" class="image-order-input">
+                                    <div class="relative group/img rounded-lg overflow-hidden border border-gray-200 bg-white shadow-sm hover:shadow-md transition-shadow duration-200">
+                                        <img src="{{ img.image.url }}" alt="{{ item.name }} image {{ forloop.counter }}" class="image-preview-thumb w-full h-28 object-cover">
+                                        <div class="absolute inset-0 bg-black/0 group-hover/img:bg-black/10 transition-colors duration-200"></div>
+                                    </div>
+                                    <button type="button" class="image-remove-btn absolute -top-2 -right-2 w-6 h-6 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center shadow-md transition-all duration-150 hover:scale-110" title="Remove this image" onclick="removeExistingImage(this)" aria-label="Remove image {{ forloop.counter }}">
+                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true">
+                                            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                                        </svg>
+                                    </button>
                                 </div>
+                                {% endfor %}
                             </div>
 
-                            
-                            {% else %}
-                            <a href="{% url 'core:signup' %}" class="bg-teal-500 hover:bg-teal-600 text-white px-3 py-2 rounded-lg text-md font-bold">
-                                Signup
-                            </a>
-                            <a href="{% url 'core:login' %}" class="bg-gray-700 hover:bg-gray-800 text-white px-3 py-2 rounded-lg text-md font-bold">
-                                Login
-                            </a>
-                            {% endif %}
-                        </div>
+                            <!-- Add New Images Dropzone -->
+                            <div class="image-dropzone mt-3 border-2 border-dashed border-gray-300 hover:border-base-2/50 rounded-xl p-6 text-center transition-all duration-200 bg-white/60 hover:bg-base-2/[0.02]" id="imageDropzone">
+                                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="mx-auto mb-2 text-gray-400" aria-hidden="true">
+                                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                                    <circle cx="8.5" cy="8.5" r="1.5"/>
+                                    <polyline points="21 15 16 10 5 21"/>
+                                </svg>
+                                <p class="text-sm text-gray-500 font-['Inter']">Add more images, or</p>
+                                <label class="inline-block mt-2 px-4 py-2 bg-base-2 hover:bg-base-1 text-white text-sm font-medium rounded-lg cursor-pointer transition-all duration-200 active:scale-[0.97] shadow-sm hover:shadow-md">
+                                    Browse Files
+                                    <input type="file" id="imageFileInput" name="new_images" accept="image/*" multiple class="hidden" onchange="handleFileSelect(event)">
+                                </label>
+                                <p class="text-xs text-gray-400 mt-1.5 font-['Inter']">JPG, PNG, WebP &bull; Max 5 images total</p>
+                            </div>
 
+                            <!-- New Images Preview Grid -->
+                            <div class="image-preview-grid mt-3" id="newImagesPreviewGrid"></div>
+                            <p id="imageLimitMsg" class="text-sm text-red-500 hidden mt-3 flex items-center gap-1.5 font-['Inter']">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                                    <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+                                </svg>
+                                You can have at most 5 images total.
+                            </p>
+                        </div>
                     </div>
+                </div>
+
+                <!-- Divider -->
+                <hr class="border-gray-100">
+
+                <!-- Actions -->
+                <div class="px-6 sm:px-10 py-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 bg-gray-50/50">
+                    <button type="submit"
+                            class="premium-btn-primary text-base px-8 py-3 flex-1 sm:flex-none inline-flex items-center justify-center gap-2">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                        </svg>
+                        Update Item
+                    </button>
+                    <a href="{% url 'core:my_items' %}"
+                       class="premium-btn-secondary text-sm px-6 py-3 flex-1 sm:flex-none inline-flex items-center justify-center gap-2">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                            <line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/>
+                        </svg>
+                        Back to My Items
+                    </a>
+                </div>
+            </div>
+        </form>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="bg-gray-800 mt-auto">
+        <!-- Top accent bar -->
+        <div class="h-1 bg-gradient-to-r from-base-1 via-base-2 to-base-1"></div>
+
+        <!-- Main footer content -->
+        <div class="container mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+
+                <!-- Brand Column -->
+                <div class="space-y-4">
+                    <a href="{% url 'core:index' %}" class="inline-block">
+                        <img class="h-12 md:h-14 rounded-lg" src="{% static 'images/logonew.png' %}" alt="Bazzar Logo" />
+                    </a>
+                    <p class="text-gray-400 text-sm leading-relaxed max-w-sm">
+                        Your trusted online marketplace — discover curated products from futuristic tech to artisanal home essentials.
+                    </p>
+                </div>
+
+                <!-- Company -->
+                <div>
+                    <h3 class="text-white font-semibold text-sm uppercase tracking-wider mb-4">Company</h3>
+                    <ul class="space-y-2.5">
+                        <li><a href="{% url 'core:about' %}" class="text-gray-400 hover:text-white transition-colors duration-200 text-sm">About</a></li>
+                        <li><a href="{% url 'core:contact' %}" class="text-gray-400 hover:text-white transition-colors duration-200 text-sm">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Legal -->
+                <div>
+                    <h3 class="text-white font-semibold text-sm uppercase tracking-wider mb-4">Legal</h3>
+                    <ul class="space-y-2.5">
+                        <li><a href="{% url 'core:policy' %}" class="text-gray-400 hover:text-white transition-colors duration-200 text-sm">Privacy Policy</a></li>
+                        <li><a href="{% url 'core:terms' %}" class="text-gray-400 hover:text-white transition-colors duration-200 text-sm">Terms of Service</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- edit item form -->
-    <form method="POST" enctype="multipart/form-data" 
-        class="flex flex-col mb-12 bg-white shadow-md sm:p-12 p-8 gap-6 rounded-xl text-shadow-lg sm:mx-auto sm:max-w-2xl sm:w-[60%] mx-4">
-        {% csrf_token %}
-        <div class="text-center">
-            <h2 class="text-gray-600 text-2xl font-extrabold underline">Edit Item</h2>
+        <!-- Bottom bar -->
+        <div class="border-t border-gray-700">
+            <div class="container mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left">
+                <p class="text-gray-500 text-xs">&copy; 2026 Bazzar. All rights reserved.</p>
+                <p class="text-gray-600 text-xs">Made with <span class="text-base-1">&#9829;</span> for the community</p>
+            </div>
         </div>
-
-        <label class="signuplabel">Item Name</label>
-        <input type="text" name="name" value="{{ item.name }}" class="signupbox" required>
-
-        <label class="signuplabel">Description</label>
-        <textarea name="description" class="signupbox" required>{{ item.description }}</textarea>
-
-        <label class="signuplabel">Price</label>
-        <input type="number" name="price" value="{{ item.price }}" class="signupbox" required>
-
-        <label class="signuplabel">Category</label>
-        <select name="category" class="signupbox cursor-pointer">
-            {% for cat in categories %}
-            <option value="{{ cat.id }}" {% if item.category.id == cat.id %}selected{% endif %}>{{ cat.name }}</option>
-            {% endfor %}
-        </select>
-
-        <label class="signuplabel">Change Image (Or Keep Unchanged)</label>
-        <input type="file" name="image" class="signupbox">
-
-        <button type="submit" class="p-2 font-bold rounded mt-4 mx-auto w-64 hover:scale-110 bg-teal-500 hover:bg-teal-600 text-gray-100 shadow-lg">
-            Update Item
-        </button>
-    </form>
-</body>
+    </footer>
 
 
-<footer class="bg-gray-800 flex justify-between text-gray-400 py-6 px-[8%] mt-8">
-    <div class="flex items-center max-w-[70%]">
-        <div>&copy; 2025 Bazzar. All rights reserved. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maxime ab vitae ipsam accusamus a illum nobis cumququaerat recusandae et esse ea totam voluptatibus? Ipsa!</div>
-    </div>
-    
-    <ul class="text-center space-y-4">
-        <li><a href="{% url 'core:about' %}" class="footerlist">About</a></li>
-        <li><a href="{% url 'core:policy' %}" class="footerlist">Privacy Policy</a></li>
-        <li><a href="{% url 'core:terms' %}" class="footerlist">Terms of Service</a></li>
-        <li><a href="{% url 'core:contact' %}" class="footerlist">Contact Us</a></li>
-    </ul>
-</footer>
+    <!-- ===== SCRIPTS ===== -->
+    <script>
+    // === USER DROPDOWN ===
+    const userButton = document.getElementById('userButton');
+    const userDropdown = document.getElementById('userDropdown');
+    let userTimeout;
+
+    if (userButton && userDropdown) {
+        userButton.addEventListener('mouseenter', () => {
+            clearTimeout(userTimeout);
+            userDropdown.classList.remove('opacity-0', 'invisible', 'translate-y-[-6px]');
+            userDropdown.classList.add('opacity-100', 'translate-y-0');
+        });
+
+        userButton.addEventListener('mouseleave', () => {
+            userTimeout = setTimeout(() => {
+                userDropdown.classList.remove('opacity-100', 'translate-y-0');
+                userDropdown.classList.add('opacity-0', 'invisible', 'translate-y-[-6px]');
+            }, 200);
+        });
+
+        userDropdown.addEventListener('mouseenter', () => {
+            clearTimeout(userTimeout);
+        });
+
+        userDropdown.addEventListener('mouseleave', () => {
+            userTimeout = setTimeout(() => {
+                userDropdown.classList.remove('opacity-100', 'translate-y-0');
+                userDropdown.classList.add('opacity-0', 'invisible', 'translate-y-[-6px]');
+            }, 200);
+        });
+    }
 
 
-<script>
-// === CATEGORY DROPDOWN ===
-const button = document.getElementById('categoryButton');
-const menu = document.getElementById('dropdownList');
-let timeout;
+    // === MULTI-IMAGE UPLOAD (Edit Page) ===
+    var newSelectedFiles = [];
 
-if (button && menu) {
-    button.addEventListener('mouseenter', () => {
-        clearTimeout(timeout);
-        menu.classList.remove('opacity-0', 'invisible');
-        menu.classList.add('opacity-100');
-    });
+    // Count existing (visible) images
+    function existingImageCount() {
+        return document.querySelectorAll('#existingImagesGrid .image-preview-card').length;
+    }
 
-    button.addEventListener('mouseleave', () => {
-        timeout = setTimeout(() => {
-            menu.classList.remove('opacity-100');
-            menu.classList.add('opacity-0', 'invisible');
-        }, 200); // stays open 200ms after mouse leaves
-    });
+    function totalImageCount() {
+        return existingImageCount() + document.querySelectorAll('#newImagesPreviewGrid .image-preview-card').length;
+    }
 
-    menu.addEventListener('mouseenter', () => {
-        clearTimeout(timeout); // keep open if mouse moves into menu
-    });
+    function handleFileSelect(event) {
+        var files = Array.from(event.target.files);
+        var total = totalImageCount() + files.length;
 
-    menu.addEventListener('mouseleave', () => {
-        timeout = setTimeout(() => {
-            menu.classList.remove('opacity-100');
-            menu.classList.add('opacity-0', 'invisible');
-        }, 200);
-    });
-}
+        if (total > 5) {
+            document.getElementById('imageLimitMsg').classList.remove('hidden');
+            event.target.value = '';
+            return;
+        }
+        document.getElementById('imageLimitMsg').classList.add('hidden');
 
+        files.forEach(function (file) {
+            if (!file.type.startsWith('image/')) return;
+            if (totalImageCount() + newSelectedFiles.length >= 5) return;
+            newSelectedFiles.push(file);
+            addNewPreviewCard(file, newSelectedFiles.length - 1);
+        });
 
+        event.target.value = '';
+        updateNewFileInput();
+    }
 
-// === USER DROPDOWN ===
-const userButton = document.getElementById('userButton');
-const userDropdown = document.getElementById('userDropdown');
-let userTimeout;
+    function addNewPreviewCard(file, index) {
+        var grid = document.getElementById('newImagesPreviewGrid');
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            var card = document.createElement('div');
+            card.className = 'image-preview-card relative';
+            card.setAttribute('draggable', 'true');
+            card.setAttribute('data-new-index', index);
+            card.innerHTML =
+                '<div class="relative group/img rounded-lg overflow-hidden border border-gray-200 bg-white shadow-sm hover:shadow-md transition-shadow duration-200">' +
+                '<img src="' + e.target.result + '" alt="New preview ' + (index + 1) + '" class="image-preview-thumb w-full h-28 object-cover">' +
+                '<div class="absolute inset-0 bg-black/0 group-hover/img:bg-black/10 transition-colors duration-200"></div>' +
+                '</div>' +
+                '<button type="button" class="image-remove-btn absolute -top-2 -right-2 w-6 h-6 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center shadow-md transition-all duration-150 hover:scale-110" title="Remove image" onclick="removeNewPreviewImage(this)" aria-label="Remove new image ' + (index + 1) + '">' +
+                '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>' +
+                '</button>';
+            card.addEventListener('dragstart', function (e) { e.dataTransfer.setData('text/plain', 'new-' + index); card.classList.add('dragging'); });
+            card.addEventListener('dragend', function () { card.classList.remove('dragging'); });
+            card.addEventListener('dragover', function (e) { e.preventDefault(); });
+            card.addEventListener('drop', function (e) {
+                e.preventDefault();
+                var fromData = e.dataTransfer.getData('text/plain');
+                if (fromData.startsWith('new-')) {
+                    var fromIdx = parseInt(fromData.split('-')[1], 10);
+                    reorderNewImages(fromIdx, index);
+                }
+            });
+            grid.appendChild(card);
+            document.getElementById('imageDropzone').classList.add('hidden');
+        };
+        reader.readAsDataURL(file);
+    }
 
-if (userButton && userDropdown) {
-    userButton.addEventListener('mouseenter', () => {
-        clearTimeout(userTimeout);
-        userDropdown.classList.remove('opacity-0', 'invisible');
-        userDropdown.classList.add('opacity-100');
-    });
+    function removeNewPreviewImage(btn) {
+        var card = btn.closest('.image-preview-card');
+        var idx = parseInt(card.getAttribute('data-new-index'), 10);
+        if (idx >= 0 && idx < newSelectedFiles.length) {
+            newSelectedFiles.splice(idx, 1);
+        }
+        card.remove();
+        updateNewFileInput();
+        document.getElementById('imageLimitMsg').classList.add('hidden');
+        if (document.querySelectorAll('#newImagesPreviewGrid .image-preview-card').length === 0) {
+            document.getElementById('imageDropzone').classList.remove('hidden');
+        }
+        refreshNewIndices();
+    }
 
-    userButton.addEventListener('mouseleave', () => {
-        userTimeout = setTimeout(() => {
-            userDropdown.classList.remove('opacity-100');
-            userDropdown.classList.add('opacity-0', 'invisible');
-        }, 200);
-    });
+    function reorderNewImages(fromIdx, toIdx) {
+        var cards = Array.from(document.querySelectorAll('#newImagesPreviewGrid .image-preview-card'));
+        var fromCard = cards.find(function (c) { return parseInt(c.getAttribute('data-new-index'), 10) === fromIdx; });
+        var toCard = cards.find(function (c) { return parseInt(c.getAttribute('data-new-index'), 10) === toIdx; });
+        if (!fromCard || !toCard || fromCard === toCard) return;
+        var grid = document.getElementById('newImagesPreviewGrid');
+        if (fromIdx < toIdx) {
+            grid.insertBefore(fromCard, toCard.nextSibling);
+        } else {
+            grid.insertBefore(fromCard, toCard);
+        }
+        refreshNewIndices();
+        var moved = newSelectedFiles.splice(fromIdx, 1)[0];
+        newSelectedFiles.splice(toIdx, 0, moved);
+    }
 
-    userDropdown.addEventListener('mouseenter', () => {
-        clearTimeout(userTimeout);
-    });
+    function refreshNewIndices() {
+        var cards = document.querySelectorAll('#newImagesPreviewGrid .image-preview-card');
+        cards.forEach(function (card, i) {
+            card.setAttribute('data-new-index', i);
+        });
+    }
 
-    userDropdown.addEventListener('mouseleave', () => {
-        userTimeout = setTimeout(() => {
-            userDropdown.classList.remove('opacity-100');
-            userDropdown.classList.add('opacity-0', 'invisible');
-        }, 200);
-    });
-}
-</script>
+    function updateNewFileInput() {
+        var dt = new DataTransfer();
+        newSelectedFiles.forEach(function (f) { dt.items.add(f); });
+        document.getElementById('imageFileInput').files = dt.files;
+    }
 
+    // Remove an existing image from the UI and its hidden inputs
+    function removeExistingImage(btn) {
+        var card = btn.closest('.image-preview-card');
+        card.remove();
+        document.getElementById('imageLimitMsg').classList.add('hidden');
+        updateExistingOrderInputs();
+    }
 
-{% block scripts %}
-{% endblock %}
+    // Reorder existing images via drag & drop, then update hidden order inputs
+    (function initExistingDrag() {
+        var grid = document.getElementById('existingImagesGrid');
+        if (!grid) return;
+        grid.addEventListener('dragover', function (e) { e.preventDefault(); });
+        grid.addEventListener('drop', function (e) {
+            e.preventDefault();
+            var fromData = e.dataTransfer.getData('text/plain');
+            if (fromData.startsWith('new-')) return; // don't allow mixing
+            var fromId = fromData;
+            var toCard = e.target.closest('.image-preview-card');
+            if (!toCard) return;
+            var toId = toCard.getAttribute('data-image-id');
+            if (!fromId || fromId === toId) return;
+            var fromCard = grid.querySelector('.image-preview-card[data-image-id="' + fromId + '"]');
+            if (!fromCard) return;
+            var cards = Array.from(grid.querySelectorAll('.image-preview-card'));
+            var fromIdx = cards.indexOf(fromCard);
+            var toIdx = cards.indexOf(toCard);
+            if (fromIdx < toIdx) {
+                grid.insertBefore(fromCard, toCard.nextSibling);
+            } else {
+                grid.insertBefore(fromCard, toCard);
+            }
+            updateExistingOrderInputs();
+        });
+
+        // Make existing cards draggable
+        grid.querySelectorAll('.image-preview-card').forEach(function (card) {
+            card.addEventListener('dragstart', function (e) {
+                e.dataTransfer.setData('text/plain', card.getAttribute('data-image-id'));
+                card.classList.add('dragging');
+            });
+            card.addEventListener('dragend', function () { card.classList.remove('dragging'); });
+        });
+    })();
+
+    function updateExistingOrderInputs() {
+        var cards = document.querySelectorAll('#existingImagesGrid .image-preview-card');
+        cards.forEach(function (card, i) {
+            var orderInput = card.querySelector('.image-order-input');
+            if (orderInput) orderInput.value = i;
+        });
+    }
+
+    // Drag-and-drop on dropzone
+    var dropzone = document.getElementById('imageDropzone');
+    if (dropzone) {
+        dropzone.addEventListener('dragover', function (e) { e.preventDefault(); dropzone.classList.add('image-dropzone-active'); });
+        dropzone.addEventListener('dragleave', function () { dropzone.classList.remove('image-dropzone-active'); });
+        dropzone.addEventListener('drop', function (e) {
+            e.preventDefault();
+            dropzone.classList.remove('image-dropzone-active');
+            var files = Array.from(e.dataTransfer.files);
+            var input = document.getElementById('imageFileInput');
+            var dt = new DataTransfer();
+            files.forEach(function (f) { dt.items.add(f); });
+            input.files = dt.files;
+            handleFileSelect({ target: input });
+        });
+    }
+    </script>
 
 </html>

@@ -1,118 +1,833 @@
 {% extends 'core/base.html' %}
 {% load humanize %}
-{% block title %} {{ item.name }} | Details {% endblock %}
+{% load static %}
+{% load item_extras %}
+{% block title %}{{ item.name }} | Bazzar{% endblock %}
 
 {% block content %}
-<br>
-<br>
-<div class="container mx-auto px-4 max-w-6xl">
 
-    <!-- Product Detail Layout -->
-    <div class="flex flex-col md:flex-row gap-10">
-        
-        <!-- Sticky Image (Top-left, no empty space) -->
-        <div class="md:w-[40%]">
-           <div class="sticky top-20 flex justify-center items-center bg-gray-100 rounded-xl max-h-[90vh]">
-            <img 
-                src="{{ item.image.url }}" 
-                alt="{{ item.name }}" 
-                class="object-contain max-h-[90vh] w-auto"
-            >
-            </div>
-        </div>
+<!-- Skip Navigation Link -->
+<a href="#detail-main-content" class="skip-link" aria-label="Skip to product details">Skip to Content</a>
 
-        <!-- Scrollable Product Info -->
-        <div class="md:w-[60%] flex flex-col justify-start">
-            <h2 class="text-3xl font-semibold text-gray-800 mb-4">{{ item.name }}</h2>
-            
-            <div class="flex flex-col space-x-4 mb-6 items-end font-bold">
-                <div class="flex items-center">
-                    <span class="text-gray-500">Category:</span>
-                    <a href="{% url 'item:categories' item.category.id %}" class="ml-2 text-teal-500 hover:underline">{{item.category.name}}</a>
-                </div>
-                <div class="flex items-center">
-                    <span class="text-gray-500 ">Seller:</span>
-                    <a href="{% url 'item:seller_items' item.created_by.id %}" class="ml-2 text-teal-500 hover:underline mr-4">{{ item.created_by}}</a>
-                </div>
-            </div>
-            
-            <p class="text-gray-600 text-lg leading-relaxed mb-6">
-                {{ item.description }}
-            </p>
+<div class="detail-page" id="detail-main-content">
 
-            
-            <hr class="my-4 border-gray-200">
+    <!-- ===== Breadcrumb ===== -->
+    <nav class="detail-breadcrumb max-w-6xl mx-auto px-4" aria-label="Breadcrumb">
+        <a href="{% url 'core:index' %}" aria-label="Go to homepage">Home</a>
+        <span class="breadcrumb-sep" aria-hidden="true">›</span>
+        <a href="{% url 'item:categories' item.category.id %}" aria-label="Browse {{ item.category.name }} category">{{ item.category.name }}</a>
+        <span class="breadcrumb-sep" aria-hidden="true">›</span>
+        <span class="breadcrumb-current" aria-current="page">{{ item.name|truncatechars:40 }}</span>
+    </nav>
 
-            <div class="flex items-center justify-between mb-6">
-                <span class="text-3xl font-bold text-teal-500">{{ item.price|floatformat:0|intcomma }} Tk.</span>
-                <span class="text-sm text-gray-500">(Inclusive of all taxes)</span>
-            </div>
+    <!-- ===== Main Split Layout ===== -->
+    <div class="max-w-6xl mx-auto px-4 pb-8">
 
-            <div class="flex flex-col sm:flex-row gap-4 mb-4">
-                <a href="{% url 'cart:add_to_cart' item.id %}" 
-                class="bg-teal-500 hover:bg-teal-600 text-white px-6 py-3 rounded-lg text-base font-semibold transition-all shadow-md hover:shadow-lg w-full sm:w-auto text-center">
-                Add to Cart 
-                </a>
-                <a href="{% url 'cart:add_to_cart' item.id %}" class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg text-base font-semibold transition-all shadow-md hover:shadow-lg w-full sm:w-auto text-center">
-                Buy Now
-                </a>
-            </div>
-            <div class="flex mb-4">
-                <a href="{% url 'item:seller_items' item.created_by.id %}" class=" text-center bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-lg text-base font-semibold transition-all shadow-md hover:shadow-lg w-full sm:w-auto">
-                Contact Seller
-                </a>
-            </div>
+        <div class="detail-split">
 
-            <hr class="my-6 border-gray-200">
+            <!-- ===== LEFT: Image Gallery ===== -->
+            <section aria-label="Product image gallery" class="gallery-reveal opacity-0 translate-y-6">
+                <div class="bg-white rounded-2xl shadow-sm overflow-hidden sticky top-20
+                            ring-1 ring-gray-100/80
+                            transition-shadow duration-500 ease-out
+                            hover:shadow-xl hover:shadow-base-1/5" role="region" aria-label="Image gallery">
 
-            <div>
-                <h3 class="text-xl font-semibold text-gray-800 mb-2">Product Details</h3>
-                <ul class="list-disc pl-5 text-gray-600 leading-relaxed space-y-1">
-                    <li>High-quality materials</li>
-                    <li>Durable and lightweight design</li>
-                    <li>Fast shipping and easy returns</li>
-                    <li>Made for everyday use</li>
-                </ul>
-            </div>
+                    <!-- Main Image Stage -->
+                    <div class="relative bg-gradient-to-br from-gray-50 to-gray-100/50
+                                aspect-square flex items-center justify-center
+                                cursor-zoom-in overflow-hidden group/main"
+                         id="galleryMain" role="img" aria-label="Product image: {{ item.name }}">
 
-            <div class="mt-10">
-                <h3 class="text-xl font-semibold text-gray-800 mb-2">Customer Reviews</h3>
-                <p class="text-gray-500 text-sm italic">No reviews yet. Be the first to review this product!</p>
-            </div>
-        </div>
-    </div>
-</div>
- 
-<hr class="mt-12 mb-4 border-gray-200">
+                        {% with first_image=item.images.first %}
+                        {% if first_image %}
+                            <img
+                                src="{{ first_image.image.url }}"
+                                alt="{{ item.name }}"
+                                id="galleryMainImg"
+                                loading="eager"
+                                class="w-full h-full object-contain p-6
+                                       transition-all duration-500 ease-out
+                                       group-hover/main:scale-105"
+                            >
+                        {% else %}
+                            <img
+                                src="{% static 'images/empty.png' %}"
+                                alt="No image available for {{ item.name }}"
+                                id="galleryMainImg"
+                                loading="eager"
+                                class="w-full h-full object-contain p-6
+                                       transition-all duration-500 ease-out
+                                       group-hover/main:scale-105"
+                            >
+                        {% endif %}
+                        {% endwith %}
 
+                        <!-- Availability Badge -->
+                        {% if not item.is_sold %}
+                            <span class="absolute top-4 left-4 z-10
+                                         px-3 py-1.5 text-xs font-semibold tracking-wide
+                                         bg-base-1 text-white rounded-full
+                                         shadow-lg shadow-base-1/20
+                                         transition-all duration-300
+                                         group-hover/main:shadow-xl group-hover/main:shadow-base-1/30"
+                                  aria-label="Available for purchase">Available</span>
+                        {% else %}
+                            <span class="absolute top-4 left-4 z-10
+                                         px-3 py-1.5 text-xs font-semibold tracking-wide
+                                         bg-gray-500 text-white rounded-full
+                                         shadow-lg shadow-gray-500/20"
+                                  aria-label="Sold out">Sold</span>
+                        {% endif %}
 
-<!-- related items -->
-<div class="container mx-auto px-4 max-w-6xl mt-8 mb-8">
-    <h3 class="text-2xl font-extrabold text-gray-700 mb-6">Related Products</h3>
-    <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-8">
-        {% for related in related_items %}
-        <a href="{% url 'item:detail' related.id %}" class="group">
-            <div class="flex flex-col h-full rounded-lg shadow-md overflow-hidden transition-transform transform group-hover:scale-105 bg-white">
-                <div class="aspect-[3/4] overflow-hidden">
-                    <img class="w-full h-full object-contain" src="{{ related.image.url }}" alt="{{ related.name|truncatewords:3 }}">
-                </div>
+                        <!-- Multi-image indicator dots (mobile-friendly) -->
+                        <div class="absolute bottom-4 left-1/2 -translate-x-1/2 z-10
+                                    flex items-center gap-1.5 md:hidden"
+                             id="galleryDots" aria-hidden="true">
+                            {% for img in item.images.all %}
+                            <span class="gallery-dot w-2 h-2 rounded-full transition-all duration-300
+                                        {% if forloop.first %}bg-white shadow-md w-3.5{% else %}bg-white/50{% endif %}"
+                                  data-index="{{ forloop.counter0 }}"></span>
+                            {% endfor %}
+                        </div>
 
-                <div class="flex flex-col flex-grow p-4">
-                    <h2 class="text-lg font-bold text-gray-800 group-hover:text-teal-600">{{ related.name|truncatewords:10 }}</h2>
-                    <p class="text-gray-600 mt-2 text-sm flex-grow">{{ related.description|truncatewords:20 }}</p>
+                        <!-- Zoom hint -->
+                        <div class="absolute bottom-4 right-4 z-10
+                                    flex items-center gap-1.5
+                                    px-2.5 py-1.5 rounded-lg
+                                    bg-black/40 backdrop-blur-sm
+                                    text-white/80 text-xs
+                                    opacity-0 group-hover/main:opacity-100
+                                    transition-opacity duration-300
+                                    pointer-events-none hidden md:flex"
+                             aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                                <line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
+                            </svg>
+                            Click to zoom
+                        </div>
 
-                    <div class="mt-4 flex items-center gap-2 justify-between">
-                        <span class="text-lg font-bold text-teal-600">{{ related.price }} Tk.</span>
-                        <span class="bg-teal-500 text-white px-3 py-2 rounded-lg text-sm font-medium">View Details</span>
+                        <!-- Gallery Arrows — glass-morphism -->
+                        <button class="absolute top-1/2 left-3 z-20
+                                       -translate-y-1/2
+                                       w-10 h-10 flex items-center justify-center
+                                       rounded-full
+                                       bg-white/20 backdrop-blur-md
+                                       text-white
+                                       border border-white/30
+                                       shadow-lg shadow-black/10
+                                       opacity-0 group-hover/main:opacity-100
+                                       hover:bg-white/35 hover:scale-110 hover:shadow-xl
+                                       active:scale-95
+                                       transition-all duration-300 ease-out
+                                       focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent
+                                       disabled:opacity-0 disabled:pointer-events-none"
+                                id="galleryArrowLeft" aria-label="Previous image" onclick="galleryPrev()">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+                        </button>
+                        <button class="absolute top-1/2 right-3 z-20
+                                       -translate-y-1/2
+                                       w-10 h-10 flex items-center justify-center
+                                       rounded-full
+                                       bg-white/20 backdrop-blur-md
+                                       text-white
+                                       border border-white/30
+                                       shadow-lg shadow-black/10
+                                       opacity-0 group-hover/main:opacity-100
+                                       hover:bg-white/35 hover:scale-110 hover:shadow-xl
+                                       active:scale-95
+                                       transition-all duration-300 ease-out
+                                       focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent
+                                       disabled:opacity-0 disabled:pointer-events-none"
+                                id="galleryArrowRight" aria-label="Next image" onclick="galleryNext()">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+                        </button>
+                    </div>
+
+                    <!-- Thumbnail Strip -->
+                    <div class="flex gap-2.5 p-3 overflow-x-auto
+                                border-t border-gray-100
+                                scrollbar-none snap-x snap-mandatory
+                                scroll-px-3"
+                         role="tablist" aria-label="Product image thumbnails" id="galleryThumbs">
+                        {% for img in item.images.all %}
+                            <button
+                                class="flex-shrink-0 w-16 h-16 sm:w-[72px] sm:h-[72px]
+                                       rounded-xl overflow-hidden
+                                       border-2 transition-all duration-300 ease-out
+                                       snap-start
+                                       bg-gray-100
+                                       focus:outline-none
+                                       {% if forloop.first %}
+                                       border-base-1 shadow-[0_0_0_3px_rgba(89,0,231,0.15)] scale-105
+                                       {% else %}
+                                       border-transparent hover:border-gray-300 hover:shadow-md hover:scale-105
+                                       {% endif %}"
+                                role="tab"
+                                aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+                                aria-label="View image {{ forloop.counter }} of {{ item.images.count }}"
+                                data-src="{{ img.image.url }}"
+                                data-index="{{ forloop.counter0 }}"
+                                onclick="switchGalleryImage(this)"
+                            >
+                                <img src="{{ img.image.url }}" alt="{{ item.name }} thumbnail {{ forloop.counter }}"
+                                     class="w-full h-full object-cover transition-transform duration-300"
+                                     loading="lazy">
+                            </button>
+                        {% endfor %}
                     </div>
                 </div>
-            </div>
-        </a>
-        {% empty %}
-        <p class="text-gray-600">No related items available.</p>
-        {% endfor %}
+            </section>
+
+            <!-- ===== RIGHT: Product Details ===== -->
+            <section class="info-section" aria-label="Product details">
+
+                <!-- Meta: Category + Seller -->
+                <div class="info-meta">
+                    <a href="{% url 'item:categories' item.category.id %}"
+                       class="meta-badge meta-category"
+                       aria-label="View all items in {{ item.category.name }}">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                            <rect x="3" y="3" width="7" height="7" rx="1"/>
+                            <rect x="14" y="3" width="7" height="7" rx="1"/>
+                            <rect x="3" y="14" width="7" height="7" rx="1"/>
+                            <rect x="14" y="14" width="7" height="7" rx="1"/>
+                        </svg>
+                        {{ item.category.name }}
+                    </a>
+                    <a href="{% url 'item:seller_items' item.created_by.id %}"
+                       class="meta-badge meta-seller"
+                       aria-label="View all items by seller {{ item.created_by }}">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                            <circle cx="12" cy="7" r="4"/>
+                        </svg>
+                        {{ item.created_by|truncatechars:18 }}
+                    </a>
+                </div>
+
+                <!-- Title -->
+                <h1 class="info-title">{{ item.name }}</h1>
+
+                <!-- Price -->
+                <div class="info-price-block">
+                    {% if item.is_flash_discount_valid %}
+                        <span class="flash-detail-badge">
+                            <span class="flash-detail-icon">⚡</span>
+                            <span class="flash-detail-label">-{{ item.flash_discount_percentage }}%</span>
+                            {% with save=item.original_price|sub:item.discounted_price %}
+                            {% if save > 0 %}
+                            <span class="flash-detail-save">Save ৳{{ save|floatformat:0 }}</span>
+                            {% endif %}
+                            {% endwith %}
+                        </span>
+                        <div class="flex items-baseline gap-2 flex-wrap">
+                            <span class="text-gray-400 line-through text-lg">৳ {{ item.original_price|floatformat:0|intcomma }}</span>
+                            <span class="info-price" style="color:#dc2626;" aria-label="Discounted price: {{ item.discounted_price|floatformat:0|intcomma }} Taka">
+                                ৳ {{ item.discounted_price|floatformat:0|intcomma }}
+                            </span>
+                        </div>
+                    {% else %}
+                        <span class="info-price" aria-label="Price: {{ item.get_effective_price|floatformat:0|intcomma }} Taka">
+                            ৳ {{ item.get_effective_price|floatformat:0|intcomma }}
+                        </span>
+                    {% endif %}
+                    <span class="info-tax-note">Inclusive of all taxes</span>
+                </div>
+
+                <!-- Divider -->
+                <hr class="info-divider" aria-hidden="true">
+
+                <!-- Description -->
+                {% if item.description %}
+                    <p class="info-description">
+                        {{ item.description }}
+                    </p>
+                    <hr class="info-divider" aria-hidden="true">
+                {% endif %}
+
+                <!-- Quantity Selector -->
+                <div class="qty-group">
+                    <label class="qty-label" for="quantityInput">Quantity</label>
+                    <div class="qty-controls">
+                        <button
+                            type="button"
+                            class="qty-btn"
+                            id="qtyDecrease"
+                            aria-label="Decrease quantity by 1"
+                            onclick="adjustQty(-1)"
+                        >
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                                <line x1="5" y1="12" x2="19" y2="12"/>
+                            </svg>
+                        </button>
+                        <input
+                            type="number"
+                            class="qty-input"
+                            id="quantityInput"
+                            name="quantity"
+                            value="1"
+                            min="1"
+                            max="99"
+                            aria-label="Product quantity"
+                            aria-describedby="qtyHelpText"
+                            onchange="validateQty(this)"
+                            onkeydown="if(event.key==='Enter')event.preventDefault()"
+                        >
+                        <button
+                            type="button"
+                            class="qty-btn"
+                            id="qtyIncrease"
+                            aria-label="Increase quantity by 1"
+                            onclick="adjustQty(1)"
+                        >
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                                <line x1="12" y1="5" x2="12" y2="19"/>
+                                <line x1="5" y1="12" x2="19" y2="12"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <span id="qtyHelpText" class="info-tax-note" style="font-size:0.75rem;">Min: 1 &bull; Max: 99</span>
+                </div>
+
+                <!-- Divider -->
+                <hr class="info-divider" aria-hidden="true">
+
+                <!-- Action Buttons -->
+                {% if not item.is_sold %}
+                <div class="action-group">
+                    <a
+                        href="{% url 'cart:add_to_cart' item.id %}"
+                        class="btn-action btn-cart"
+                        id="addToCartBtn"
+                        role="button"
+                        aria-label="Add {{ item.name }} to cart"
+                    >
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                        </svg>
+                        Add to Cart
+                    </a>
+                    <a
+                        href="{% url 'cart:buy_now' item.id %}"
+                        class="btn-action btn-buy"
+                        role="button"
+                        aria-label="Buy {{ item.name }} now"
+                    >
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        Buy Now
+                    </a>
+                </div>
+                {% else %}
+                <div class="action-group">
+                    <span class="btn-action" style="background:#e5e5ec;color:#8e8ea0;cursor:not-allowed;flex:1;" aria-disabled="true">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/>
+                        </svg>
+                        Sold Out
+                    </span>
+                </div>
+                {% endif %}
+
+                <!-- Contact Seller -->
+                <div class="action-group" style="flex-direction:column;">
+                    {% if user.is_authenticated and user != item.created_by %}
+                        <a
+                            href="{% url 'item:seller_items' item.created_by.id %}"
+                            class="btn-action btn-contact"
+                            role="button"
+                            aria-label="Contact seller {{ item.created_by }}"
+                        >
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                            Contact Seller
+                        </a>
+                    {% elif not user.is_authenticated %}
+                        <a
+                            href="{% url 'item:seller_items' item.created_by.id %}"
+                            class="btn-action btn-contact-secondary"
+                            role="button"
+                            aria-label="View seller {{ item.created_by }}'s items"
+                        >
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                <circle cx="12" cy="7" r="4"/>
+                            </svg>
+                            View Seller Profile
+                        </a>
+                    {% endif %}
+                </div>
+
+                <!-- Divider -->
+                <hr class="info-divider" aria-hidden="true">
+
+                <!-- Product Details Card -->
+                <article class="info-card" aria-label="Product specifications">
+                    <h3>Product Details</h3>
+                    <ul>
+                        <li>High-quality materials for lasting durability</li>
+                        <li>Lightweight and ergonomic design</li>
+                        <li>Fast shipping with easy returns</li>
+                        <li>Made for everyday reliable use</li>
+                    </ul>
+                </article>
+
+                <!-- Customer Reviews -->
+                <article class="reviews-card" aria-label="Customer reviews">
+                    <div class="reviews-icon" aria-hidden="true">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin:0 auto;">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                        </svg>
+                    </div>
+                    <p>No reviews yet. Be the first to review this product!</p>
+                </article>
+
+            </section>
+        </div>
+
+        <!-- ===== Sticky Mobile Add-to-Cart Bar ===== -->
+        {% if not item.is_sold %}
+        <div class="mobile-sticky-bar" role="complementary" aria-label="Mobile quick actions">
+            <span class="mobile-price">৳ {{ item.get_effective_price|floatformat:0|intcomma }}</span>
+            <a
+                href="{% url 'cart:add_to_cart' item.id %}"
+                class="mobile-atc"
+                role="button"
+                aria-label="Add {{ item.name }} to cart from mobile bar"
+            >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" aria-hidden="true">
+                    <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                </svg>
+                Add to Cart
+            </a>
+        </div>
+        {% endif %}
+
     </div>
 
+    <!-- ===== Related Products ===== -->
+    {% if related_items %}
+    <section class="max-w-6xl mx-auto px-4 mb-10 mt-14 pt-8 border-t border-gray-100
+                    gallery-reveal opacity-0 translate-y-6" aria-label="Related products">
+        <h2 class="text-xl sm:text-2xl font-bold text-gray-900 tracking-tight mb-6">
+            You May Also Like
+        </h2>
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
+            {% for related in related_items %}
+            <a
+                href="{% url 'item:detail' related.id %}"
+                class="group/rp bg-white rounded-2xl shadow-sm overflow-hidden
+                       ring-1 ring-gray-100/80
+                       transition-all duration-300 ease-out
+                       hover:-translate-y-1.5 hover:shadow-lg hover:shadow-base-1/5
+                       focus:outline-none focus:ring-2 focus:ring-base-1 focus:ring-offset-2"
+                aria-label="View {{ related.name }} &mdash; {{ related.price }} Taka"
+            >
+                <div class="aspect-square bg-gray-50 overflow-hidden flex items-center justify-center">
+                    {% if related.primary_image %}
+                        <img src="{{ related.primary_image.url }}" alt="{{ related.name|truncatewords:4 }}"
+                             class="w-full h-full object-contain p-3 transition-transform duration-500 ease-out
+                                    group-hover/rp:scale-110" loading="lazy">
+                    {% else %}
+                        <img src="{% static 'images/empty.png' %}" alt="{{ related.name|truncatewords:4 }}"
+                             class="w-full h-full object-contain p-3 transition-transform duration-500 ease-out
+                                    group-hover/rp:scale-110" loading="lazy">
+                    {% endif %}
+                </div>
+                <div class="p-3 sm:p-3.5 flex flex-col gap-1.5">
+                    <span class="text-sm font-semibold text-gray-900 leading-snug line-clamp-2
+                                 group-hover/rp:text-base-1 transition-colors duration-200">
+                        {{ related.name|truncatewords:8 }}
+                    </span>
+                    <span class="text-xs text-gray-400 leading-relaxed line-clamp-2">
+                        {{ related.description|truncatewords:16 }}
+                    </span>
+                    <div class="flex items-center justify-between mt-1 pt-1.5 border-t border-gray-50">
+                        <span class="text-base font-bold text-base-1">৳ {{ related.price }}</span>
+                        <span class="text-[11px] font-semibold text-white bg-base-2
+                                     px-2.5 py-1 rounded-full
+                                     group-hover/rp:bg-base-1 transition-colors duration-200
+                                     group-hover/rp:shadow-md group-hover/rp:shadow-base-1/20">
+                            View
+                        </span>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
 
+</div>
+
+<!-- ===== Gallery, Lightbox, Scroll Reveal & Quantity Scripts ===== -->
+<script>
+    (function () {
+        // --- Gallery state ---
+        var galleryImages = [];
+        var currentIndex = 0;
+        var mainImg = document.getElementById('galleryMainImg');
+        var galleryMain = document.getElementById('galleryMain');
+
+        // Collect all thumbnail data-src URLs
+        (function initGallery() {
+            var thumbs = document.querySelectorAll('#galleryThumbs [data-src]');
+            thumbs.forEach(function (t) {
+                galleryImages.push(t.dataset.src);
+            });
+            // Show/hide arrows based on image count
+            var leftArrow = document.getElementById('galleryArrowLeft');
+            var rightArrow = document.getElementById('galleryArrowRight');
+            if (galleryImages.length > 1) {
+                if (leftArrow) leftArrow.disabled = false;
+                if (rightArrow) rightArrow.disabled = false;
+            } else {
+                if (leftArrow) leftArrow.disabled = true;
+                if (rightArrow) rightArrow.disabled = true;
+            }
+        })();
+
+        /**
+         * Switch the main gallery image with a subtle crossfade
+         */
+        window.switchGalleryImage = function (thumbOrIndex) {
+            if (typeof thumbOrIndex === 'number') {
+                currentIndex = thumbOrIndex;
+                var thumbs = document.querySelectorAll('#galleryThumbs [data-src]');
+                if (thumbs[currentIndex]) {
+                    window.switchGalleryImage(thumbs[currentIndex]);
+                }
+                return;
+            }
+            var thumbEl = thumbOrIndex;
+            currentIndex = parseInt(thumbEl.dataset.index, 10);
+
+            // Animate main image with subtle opacity transition
+            if (mainImg && thumbEl.dataset.src) {
+                mainImg.style.opacity = '0';
+                mainImg.style.transform = 'scale(0.97)';
+                setTimeout(function () {
+                    mainImg.src = thumbEl.dataset.src;
+                    mainImg.style.opacity = '1';
+                    mainImg.style.transform = 'scale(1)';
+                }, 180);
+            }
+
+            // Update thumbnails
+            var allThumbs = document.querySelectorAll('#galleryThumbs [data-src]');
+            allThumbs.forEach(function (t) {
+                t.classList.remove('border-base-1', 'shadow-[0_0_0_3px_rgba(89,0,231,0.15)]', 'scale-105');
+                t.classList.add('border-transparent');
+                t.setAttribute('aria-selected', 'false');
+            });
+            thumbEl.classList.add('border-base-1', 'shadow-[0_0_0_3px_rgba(89,0,231,0.15)]', 'scale-105');
+            thumbEl.classList.remove('border-transparent');
+            thumbEl.setAttribute('aria-selected', 'true');
+
+            // Scroll thumb into view
+            thumbEl.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+
+            // Update dots
+            updateDots(currentIndex);
+        }
+
+        // Mobile dot indicators
+        function updateDots(idx) {
+            var dots = document.querySelectorAll('#galleryDots .gallery-dot');
+            dots.forEach(function (d, i) {
+                if (i === idx) {
+                    d.classList.add('bg-white', 'shadow-md', 'w-3.5');
+                    d.classList.remove('bg-white/50');
+                } else {
+                    d.classList.add('bg-white/50');
+                    d.classList.remove('bg-white', 'shadow-md', 'w-3.5');
+                }
+            });
+        }
+
+        window.galleryPrev = function () {
+            var newIdx = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+            switchGalleryImage(newIdx);
+        };
+
+        window.galleryNext = function () {
+            var newIdx = (currentIndex + 1) % galleryImages.length;
+            switchGalleryImage(newIdx);
+        };
+
+        // --- Touch/Swipe on main gallery ---
+        (function initGallerySwipe() {
+            if (!galleryMain || galleryImages.length < 2) return;
+            var startX = 0, startY = 0, moved = false;
+
+            galleryMain.addEventListener('touchstart', function (e) {
+                if (e.touches.length === 1) {
+                    startX = e.touches[0].clientX;
+                    startY = e.touches[0].clientY;
+                    moved = false;
+                }
+            }, { passive: true });
+
+            galleryMain.addEventListener('touchmove', function (e) {
+                if (e.touches.length !== 1) return;
+                moved = true;
+            }, { passive: true });
+
+            galleryMain.addEventListener('touchend', function (e) {
+                if (!moved) return;
+                var dx = e.changedTouches[0].clientX - startX;
+                var dy = e.changedTouches[0].clientY - startY;
+                var threshold = 50;
+                if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > threshold) {
+                    if (dx > 0) window.galleryPrev();
+                    else window.galleryNext();
+                }
+            });
+        })();
+
+        // --- Lightbox with polished transitions ---
+        window.openLightbox = function (index) {
+            var idx = (index !== undefined) ? index : currentIndex;
+            if (galleryImages.length === 0) return;
+
+            var scrollY = window.scrollY;
+            document.body.style.overflow = 'hidden';
+            document.body.style.position = 'fixed';
+            document.body.style.top = '-' + scrollY + 'px';
+            document.body.style.width = '100%';
+
+            var overlay = document.createElement('div');
+            overlay.className = 'lightbox-overlay';
+            overlay.setAttribute('role', 'dialog');
+            overlay.setAttribute('aria-modal', 'true');
+            overlay.setAttribute('aria-label', 'Image lightbox');
+
+            var total = galleryImages.length;
+
+            overlay.innerHTML =
+                '<button class="lightbox-close" aria-label="Close lightbox">&times;</button>' +
+                '<button class="lightbox-nav lightbox-prev" aria-label="Previous image"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></button>' +
+                '<img src="' + galleryImages[idx] + '" alt="Enlarged product image ' + (idx + 1) + ' of ' + total + '" class="lightbox-img">' +
+                '<button class="lightbox-nav lightbox-next" aria-label="Next image"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>' +
+                '<div class="lightbox-counter">' + (idx + 1) + ' / ' + total + '</div>';
+
+            document.body.appendChild(overlay);
+
+            var currentLightboxIdx = idx;
+            var isAnimating = false;
+
+            function closeLb() {
+                if (isAnimating) return;
+                overlay.classList.add('closing');
+                overlay.addEventListener('animationend', function () {
+                    if (overlay.parentNode) {
+                        document.body.removeChild(overlay);
+                    }
+                    document.body.style.overflow = '';
+                    document.body.style.position = '';
+                    document.body.style.top = '';
+                    document.body.style.width = '';
+                    window.scrollTo(0, scrollY);
+                }, { once: true });
+                document.removeEventListener('keydown', lbKeyHandler);
+                cleanupTouch();
+            }
+
+            function updateCounter() {
+                var counter = overlay.querySelector('.lightbox-counter');
+                if (counter) counter.textContent = (currentLightboxIdx + 1) + ' / ' + total;
+            }
+
+            function updateLbImage(newIdx) {
+                if (isAnimating) return;
+                var img = overlay.querySelector('.lightbox-img');
+                if (!img) return;
+                isAnimating = true;
+                img.classList.add('switching');
+                img.addEventListener('transitionend', function handler() {
+                    img.removeEventListener('transitionend', handler);
+                    img.src = galleryImages[newIdx];
+                    img.alt = 'Enlarged product image ' + (newIdx + 1) + ' of ' + total;
+                    void img.offsetWidth;
+                    img.classList.remove('switching');
+                    currentLightboxIdx = newIdx;
+                    updateCounter();
+                    isAnimating = false;
+                });
+            }
+
+            function goPrev() {
+                updateLbImage((currentLightboxIdx - 1 + total) % total);
+            }
+
+            function goNext() {
+                updateLbImage((currentLightboxIdx + 1) % total);
+            }
+
+            function lbKeyHandler(e) {
+                if (e.key === 'Escape') { closeLb(); return; }
+                if (e.key === 'ArrowLeft') { goPrev(); return; }
+                if (e.key === 'ArrowRight') { goNext(); return; }
+            }
+
+            overlay.addEventListener('click', function (e) {
+                if (e.target === overlay) closeLb();
+            });
+            overlay.querySelector('.lightbox-close').addEventListener('click', function (e) {
+                e.stopPropagation();
+                closeLb();
+            });
+            overlay.querySelector('.lightbox-prev').addEventListener('click', function (e) {
+                e.stopPropagation();
+                goPrev();
+            });
+            overlay.querySelector('.lightbox-next').addEventListener('click', function (e) {
+                e.stopPropagation();
+                goNext();
+            });
+
+            document.addEventListener('keydown', lbKeyHandler);
+
+            // Touch swipe for lightbox
+            var touchStartX = 0, touchStartY = 0, touchMoved = false;
+
+            function onTouchStart(e) {
+                if (e.touches.length === 1) {
+                    touchStartX = e.touches[0].clientX;
+                    touchStartY = e.touches[0].clientY;
+                    touchMoved = false;
+                }
+            }
+
+            function onTouchMove(e) {
+                if (e.touches.length !== 1) return;
+                touchMoved = true;
+            }
+
+            function onTouchEnd(e) {
+                if (!touchMoved) return;
+                var dx = e.changedTouches[0].clientX - touchStartX;
+                var dy = e.changedTouches[0].clientY - touchStartY;
+                var threshold = 60;
+                if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > threshold) {
+                    if (dx > 0) goPrev();
+                    else goNext();
+                }
+            }
+
+            overlay.addEventListener('touchstart', onTouchStart, { passive: true });
+            overlay.addEventListener('touchmove', onTouchMove, { passive: true });
+            overlay.addEventListener('touchend', onTouchEnd);
+
+            function cleanupTouch() {
+                overlay.removeEventListener('touchstart', onTouchStart);
+                overlay.removeEventListener('touchmove', onTouchMove);
+                overlay.removeEventListener('touchend', onTouchEnd);
+            }
+
+            var closeBtn = overlay.querySelector('.lightbox-close');
+            if (closeBtn) setTimeout(function () { closeBtn.focus(); }, 100);
+        };
+
+        // Click main image to open lightbox
+        if (mainImg && galleryImages.length > 0) {
+            mainImg.addEventListener('click', function () { window.openLightbox(); });
+        }
+
+        // ===================================================================
+        // Scroll-triggered Reveal Animations (Intersection Observer)
+        // ===================================================================
+        (function initScrollReveal() {
+            var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (prefersReduced) {
+                // Show everything immediately
+                var els = document.querySelectorAll('.gallery-reveal');
+                els.forEach(function (el) {
+                    el.classList.remove('opacity-0', 'translate-y-6');
+                    el.classList.add('opacity-100', 'translate-y-0');
+                });
+                return;
+            }
+
+            var revealEls = document.querySelectorAll('.gallery-reveal');
+            if (revealEls.length === 0) return;
+
+            // Stagger delay for multiple elements
+            revealEls.forEach(function (el, i) {
+                el.style.transitionDelay = (i * 120) + 'ms';
+            });
+
+            var observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        var el = entry.target;
+                        el.classList.remove('opacity-0', 'translate-y-6');
+                        el.classList.add('opacity-100', 'translate-y-0');
+                        observer.unobserve(el);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -30px 0px'
+            });
+
+            revealEls.forEach(function (el) {
+                observer.observe(el);
+            });
+        })();
+
+        // --- Quantity ---
+        window.adjustQty = function (delta) {
+            var input = document.getElementById('quantityInput');
+            if (!input) return;
+            var val = parseInt(input.value, 10) || 1;
+            var newVal = val + delta;
+            newVal = Math.max(1, Math.min(99, newVal));
+            input.value = newVal;
+            updateQtyButtons(newVal);
+            updateCartUrl(newVal);
+        };
+
+        window.validateQty = function (input) {
+            var val = parseInt(input.value, 10);
+            if (isNaN(val) || val < 1) { input.value = 1; }
+            else if (val > 99) { input.value = 99; }
+            updateQtyButtons(parseInt(input.value, 10));
+            updateCartUrl(parseInt(input.value, 10));
+        };
+
+        function updateQtyButtons(val) {
+            var decBtn = document.getElementById('qtyDecrease');
+            var incBtn = document.getElementById('qtyIncrease');
+            if (decBtn) decBtn.disabled = (val <= 1);
+            if (incBtn) incBtn.disabled = (val >= 99);
+        }
+
+        function updateCartUrl(qty) {
+            var cartBaseUrl = "{% url 'cart:add_to_cart' item.id %}";
+            var buyNowBaseUrl = "{% url 'cart:buy_now' item.id %}";
+            var qsCart = cartBaseUrl.indexOf('?') > -1 ? '&' : '?';
+            var qsBuy = buyNowBaseUrl.indexOf('?') > -1 ? '&' : '?';
+            var cartUrl = cartBaseUrl + qsCart + 'quantity=' + qty;
+            var buyNowUrl = buyNowBaseUrl + qsBuy + 'quantity=' + qty;
+            var cartBtn = document.getElementById('addToCartBtn');
+            if (cartBtn) cartBtn.href = cartUrl;
+            var buyBtns = document.querySelectorAll('.btn-buy');
+            buyBtns.forEach(function (btn) { btn.href = buyNowUrl; });
+            var mobileAtc = document.querySelector('.mobile-atc');
+            if (mobileAtc) mobileAtc.href = cartUrl;
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var input = document.getElementById('quantityInput');
+            if (input) window.validateQty(input);
+        });
+    })();
+</script>
 
 {% endblock %}

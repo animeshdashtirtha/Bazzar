@@ -9,235 +9,362 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-    <title>{% block title %} {% endblock %} | Bazzar</title>
+    <!-- Inter font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <title>{% block title %}{% endblock %} | Bazzar</title>
 </head>
-<body class="min-h-screen flex flex-col">
-    <nav class="border-b border-gray-300 bg-white sticky py-2 z-50">
-        <div class="container mx-auto px-3 sm:px-4 h-16 flex items-center justify-between gap-4">
-            <div class="flex items-center flex-shrink-0">
-                <a href="{% url 'core:index' %}" class="pt-2">
-                    <img class="h-18 md:h-24 lg:h-24 rounded-xl mb-2" src="{% static 'images/logonew.png' %}" alt="Logo" />
-                </a>
-            </div>
+<body class="min-h-screen flex flex-col bg-gray-50">
 
-            <!-- Desktop Search - Always visible in center -->
-            {% if not user.is_authenticated or user.core_profile.user_type != 'seller' %}
-            <div class="flex-1 max-w-xl hidden lg:block">
-                <form method="get" action="{% url 'core:index' %}" class="flex">
-                    <div class="relative w-full">
-                        <input
-                            type="text"
-                            name="q"
-                            value="{{ request.GET.q }}"
-                            placeholder="Search products..."
-                            class="w-full border border-gray-300 rounded-l-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent transition-all"
-                        />
-                        {% if request.GET.q %}
-                        <a
-                            href="{% url 'core:index' %}"
-                            class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
-                        >
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                            </svg>
+    <!-- ===== Navbar ===== -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100 shadow-sm">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Main navigation">
+            <div class="flex items-center justify-between h-16 lg:h-18">
+
+                <!-- ===== Left: Logo + Nav Links ===== -->
+                <div class="flex items-center gap-6 lg:gap-8">
+                    <!-- Logo -->
+                    <a href="{% url 'core:index' %}" class="flex-shrink-0" aria-label="Bazzar Home">
+                        <img class="h-14 md:h-14 lg:h-16 w-auto rounded-lg" src="{% static 'images/logonew.png' %}" alt="Bazzar Logo" />
+                    </a>
+
+                    <!-- Desktop Nav Links -->
+                    {% if request.path != '/login/' and request.path != '/signup/' %}
+                    <div class="hidden lg:flex items-center gap-1">
+                        {% if not user.is_authenticated or user.core_profile.user_type == 'buyer' %}
+                        <a href="{% url 'core:index' %}"
+                           class="nav-link px-3 py-2 text-sm font-medium text-gray-600 hover:text-base-1 rounded-lg hover:bg-base-2/5 transition-all duration-200"
+                           aria-current="page">
+                            Home
                         </a>
                         {% endif %}
-                    </div>
-                    <button
-                        type="submit"
-                        class="bg-gray-700 hover:bg-teal-600 text-white px-4 py-2 rounded-r-lg font-medium transition-all shadow-sm"
-                    >
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 104.5 4.5a7.5 7.5 0 0012.15 12.15z"/>
-                        </svg>
-                    </button>
-                </form>
-            </div>
-            {% endif %}
 
-            <div class="hidden lg:flex items-center space-x-2 lg:space-x-3 flex-shrink-0">
-
-                <!-- My Cart -->
-                {% if user.is_authenticated and user.core_profile.user_type != 'seller' %}
-                    <a href="{% url 'cart:view_cart' %}" class="text-gray-800 hover:text-teal-600 px-3 py-2 text-sm font-medium">My Cart 🛒</a>
-                {% endif %}
-                {% if not user.is_authenticated or user.core_profile.user_type == 'buyer' %}
-                <div class="relative group" id="categoryDropdown">
-                    <button id="categoryButton" class="text-gray-800 hover:text-teal-600 px-3 py-2 text-sm font-medium inline-flex items-center">
-                        Categories
-                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
-                    </button>
-                    <div id="dropdownList" class="absolute opacity-0 invisible bg-white border border-gray-200 shadow-lg rounded-md mt-2 w-48 transition-all duration-200">
-                        <ul class="py-2">
-                            {% for category in categories %}
-                            <li><a href="{% url 'item:categories' category.id %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-teal-500 hover:text-white">{{ category.name }}</a></li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                </div>
-                {% endif %}
-
-
-                {% if user.is_authenticated %}
-                <div class="relative" id="userDropdownWrapper">
-                    <button id="userButton" class="bg-gray-800 text-white px-3 py-2 rounded-lg text-sm font-bold flex items-center">
-                        {{ user.username|truncatechars:10 }}
-                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
-                    </button>
-                    <div id="userDropdown" class="absolute right-0 opacity-0 invisible bg-white border border-gray-200 shadow-lg rounded-md mt-2 w-48 transition-all duration-200">
-                        <ul class="py-2 text-sm">
-                            <li><a href="{% url 'core:inbox' %}" class="block px-4 py-2 hover:bg-gray-800 hover:text-white">Inbox</a></li>
-                            {% if user.core_profile.user_type != 'seller' %}
-                            <li><a href="{% url 'orders:my_orders' %}" class="block px-4 py-2 hover:bg-gray-800 hover:text-white">My Orders</a></li>
-                            {% endif %}
-                            <li><a href="{% url 'core:logout' %}" class="block px-4 py-2 hover:bg-red-500 hover:text-white">Logout</a></li>
-                        </ul>
-                    </div>
-                </div>
-                {% else %}
-                <a href="{% url 'core:signup' %}" class="bg-teal-500 hover:bg-teal-600 text-white px-4 py-2 rounded-lg text-sm font-bold">Signup</a>
-                <a href="{% url 'core:login' %}" class="bg-gray-700 hover:bg-gray-800 text-white px-4 py-2 rounded-lg text-sm font-bold">Login</a>
-                {% endif %}
-            </div>
-
-            <div class="lg:hidden flex items-center">
-                <button id="mobileMenuButton" class="text-gray-800 focus:outline-none">
-                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>
-                </button>
-            </div>
-        </div>
-
-        <div id="mobileDrawer" class="hidden lg:hidden bg-white border-t border-gray-200 px-4 py-4 space-y-2">
-            
-            <!-- Mobile Search (inside drawer) -->
-            <div class="space-y-2">
-                <button
-                    id="mobileSearchToggle"
-                    type="button"
-                    class="w-full inline-flex items-center justify-between border border-gray-300 hover:border-gray-500 text-gray-800 px-4 py-2 rounded-lg font-semibold transition-all shadow-sm"
-                    aria-expanded="{% if request.GET.q %}true{% else %}false{% endif %}"
-                >
-                    <span class="inline-flex items-center gap-2">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 104.5 4.5a7.5 7.5 0 0012.15 12.15z"/>
-                        </svg>
-                        Search
-                    </span>
-                    <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                    </svg>
-                </button>
-
-                <div
-                    id="mobileSearchPanel"
-                    class="{% if request.GET.q %}block{% else %}hidden{% endif %}"
-                >
-                    <form method="get" action="{% url 'core:index' %}" class="pt-2 pb-3">
-                        <div class="flex flex-col gap-3">
-                            <input
-                                id="mobileSearchInput"
-                                type="text"
-                                name="q"
-                                value="{{ request.GET.q }}"
-                                placeholder="Search products..."
-                                class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-gray-500"
-                            />
-
-                            <div class="flex items-center gap-3">
-                                <button
-                                    type="submit"
-                                    class="bg-gray-800 hover:bg-gray-700 text-white px-5 py-3 rounded-lg font-semibold transition-all shadow-md w-full"
-                                >
-                                    Search
-                                </button>
-                                {% if request.GET.q %}
-                                    <a
-                                        href="{% url 'core:index' %}"
-                                        class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-3 rounded-lg font-semibold transition-all whitespace-nowrap"
-                                    >
-                                        Clear
+                        {% if not user.is_authenticated or user.core_profile.user_type == 'buyer' %}
+                        <!-- Categories Dropdown -->
+                        <div class="relative" id="categoryDropdown" data-dropdown>
+                            <button id="categoryButton"
+                                    class="nav-link px-3 py-2 text-sm font-medium text-gray-600 hover:text-base-1 rounded-lg hover:bg-base-2/5 transition-all duration-200 inline-flex items-center gap-1"
+                                    aria-expanded="false"
+                                    aria-haspopup="true">
+                                Categories
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                                    <polyline points="6 9 12 15 18 9"/>
+                                </svg>
+                            </button>
+                            <div id="dropdownList"
+                                 class="absolute top-full left-0 mt-1.5 w-56 bg-white border border-gray-100 rounded-xl shadow-lg opacity-0 invisible translate-y-[-6px] transition-all duration-200 z-50 overflow-hidden"
+                                 role="menu">
+                                <div class="py-2 max-h-64 overflow-y-auto">
+                                    {% for category in categories %}
+                                    <a href="{% url 'item:categories' category.id %}"
+                                       class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-base-2/5 hover:text-base-1 transition-colors"
+                                       role="menuitem">
+                                        {{ category.name }}
                                     </a>
-                                {% endif %}
+                                    {% endfor %}
+                                </div>
                             </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                </div>
+
+                <!-- ===== Center: Search Bar ===== -->
+                {% if request.path != '/login/' and request.path != '/signup/' %}
+                {% if not user.is_authenticated or user.core_profile.user_type != 'seller' %}
+                <div class="hidden md:flex flex-1 max-w-xl mx-6 lg:mx-10">
+                    <form method="get" action="{% url 'core:index' %}" class="w-full">
+                        <div class="relative group">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-gray-400 group-focus-within:text-base-2 transition-colors" aria-hidden="true">
+                                    <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                                </svg>
+                            </div>
+                            <input type="text" name="q" value="{{ request.GET.q }}"
+                                   placeholder="Search products, categories, brands..."
+                                   class="w-full pl-11 pr-12 py-2.5 border border-gray-200 rounded-xl text-sm bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-base-2/30 focus:border-base-2 transition-all"
+                                   aria-label="Search products">
+                            {% if request.GET.q %}
+                            <a href="{% url 'core:index' %}"
+                               class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 transition-colors"
+                               aria-label="Clear search">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
+                                    <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                                </svg>
+                            </a>
+                            {% endif %}
                         </div>
                     </form>
                 </div>
-            </div>
+                {% endif %}
+                {% endif %}
 
-            {% if user.is_authenticated and user.core_profile.user_type != 'seller' %}
-                <a href="{% url 'cart:view_cart' %}" class="block py-2 text-gray-800 font-bold border-b">My Cart 🛒</a>
-            {% endif %}
+                <!-- ===== Right: Actions ===== -->
+                {% if request.path != '/login/' and request.path != '/signup/' %}
+                <div class="flex items-center gap-1 sm:gap-2">
 
-            {% if not user.is_authenticated or user.core_profile.user_type != 'seller' %}
-                <div class="py-2 font-bold">Categories:</div>
-                <div class="grid grid-cols-2 gap-2 pb-4 border-b">
-                    {% for category in categories %}
-                    <a href="{% url 'item:categories' category.id %}" class="text-sm text-gray-600 hover:text-teal-500">{{ category.name }}</a>
-                    {% endfor %}
+                    <!-- Cart Icon with Badge -->
+                    {% if user.is_authenticated and user.core_profile.user_type != 'seller' %}
+                    <a href="{% url 'cart:view_cart' %}"
+                       class="relative p-2 text-gray-600 hover:text-base-1 rounded-xl hover:bg-base-2/5 transition-all duration-200"
+                       aria-label="View cart{% if cart_count %} — {{ cart_count }} item{{ cart_count|pluralize }}{% endif %}">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                        </svg>
+                        {% if cart_count %}
+                        <span class="absolute -top-0.5 -right-0.5 flex items-center justify-center min-w-[20px] h-5 px-1.5 text-[10px] font-bold text-white bg-base-2 rounded-full ring-2 ring-white leading-none">
+                            {{ cart_count }}
+                        </span>
+                        {% endif %}
+                    </a>
+                    {% endif %}
+
+                    <!-- Auth: User Menu / Login-Signup -->
+                    {% if user.is_authenticated %}
+                    <div class="relative" id="userDropdownWrapper" data-dropdown>
+                        <button id="userButton"
+                                class="flex items-center gap-2 px-3 py-2 text-sm font-semibold text-gray-700 hover:text-base-1 rounded-xl hover:bg-base-2/5 transition-all duration-200"
+                                aria-expanded="false"
+                                aria-haspopup="true">
+                            <!-- User Avatar Icon -->
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                <circle cx="12" cy="7" r="4"/>
+                            </svg>
+                            <span class="hidden sm:inline">{{ user.username|truncatechars:12 }}</span>
+                            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                                <polyline points="6 9 12 15 18 9"/>
+                            </svg>
+                        </button>
+                        <div id="userDropdown"
+                             class="absolute top-full right-0 mt-1.5 w-48 bg-white border border-gray-100 rounded-xl shadow-lg opacity-0 invisible translate-y-[-6px] transition-all duration-200 z-50 overflow-hidden"
+                             role="menu">
+                            <div class="py-1.5">
+                                <div class="px-4 py-2.5 border-b border-gray-50">
+                                    <p class="text-sm font-semibold text-gray-800">{{ user.username }}</p>
+                                    <p class="text-xs text-gray-400">{{ user.email }}</p>
+                                </div>
+                                <a href="{% url 'core:inbox' %}" class="flex items-center gap-2.5 px-4 py-2.5 text-sm text-gray-700 hover:bg-base-2/5 hover:text-base-1 transition-colors" role="menuitem">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                                    Inbox
+                                </a>
+                                {% if user.core_profile.user_type != 'seller' %}
+                                <a href="{% url 'orders:my_orders' %}" class="flex items-center gap-2.5 px-4 py-2.5 text-sm text-gray-700 hover:bg-base-2/5 hover:text-base-1 transition-colors" role="menuitem">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polyline points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                                    My Orders
+                                </a>
+                                {% endif %}
+                                <div class="border-t border-gray-50 mt-1 pt-1">
+                                    <a href="{% url 'core:logout' %}" class="flex items-center gap-2.5 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition-colors" role="menuitem">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                                        Logout
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="hidden sm:flex items-center gap-2">
+                        <a href="{% url 'core:login' %}"
+                           class="px-4 py-2 text-sm font-semibold text-gray-700 hover:text-base-1 rounded-xl hover:bg-gray-100 transition-all duration-200">
+                            Log in
+                        </a>
+                        <a href="{% url 'core:signup' %}"
+                           class="px-4 py-2 text-sm font-bold text-white bg-base-2 hover:bg-base-1 rounded-xl transition-all duration-200 hover:shadow-lg hover:shadow-base-1/20 active:scale-[0.97]">
+                            Sign up
+                        </a>
+                    </div>
+                    {% endif %}
+
+                    <!-- Mobile: Hamburger -->
+                    <button id="mobileMenuButton"
+                            class="lg:hidden p-2 text-gray-600 hover:text-gray-800 rounded-xl hover:bg-gray-100 transition-all duration-200"
+                            aria-label="Open menu"
+                            aria-expanded="false">
+                        <svg id="menuIcon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                            <line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/>
+                        </svg>
+                        <svg id="closeIcon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true" class="hidden">
+                            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                    </button>
                 </div>
-            {% endif %}
-            
-            {% if user.is_authenticated %}
-                <a href="{% url 'core:inbox' %}" class="block py-2 text-teal-600 font-bold">Inbox</a>
-                <a href="{% url 'orders:my_orders' %}" class="block py-2 text-teal-600 font-bold border-b">My Orders</a>
-                <a href="{% url 'core:logout' %}" class="block py-2 text-red-600 font-bold">Logout</a>
-            {% else %}
-                <a href="{% url 'core:signup' %}" class="block py-2 text-teal-600 font-bold">Signup</a>
-                <a href="{% url 'core:login' %}" class="block py-2 text-gray-600 font-bold">Login</a>
-            {% endif %}
-        </div>
-    </nav>
+                {% endif %}
+            </div>
+        </nav>
 
-    <main class="flex-grow container mx-auto px-4 py-8">
+        <!-- ===== Mobile Drawer ===== -->
+        {% if request.path != '/login/' and request.path != '/signup/' %}
+        <div id="mobileDrawer"
+             class="lg:hidden overflow-hidden transition-all duration-300 ease-in-out max-h-0 opacity-0 bg-white border-t border-gray-100"
+             aria-label="Mobile navigation">
+            <div class="px-4 py-5 space-y-3">
+
+                <!-- Mobile Search -->
+                <form method="get" action="{% url 'core:index' %}" class="mb-2">
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-gray-400" aria-hidden="true">
+                                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                            </svg>
+                        </div>
+                        <input type="text" name="q" value="{{ request.GET.q }}"
+                               placeholder="Search products..."
+                               class="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-xl text-sm bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-base-2/30 focus:border-base-2 transition-all">
+                    </div>
+                </form>
+
+                <!-- Mobile Nav Links -->
+                <a href="{% url 'core:index' %}" class="flex items-center gap-3 py-3 px-2 text-sm font-semibold text-gray-700 hover:text-base-1 rounded-lg hover:bg-base-2/5 transition-colors">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    Home
+                </a>
+
+                {% if not user.is_authenticated or user.core_profile.user_type != 'seller' %}
+                <div class="pt-2 pb-1 px-2">
+                    <p class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Categories</p>
+                    <div class="grid grid-cols-2 gap-1">
+                        {% for category in categories %}
+                        <a href="{% url 'item:categories' category.id %}" class="py-2 text-sm text-gray-600 hover:text-base-1 transition-colors">{{ category.name }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+
+                {% if not user.is_authenticated %}
+                <hr class="border-gray-100">
+                <div class="grid grid-cols-2 gap-2 pt-1">
+                    <a href="{% url 'core:login' %}" class="py-2.5 text-center text-sm font-bold text-gray-700 border border-gray-200 rounded-xl hover:border-gray-300 transition-colors">Log in</a>
+                    <a href="{% url 'core:signup' %}" class="py-2.5 text-center text-sm font-bold text-white bg-base-2 hover:bg-base-1 rounded-xl transition-colors">Sign up</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+    </header>
+
+    <main class="flex-grow container mx-auto px-4 py-4">
         {% block content %}
         {% endblock %}
     </main>
 
-    <footer class="bg-gray-800 text-gray-400 py-8 px-4 mt-auto">
-        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0 text-center md:text-left">
-            <div class="max-w-md">
-                <div class="text-white font-bold text-xl mb-2">Bazzar</div>
-                <p class="text-sm">&copy; 2026 Bazzar. All rights reserved.</p>
+    <footer class="bg-gray-800 mt-auto">
+        <!-- Top accent bar -->
+        <div class="h-1 bg-gradient-to-r from-base-1 via-base-2 to-base-1"></div>
+
+        <!-- Main footer content -->
+        <div class="container mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+
+                <!-- Brand Column -->
+                <div class="space-y-4">
+                    <a href="{% url 'core:index' %}" class="inline-block">
+                        <img class="h-12 md:h-14 rounded-lg" src="{% static 'images/logonew.png' %}" alt="Bazzar Logo" />
+                    </a>
+                    <p class="text-gray-400 text-sm leading-relaxed max-w-sm">
+                        Your trusted online marketplace — discover curated products from futuristic tech to artisanal home essentials.
+                    </p>
+                </div>
+
+                <!-- Company -->
+                <div>
+                    <h3 class="text-white font-semibold text-sm uppercase tracking-wider mb-4">Company</h3>
+                    <ul class="space-y-2.5">
+                        <li><a href="{% url 'core:about' %}" class="text-gray-400 hover:text-white transition-colors duration-200 text-sm">About</a></li>
+                        <li><a href="{% url 'core:contact' %}" class="text-gray-400 hover:text-white transition-colors duration-200 text-sm">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Legal -->
+                <div>
+                    <h3 class="text-white font-semibold text-sm uppercase tracking-wider mb-4">Legal</h3>
+                    <ul class="space-y-2.5">
+                        <li><a href="{% url 'core:policy' %}" class="text-gray-400 hover:text-white transition-colors duration-200 text-sm">Privacy Policy</a></li>
+                        <li><a href="{% url 'core:terms' %}" class="text-gray-400 hover:text-white transition-colors duration-200 text-sm">Terms of Service</a></li>
+                    </ul>
+                </div>
             </div>
-            <ul class="flex flex-wrap justify-center gap-4 md:gap-8">
-                <li><a href="{% url 'core:about' %}" class="hover:text-white transition">About</a></li>
-                <li><a href="{% url 'core:policy' %}" class="hover:text-white transition">Privacy</a></li>
-                <li><a href="{% url 'core:terms' %}" class="hover:text-white transition">Terms</a></li>
-                <li><a href="{% url 'core:contact' %}" class="hover:text-white transition">Contact</a></li>
-            </ul>
+        </div>
+
+        <!-- Bottom bar -->
+        <div class="border-t border-gray-700">
+            <div class="container mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left">
+                <p class="text-gray-500 text-xs">&copy; 2026 Bazzar. All rights reserved.</p>
+                <p class="text-gray-600 text-xs">Made with <span class="text-base-1">&#9829;</span> for the community</p>
+            </div>
         </div>
     </footer>
 
     <script>
+    // ── Mobile Drawer Toggle ──
     const mobileBtn = document.getElementById('mobileMenuButton');
     const mobileDrawer = document.getElementById('mobileDrawer');
-    mobileBtn?.addEventListener('click', () => mobileDrawer.classList.toggle('hidden'));
+    const menuIcon = document.getElementById('menuIcon');
+    const closeIcon = document.getElementById('closeIcon');
 
-    // Toggle mobile search panel inside the drawer.
-    const mobileSearchToggle = document.getElementById('mobileSearchToggle');
-    const mobileSearchPanel = document.getElementById('mobileSearchPanel');
-    const mobileSearchInput = document.getElementById('mobileSearchInput');
-    mobileSearchToggle?.addEventListener('click', () => {
-        mobileSearchPanel?.classList.toggle('hidden');
-        const isHidden = mobileSearchPanel?.classList.contains('hidden');
-        mobileSearchToggle.setAttribute('aria-expanded', isHidden ? 'false' : 'true');
-        if (!isHidden) mobileSearchInput?.focus();
+    function openDrawer() {
+        mobileDrawer.classList.remove('max-h-0', 'opacity-0');
+        mobileDrawer.classList.add('max-h-[800px]', 'opacity-100');
+        menuIcon.classList.add('hidden');
+        closeIcon.classList.remove('hidden');
+        mobileBtn.setAttribute('aria-expanded', 'true');
+    }
+    function closeDrawer() {
+        mobileDrawer.classList.add('max-h-0', 'opacity-0');
+        mobileDrawer.classList.remove('max-h-[800px]', 'opacity-100');
+        menuIcon.classList.remove('hidden');
+        closeIcon.classList.add('hidden');
+        mobileBtn.setAttribute('aria-expanded', 'false');
+    }
+
+    mobileBtn?.addEventListener('click', () => {
+        const isOpen = mobileDrawer.classList.contains('max-h-[800px]');
+        isOpen ? closeDrawer() : openDrawer();
     });
 
-    function setupDropdown(btnId, menuId) {
-        const btn = document.getElementById(btnId);
-        const menu = document.getElementById(menuId);
+    // ── Dropdowns (animated show/hide with delay) ──
+    const dropdowns = document.querySelectorAll('[data-dropdown]');
+    dropdowns.forEach(wrapper => {
+        const btn = wrapper.querySelector('button');
+        const menu = wrapper.querySelector('[role="menu"]');
         if (!btn || !menu) return;
         let timer;
-        const show = () => { clearTimeout(timer); menu.classList.remove('opacity-0', 'invisible'); };
-        const hide = () => { timer = setTimeout(() => { menu.classList.add('opacity-0', 'invisible'); }, 200); };
+
+        function show() {
+            clearTimeout(timer);
+            menu.classList.remove('opacity-0', 'invisible', 'translate-y-[-6px]');
+            btn.setAttribute('aria-expanded', 'true');
+        }
+        function hide() {
+            timer = setTimeout(() => {
+                menu.classList.add('opacity-0', 'invisible', 'translate-y-[-6px]');
+                btn.setAttribute('aria-expanded', 'false');
+            }, 150);
+        }
+
         btn.addEventListener('mouseenter', show);
         btn.addEventListener('mouseleave', hide);
         menu.addEventListener('mouseenter', show);
         menu.addEventListener('mouseleave', hide);
-    }
-    setupDropdown('categoryButton', 'dropdownList');
-    setupDropdown('userButton', 'userDropdown');
+
+        // Focus handling
+        btn.addEventListener('focus', show);
+        btn.addEventListener('blur', (e) => {
+            if (!menu.contains(e.relatedTarget)) hide();
+        });
+        menu.addEventListener('blur', (e) => {
+            if (!wrapper.contains(e.relatedTarget)) hide();
+        });
+    });
+
+    // ── Close drawer on Escape ──
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobileDrawer?.classList.contains('max-h-[800px]')) {
+            closeDrawer();
+            mobileBtn?.focus();
+        }
+    });
     </script>
     {% block scripts %}{% endblock %}
 </body>

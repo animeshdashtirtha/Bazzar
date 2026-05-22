@@ -1,0 +1,332 @@
+{% extends 'core/base.html' %}
+{% load humanize %}
+{% load static %}
+{% load item_extras %}
+
+{% block title %}Flash Deals{% endblock %}
+
+{% block content %}
+<div class="container mx-auto mt-6 px-4">
+
+    <!-- Hero Banner — brand purple gradient with energetic glow -->
+    <div class="flash-hero relative overflow-hidden rounded-2xl shadow-lg shadow-base-1/20 p-8 sm:p-10 mb-8 text-center text-white">
+        <!-- Animated background gradient -->
+        <div class="absolute inset-0 bg-gradient-to-br from-base-1 via-purple-600 to-base-2 animate-gradient-shift"></div>
+        <!-- Subtle radial glow overlay -->
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_20%,rgba(255,255,255,0.15)_0%,transparent_60%)]"></div>
+        <!-- Content -->
+        <div class="relative z-10">
+            <div class="inline-flex items-center gap-3 mb-3">
+                <span class="text-3xl animate-bounce-in-left">⚡</span>
+                <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Flash Deals</h1>
+                <span class="text-3xl animate-bounce-in-right">⚡</span>
+            </div>
+            <p class="text-white/90 text-lg max-w-2xl mx-auto">Exclusive deals at unbeatable prices — grab them before they're gone!</p>
+            {% if items %}
+            <p class="text-white/80 text-sm mt-3">{{ items|length }} deal{{ items|length|pluralize }} available right now</p>
+            {% endif %}
+            <!-- Decorative spark line -->
+            <div class="mt-4 flex justify-center gap-1.5" aria-hidden="true">
+                <span class="block w-1.5 h-1.5 rounded-full bg-white/60 animate-pulse" style="animation-delay:0s"></span>
+                <span class="block w-1.5 h-1.5 rounded-full bg-white/40 animate-pulse" style="animation-delay:0.15s"></span>
+                <span class="block w-1.5 h-1.5 rounded-full bg-white/60 animate-pulse" style="animation-delay:0.3s"></span>
+                <span class="block w-1.5 h-1.5 rounded-full bg-white/40 animate-pulse" style="animation-delay:0.45s"></span>
+                <span class="block w-1.5 h-1.5 rounded-full bg-white/60 animate-pulse" style="animation-delay:0.6s"></span>
+            </div>
+        </div>
+    </div>
+
+    {% if items %}
+    <!-- Flash Deal Product Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {% for item in items %}
+        <div class="flash-card group relative flex flex-col h-full rounded-xl shadow-sm overflow-hidden transition-all duration-300 transform hover:scale-[1.03] hover:shadow-lg hover:shadow-base-1/10 bg-white border border-gray-100 hover:border-base-2/40">
+
+            <!-- Discount Badge — attention-grabbing fire badge -->
+            <span class="flash-badge">
+                <span class="flash-icon">⚡</span>
+                <span class="flash-label">-{{ item.flash_discount_percentage }}%</span>
+                {% with save=item.original_price|sub:item.discounted_price %}
+                {% if save > 0 %}
+                <span class="flash-save">Save ৳{{ save|floatformat:0 }}</span>
+                {% endif %}
+                {% endwith %}
+            </span>
+
+            <!-- Product Image (clickable) -->
+            <a href="{% url 'item:detail' item.id %}" class="block relative aspect-[4/3] bg-gray-50 overflow-hidden flex items-center justify-center p-3 sm:p-4">
+                {% if item.primary_image %}
+                <img class="max-w-full max-h-full object-contain rounded-2xl sm:rounded-3xl transition-transform duration-300 group-hover:scale-110"
+                     src="{{ item.primary_image.url }}" alt="{{ item.name|truncatewords:3 }}" loading="lazy">
+                {% else %}
+                <img class="max-w-full max-h-full object-contain rounded-2xl sm:rounded-3xl opacity-40"
+                     src="{% static 'images/empty.png' %}" alt="No image available" loading="lazy">
+                {% endif %}
+            </a>
+
+            <!-- Product Info -->
+            <a href="{% url 'item:detail' item.id %}" class="flex flex-col flex-grow p-4 sm:p-5 card-content-bottom">
+                <h2 class="text-sm sm:text-base font-semibold text-gray-800 mb-1 group-hover:text-base-1 transition-colors line-clamp-2">
+                    {{ item.name|truncatewords:8 }}
+                </h2>
+                <p class="text-gray-400 text-xs mb-3 hidden sm:block">{{ item.description|truncatewords:8 }}</p>
+
+                <div class="mt-auto flex items-end justify-between gap-2">
+                    <div class="flex flex-col">
+                        <!-- Original Price with Strikethrough -->
+                        <span class="text-xs sm:text-sm text-gray-400 line-through">
+                            ৳ {{ item.original_price|floatformat:0|intcomma }}
+                        </span>
+                        <!-- Discounted Price — kept red as universal urgency signal -->
+                        <span class="text-lg sm:text-xl font-extrabold text-red-600">
+                            ৳ {{ item.discounted_price|floatformat:0|intcomma }}
+                        </span>
+                    </div>
+                    <!-- Save amount -->
+                    <span class="text-[10px] sm:text-xs font-semibold text-emerald-700 bg-emerald-50 px-2 py-1 rounded-full whitespace-nowrap border border-emerald-200">
+                        Save ৳ {{ item.original_price|sub:item.discounted_price|floatformat:0|intcomma }}
+                    </span>
+                </div>
+            </a>
+
+            <!-- Slide-Up Grab Deal Button (hidden for sold items) -->
+            {% if not item.is_sold %}
+            <div class="atc-wrapper" aria-hidden="true">
+                <a href="{% url 'cart:add_to_cart' item.id %}"
+                   class="atc-btn"
+                   role="button"
+                   aria-label="Add {{ item.name }} to cart">
+                    <svg class="atc-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                    </svg>
+                    <span class="hidden sm:inline">Grab Deal</span>
+                    <span class="inline sm:hidden">Grab Deal</span>
+                </a>
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+
+    {% else %}
+    <!-- Empty State -->
+    <div class="text-center py-20">
+        <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-base-2/10 mb-6">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-base-1/40">
+                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+        </div>
+        <h2 class="text-2xl font-bold text-gray-800 mb-2">No Flash Deals Right Now</h2>
+        <p class="text-gray-500 max-w-md mx-auto mb-6">
+            There are no active flash deals at the moment. Use the admin panel to trigger new deals, then check back here!
+        </p>
+        <a href="{% url 'core:index' %}"
+           class="inline-flex items-center gap-2 bg-base-1 hover:bg-base-2 text-white px-6 py-3 rounded-full font-semibold transition-all duration-200 shadow-md hover:shadow-lg">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/>
+            </svg>
+            Browse All Products
+        </a>
+    </div>
+    {% endif %}
+
+    <!-- Bottom CTA -->
+    <div class="text-center mt-12 mb-6">
+        <p class="text-gray-500 text-sm">Flash deals are assigned via the admin panel. Bookmark this page to catch the latest offers!</p>
+    </div>
+</div>
+
+<style>
+    /* ── Flash Deals page custom animations ── */
+    @keyframes gradient-shift {
+        0%, 100% { background-position: 0% 50%; }
+        50%      { background-position: 100% 50%; }
+    }
+    @keyframes bounce-in-left {
+        0%   { opacity: 0; transform: translateX(-20px) scale(0.5); }
+        60%  { transform: translateX(2px) scale(1.05); }
+        100% { opacity: 1; transform: translateX(0) scale(1); }
+    }
+    @keyframes bounce-in-right {
+        0%   { opacity: 0; transform: translateX(20px) scale(0.5); }
+        60%  { transform: translateX(-2px) scale(1.05); }
+        100% { opacity: 1; transform: translateX(0) scale(1); }
+    }
+    .animate-gradient-shift {
+        background-size: 200% 200%;
+        animation: gradient-shift 6s ease-in-out infinite;
+    }
+    .animate-bounce-in-left {
+        animation: bounce-in-left 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    }
+    .animate-bounce-in-right {
+        animation: bounce-in-right 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    }
+    /* ── Slide-Up Grab Deal Button ── */
+    .flash-card {
+        --atc-height: 3rem;
+        animation: card-fade-up 0.5s ease-out both;
+    }
+    @keyframes card-fade-up {
+        from { opacity: 0; transform: translateY(16px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Dynamic bottom padding so content clears the button */
+    .flash-card .card-content-bottom {
+        padding-bottom: calc(var(--atc-height) + 0.75rem);
+    }
+
+    /* Wrapper clips the button below the card bottom edge */
+    .flash-card .atc-wrapper {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: var(--atc-height);
+        overflow: hidden;
+        pointer-events: none;
+    }
+
+    .flash-card:hover .atc-wrapper,
+    .flash-card:focus-within .atc-wrapper {
+        pointer-events: auto;
+    }
+
+    /* The button itself: starts translated down (hidden) */
+    .flash-card .atc-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        width: 100%;
+        height: var(--atc-height);
+        padding: 0 1rem;
+        font-size: 0.875rem;
+        font-weight: 600;
+        line-height: 1;
+        letter-spacing: 0.01em;
+        color: #fff;
+        text-decoration: none;
+        white-space: nowrap;
+        border: none;
+        border-radius: 0 0 12px 12px;
+        background: #5900e7;
+        cursor: pointer;
+        user-select: none;
+        -webkit-user-select: none;
+        -webkit-tap-highlight-color: transparent;
+        transform: translateY(100%);
+        opacity: 0;
+        transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+    }
+
+    /* Reveal on hover / focus-within */
+    .flash-card:hover .atc-btn,
+    .flash-card:focus-within .atc-btn {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    .flash-card .atc-btn:hover {
+        background: #670ff5;
+        box-shadow: 0 4px 14px rgba(89, 0, 231, 0.35);
+    }
+
+    .flash-card .atc-btn:active {
+        transform: translateY(0) scale(0.97);
+        background: #4a00c4;
+    }
+
+    .flash-card .atc-btn:focus-visible {
+        outline: 2.5px solid #5900e7;
+        outline-offset: 2px;
+    }
+
+    .flash-card:focus-within {
+        outline: 2px solid #5900e7;
+        outline-offset: 2px;
+    }
+
+    .flash-card:focus-within .atc-btn:focus-visible {
+        outline: none;
+    }
+
+    .flash-card .atc-icon {
+        flex-shrink: 0;
+    }
+
+    /* ── Touch devices: button always visible (no persistent hover) ── */
+    @media (pointer: coarse) {
+        .flash-card .atc-btn {
+            transform: translateY(0);
+            opacity: 1;
+            padding: 0 0.65rem;
+            gap: 0.3rem;
+        }
+
+        .flash-card .atc-wrapper {
+            pointer-events: auto;
+        }
+    }
+
+    @media (pointer: coarse) and (min-width: 400px) and (max-width: 640px) {
+        .flash-card {
+            --atc-height: 2.75rem;
+        }
+
+        .flash-card .atc-btn {
+            font-size: 0.8rem;
+        }
+
+        .flash-card .atc-icon {
+            width: 16px;
+            height: 16px;
+        }
+    }
+
+    @media (pointer: coarse) and (max-width: 399px) {
+        .flash-card {
+            --atc-height: 2.5rem;
+        }
+
+        .flash-card .atc-btn {
+            font-size: 0.75rem;
+            border-radius: 0 0 10px 10px;
+        }
+
+        .flash-card .atc-icon {
+            width: 15px;
+            height: 15px;
+        }
+
+        .flash-card .card-content-bottom {
+            padding-bottom: calc(var(--atc-height) + 0.5rem);
+        }
+    }
+
+    @media (pointer: coarse) and (min-width: 641px) {
+        .flash-card {
+            --atc-height: 3rem;
+        }
+
+        .flash-card .atc-btn {
+            font-size: 0.875rem;
+            padding: 0 1rem;
+            gap: 0.5rem;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .flash-card .atc-btn {
+            transition: none;
+        }
+
+        .flash-card:hover .atc-btn,
+        .flash-card:focus-within .atc-btn {
+            transition: none;
+        }
+    }
+</style>
+{% endblock %}

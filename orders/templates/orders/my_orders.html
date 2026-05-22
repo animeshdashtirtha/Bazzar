@@ -1,52 +1,141 @@
 {% extends 'core/base.html' %}
+{% load humanize %}
+{% load static %}
 {% block title %}My Orders{% endblock %}
 
 {% block content %}
-<div class="container mx-auto px-4 py-10 max-w-5xl">
-    <h1 class="text-3xl font-bold text-gray-800 mb-8 text-center">📦 My Orders</h1>
+<div class="max-w-4xl mx-auto px-4 py-8">
+
+    <!-- ===== Page Header ===== -->
+    <div class="flex items-center justify-between mb-8">
+        <div>
+            <h1 class="text-2xl md:text-3xl font-extrabold text-gray-900 tracking-tight">My Orders</h1>
+            {% if orders %}
+            <p class="text-gray-500 text-sm mt-1">{{ orders|length }} order{{ orders|length|pluralize }} placed</p>
+            {% endif %}
+        </div>
+        <a href="{% url 'core:index' %}"
+           class="hidden sm:inline-flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-base-1 transition-colors">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                <line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/>
+            </svg>
+            Continue Shopping
+        </a>
+    </div>
 
     {% if orders %}
-    <div class="space-y-6">
+    <div class="space-y-5">
         {% for order in orders %}
-        <div class="bg-white shadow-md rounded-2xl p-6">
-            <div class="flex justify-between items-center mb-3">
-                <h2 class="font-bold text-lg text-teal-500">Ordered at : <span class="text-gray-600 font-semibold">{{ order.created_at }}</span></h2>
-                <span class="px-3 py-1 rounded-full text-sm font-medium 
-                    {% if order.status == 'pending' %}bg-yellow-100 text-yellow-700
-                    {% elif order.status == 'processing' %}bg-blue-100 text-blue-700
-                    {% elif order.status == 'delivered' %}bg-green-100 text-green-700
-                    {% else %}bg-gray-100 text-gray-700{% endif %}">
+        <!-- ===== Order Card ===== -->
+        <article class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden transition-all duration-200 hover:shadow-md">
+            
+            <!-- Order Header -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 px-5 sm:px-6 py-4 border-b border-gray-50 bg-gray-50/50">
+                <div class="flex flex-wrap items-center gap-3">
+                    <span class="text-sm font-bold text-gray-800">Order #{{ order.id }}</span>
+                    <span class="hidden sm:inline text-gray-300">·</span>
+                    <span class="text-sm text-gray-500">{{ order.created_at|date:"M d, Y · h:i A" }}</span>
+                </div>
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold w-fit
+                    {% if order.status == 'pending' %}bg-amber-50 text-amber-700 border border-amber-200
+                    {% elif order.status == 'processing' %}bg-blue-50 text-blue-700 border border-blue-200
+                    {% elif order.status == 'shipped' %}bg-indigo-50 text-indigo-700 border border-indigo-200
+                    {% elif order.status == 'delivered' %}bg-emerald-50 text-emerald-700 border border-emerald-200
+                    {% elif order.status == 'cancelled' %}bg-red-50 text-red-600 border border-red-200
+                    {% else %}bg-gray-50 text-gray-600 border border-gray-200{% endif %}">
+                    {% if order.status == 'pending' %}
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    {% elif order.status == 'processing' %}
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 10"/></svg>
+                    {% elif order.status == 'shipped' %}
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><rect x="1" y="3" width="15" height="13"/><polyline points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                    {% elif order.status == 'delivered' %}
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    {% elif order.status == 'cancelled' %}
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                    {% endif %}
                     {{ order.status|title }}
                 </span>
             </div>
 
-            <ul class="divide-y divide-gray-200">
+            <!-- Order Items -->
+            <ul class="divide-y divide-gray-50">
                 {% for item in order.items.all %}
-                <li class="py-3 flex justify-between gap-4 items-center">
-                    <!-- Small product image -->
-                    <img src="{{ item.item.image.url }}" alt="{{ item.item.name }}" class="w-12 h-12 object-contain rounded mr-4">
+                <li class="px-5 sm:px-6 py-3.5 flex items-center gap-4 group/item">
+                    <!-- Product Image (clickable) -->
+                    <a href="{% url 'item:detail' item.item.id %}"
+                       class="flex-shrink-0 w-14 h-14 rounded-xl bg-gray-50 border border-gray-100 overflow-hidden group/img"
+                       aria-label="View {{ item.item.name }}">
+                        {% if item.item.primary_image %}
+                        <img src="{{ item.item.primary_image.url }}"
+                             alt="{{ item.item.name }}"
+                             class="w-full h-full object-contain p-1.5 transition-transform duration-300 group-hover/img:scale-110"
+                             loading="lazy">
+                        {% else %}
+                        <img src="{% static 'images/empty.png' %}"
+                             alt="No image"
+                             class="w-full h-full object-contain p-1.5 opacity-50"
+                             loading="lazy">
+                        {% endif %}
+                    </a>
 
-                    <!-- Product name and quantity -->
-                    <span class="flex-grow">{{ item.item.name }} × {{ item.quantity }}</span>
+                    <!-- Product Info -->
+                    <div class="flex-1 min-w-0">
+                        <a href="{% url 'item:detail' item.item.id %}"
+                           class="block text-sm font-semibold text-gray-800 hover:text-base-1 transition-colors line-clamp-1 leading-snug">
+                            {{ item.item.name }}
+                        </a>
+                        <p class="text-xs text-gray-400 mt-0.5">Qty: {{ item.quantity }}</p>
+                    </div>
 
-                    <!-- Price -->
-                    <span class="font-medium text-gray-700">{{ item.price }} Tk</span>
+                    <!-- Item Price -->
+                    <span class="text-sm font-semibold text-gray-700 flex-shrink-0">৳ {{ item.price|floatformat:0|intcomma }}</span>
                 </li>
                 {% endfor %}
             </ul>
 
-            <div class="mt-4 text-right font-semibold text-gray-800">
-                Total: {{ order.total_price }} Tk
+            <!-- Order Footer: Total -->
+            <div class="flex items-center justify-between px-5 sm:px-6 py-3.5 bg-gray-50/30 border-t border-gray-50">
+                <span class="text-sm text-gray-500">
+                    {{ order.items.count }} item{{ order.items.count|pluralize }}
+                </span>
+                <div class="flex items-baseline gap-2">
+                    <span class="text-sm font-medium text-gray-500">Total</span>
+                    <span class="text-lg font-extrabold text-base-1">৳ {{ order.total_price|floatformat:0|intcomma }}</span>
+                </div>
             </div>
-        </div>
+        </article>
         {% endfor %}
     </div>
+
+    <!-- Mobile Continue Shopping -->
+    <a href="{% url 'core:index' %}"
+       class="sm:hidden mt-6 flex items-center justify-center gap-2 py-3 text-sm font-medium text-gray-600 hover:text-base-1 border border-dashed border-gray-200 rounded-xl transition-colors">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+            <line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/>
+        </svg>
+        Continue Shopping
+    </a>
+
     {% else %}
-    <div class="text-center bg-white py-16 rounded-2xl shadow-md">
-        <h2 class="text-2xl font-semibold text-gray-700 mb-4">You have no orders yet 🛍️</h2>
-        <a href="{% url 'core:index' %}" 
-           class="bg-teal-500 hover:bg-teal-600 text-white px-6 py-3 rounded-lg font-semibold transition">
-           Start Shopping
+    <!-- ===== Empty State ===== -->
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 py-20 px-6 text-center max-w-lg mx-auto">
+        <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gray-50 mb-6">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-gray-300" aria-hidden="true">
+                <rect x="1" y="3" width="15" height="13"/><polyline points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+                <circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
+            </svg>
+        </div>
+        <h2 class="text-xl font-bold text-gray-800 mb-2">No orders yet</h2>
+        <p class="text-gray-500 text-sm mb-8 max-w-sm mx-auto leading-relaxed">
+            You haven't placed any orders yet. Start exploring our catalog and find something you'll love!
+        </p>
+        <a href="{% url 'core:index' %}"
+           class="inline-flex items-center gap-2 bg-base-2 hover:bg-base-1 text-white font-semibold px-7 py-3 rounded-xl text-sm transition-all hover:shadow-lg hover:shadow-base-1/25">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
+            </svg>
+            Browse Products
         </a>
     </div>
     {% endif %}
