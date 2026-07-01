@@ -1,21 +1,4 @@
 services:
-  db:
-    image: mysql:8.0
-    environment:
-      MYSQL_ROOT_PASSWORD: Test-123456789
-      MYSQL_DATABASE: bazzar_db
-      MYSQL_USER: root
-      MYSQL_PASSWORD:  Test-123456789
-    volumes:
-      - db_data:/var/lib/mysql
-    ports:
-      - "3306:3306"
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-pTest-123456789"]
-      timeout: 5s
-      retries: 10
-      interval: 10s
-
   web:
     build: .
     volumes:
@@ -25,9 +8,6 @@ services:
       - "8000:8000"
     env_file:
       - .env
-    depends_on:
-      db:
-        condition: service_healthy
     command: >
       sh -c "python manage.py migrate && 
              python manage.py runserver 0.0.0.0:8000"
@@ -44,5 +24,4 @@ services:
              ./node_modules/.bin/postcss ./src/styles.css -o ../static/css/dist/styles.css --watch --poll 1000"
 
 volumes:
-  db_data:
   theme_node_modules:

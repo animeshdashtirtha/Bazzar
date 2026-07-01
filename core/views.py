@@ -327,7 +327,7 @@ def flash_deals(request):
     flash_items = item.objects.filter(
         is_flash_discount_active=True,
         is_sold=False,
-    ).order_by('-flash_discount_percentage')
+    ).order_by('?')
 
     return render(request, 'core/flash_deals.html', {
         'items': flash_items,
